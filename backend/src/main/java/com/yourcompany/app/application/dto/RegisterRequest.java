@@ -17,6 +17,9 @@ public class RegisterRequest {
     @NotBlank(message = "Confirm password is required")
     private String confirmPassword;
 
+    @NotBlank(message="Role is required")
+    private String role;
+
 
     // The getters and setters.
     public String getEmail() {
@@ -38,9 +41,18 @@ public class RegisterRequest {
     public String getConfirmPassword() {
         return confirmPassword;
     }
-    
+
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+    
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    
 
 }

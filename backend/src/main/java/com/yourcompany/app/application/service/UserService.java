@@ -40,10 +40,11 @@ public class UserService {
         }
         
         // Create new user
-        User user = new User(request.getEmail(), passwordEncoder.encode(request.getPassword()));
+        User user = new User(request.getEmail(), passwordEncoder.encode(request.getPassword()), request.getRole());
         
         // Save user
         userRepository.save(user);
+        System.out.println("Service: Successfully Created User");
         
         return user.getId();
     }
@@ -51,17 +52,18 @@ public class UserService {
     public LoginResponse login(LoginRequest request) {
         // Find user by email
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new AuthenticationException("Invalid email or password"));
+                .orElseThrow(() -> new AuthenticationException("User does not exist"));
         
         // Check password
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new AuthenticationException("Invalid email or password");
+            throw new AuthenticationException("Wrong password");
         }
         
         // Generate JWT token
         String token = jwtUtil.generateToken(user.getId().toString(), user.getEmail());
         
-        return new LoginResponse(user.getId(), user.getEmail(), token);
+        System.out.println("Service: Successfully Logged in");
+        return new LoginResponse(user.getId(), user.getEmail(), token, user.getRole(), user.getFirstName(), user.getLastName(), user.getProfileImageUrl(), user.getIsverified());
     }
     
     public UserProfileDto getUserProfile(UUID userId) {
