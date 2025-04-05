@@ -3,7 +3,7 @@ package com.yourcompany.app.domain.repository;
 import com.yourcompany.app.domain.model.Shop;
 import com.yourcompany.app.domain.model.User;
 
-import io.lettuce.core.dynamic.annotation.Param;
+import org.springframework.data.repository.query.Param;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,7 +34,7 @@ public interface ShopRepository extends JpaRepository<Shop, UUID> {
     Optional<Shop> findByPhone(String phone);
 
     // Custom query to find shops by name containing a string( case insensitive)
-    @Query("SELECT s FROM SHOP s WHERE LOWER(s.name) LIKE LOWER(concat('%', :name, '%')) AND s.active = true")
+    @Query("SELECT s FROM Shop s WHERE LOWER(s.name) LIKE LOWER(concat('%', :name, '%')) AND s.active = true")
     List<Shop> searchByName(@Param("name") String name);
 
     // Check if a shop with given email exists (excluding a specific shop)
