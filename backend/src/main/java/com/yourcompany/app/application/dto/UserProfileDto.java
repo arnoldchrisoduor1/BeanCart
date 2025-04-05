@@ -10,6 +10,9 @@ public class UserProfileDto {
     private String email;
     private String firstName;
     private String lastName;
+    private String role;
+    private boolean isVerified;
+    private String profileImageUrl;
     private LocalDateTime createdAt;
 
     // Creaing the default constructor.
@@ -48,6 +51,30 @@ public class UserProfileDto {
     
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setisVerified(boolean isverified) {
+        this.isVerified = isverified;
+    }
+
+    public boolean getIsVerified() {
+        return isVerified;
+    }
+
+    public void setProfileImgUrl(String url) {
+        this.profileImageUrl = url;
+    }
+
+    public String getProfileImgUrl() {
+        return profileImageUrl;
     }
     
     public LocalDateTime getCreatedAt() {
