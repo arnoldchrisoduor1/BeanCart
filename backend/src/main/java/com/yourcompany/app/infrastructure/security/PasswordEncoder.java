@@ -55,6 +55,12 @@ public class PasswordEncoder {
             byte[] storedHash = new byte[combined.length - SALT_LENGTH];
             System.arraycopy(combined, SALT_LENGTH, storedHash, 0, storedHash.length);
             
+            // Ensure both arrays have the same length
+            if (hashedPassword.length != storedHash.length) {
+                return false;
+            }
+            
+            // Use constant-time comparison
             return MessageDigest.isEqual(hashedPassword, storedHash);
         } catch (NoSuchAlgorithmException | IllegalArgumentException e) {
             return false;

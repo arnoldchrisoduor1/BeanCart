@@ -1,9 +1,9 @@
 CREATE TABLE shops (
-    id UUID PRIMARY KEY
+    id UUID PRIMARY KEY,
     seller_id UUID NOT NULL REFERENCES users(id),
     name VARCHAR(255) NOT NULL,
     description TEXT DEFAULT 'Brand new coffee shop',
-    logo_url VARCHAR(512) DEFAULT 'https://robohash.org/bean'
+    logo_url VARCHAR(512) DEFAULT 'https://robohash.org/bean',
     address TEXT,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
