@@ -3,7 +3,7 @@ CREATE TABLE shops (
     seller_id UUID NOT NULL REFERENCES users(id),
     name VARCHAR(255) NOT NULL,
     description TEXT DEFAULT 'Brand new coffee shop',
-    logo_url VARCHAR(512) DEFAULT 'https://robohash.org/bean',
+    logo_url VARCHAR(512) DEFAULT 'https://robohash.org/shop',
     address TEXT,
     phone VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
