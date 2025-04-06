@@ -76,6 +76,14 @@ public class Product {
         this.id = id;
     }
 
+    public boolean getIsActive() {
+        return active;
+    }
+
+    public void setIsActive(boolean active) {
+        this.active = active;
+    }
+
     public Shop getShop() {
         return shop;
     }
