@@ -15,52 +15,99 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    // Find product by ID.
+    // Find product by ID (already provided by JpaRepository)
     Optional<Product> findById(UUID id);
-
-    // Find all the products by  specific seller.
+    
+    // Find all products by specific shop
     List<Product> findByShop(Shop shop);
-
-    // Find all active Products by shop
+    
+    // Find all active Products
     List<Product> findByActiveTrue();
-
-    // Find all active products for a specific shop.
+    
+    // Find all active products for a specific shop
     List<Product> findByShopAndActiveTrue(Shop shop);
-
-    // Find products by category.
+    
+    // Find products by category
     List<Product> findByCategory(String category);
-
-    // Find all featured products.
-    List<Product> findByIsFeaturesTrue();
-
-    // Find featured products by specific shop.
+    
+    // Find all featured products (corrected from IsFeaturesTrue)
+    List<Product> findByIsFeaturedTrue();
+    
+    // Find featured products by specific shop
     List<Product> findByShopAndIsFeaturedTrue(Shop shop);
-
-    // Find products by category in a specific shop.
+    
+    // Find active featured products by specific shop
+    List<Product> findByShopAndIsFeaturedTrueAndActiveTrue(Shop shop);
+    
+    // Find products by category in a specific shop
     List<Product> findByShopAndCategory(Shop shop, String category);
-
-    // Find products by name.
+    
+    // Find products by name
     List<Product> findByNameContainingIgnoreCase(String keyword);
-
-    // Find products with price between min and max.
+    
+    // Find products with stock available
     List<Product> findByQuantityGreaterThan(Integer minQuantity);
-
-    // Find products wit price between min and max.
+    
+    // Find products with price between min and max
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
-
-    // Custom query to find products with discounts.
+    
+    // Custom query to find products with discounts
     @Query("SELECT p FROM Product p WHERE p.discount IS NOT NULL AND p.discount > 0")
-    List<Product> findProductWithDiscount();
-
-    // Custom query to search for products by name, description or category.
+    List<Product> findProductsWithDiscount();
+    
+    // Find products with discounts for a specific shop
+    @Query("SELECT p FROM Product p WHERE p.shop = :shop AND p.discount IS NOT NULL AND p.discount > 0")
+    List<Product> findProductsWithDiscountByShop(Shop shop);
+    
+    // Custom query to search for products by name, description or category
     @Query("SELECT p FROM Product p WHERE " +
            "LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(p.category) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Product> searchProducts(String keyword);
-
-    // Custom query to find low stock products.
+    
+    // Search products within a specific shop
+    @Query("SELECT p FROM Product p WHERE p.shop = :shop AND (" +
+           "LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+           "LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+           "LOWER(p.category) LIKE LOWER(CONCAT('%', :keyword, '%')))")
+    List<Product> searchProductsByShop(Shop shop, String keyword);
+    
+    // Custom query to find low stock products
     @Query("SELECT p FROM Product p WHERE p.quantity <= :threshold AND p.active = true")
     List<Product> findLowStockProducts(Integer threshold);
-
+    
+    // Find low stock products for a specific shop
+    @Query("SELECT p FROM Product p WHERE p.shop = :shop AND p.quantity <= :threshold AND p.active = true")
+    List<Product> findLowStockProductsByShop(Shop shop, Integer threshold);
+    
+    // Find recently added products
+    @Query("SELECT p FROM Product p ORDER BY p.createdAt DESC")
+    List<Product> findRecentProducts(org.springframework.data.domain.Pageable pageable);
+    
+    // Find best selling products (you would need to implement logic to track sales)
+    // This is just a placeholder - you would need a sales or orderItems relation
+    @Query(value = "SELECT p.* FROM products p " +
+                  "JOIN order_items oi ON p.id = oi.product_id " +
+                  "GROUP BY p.id " +
+                  "ORDER BY SUM(oi.quantity) DESC", 
+           nativeQuery = true)
+    List<Product> findBestSellingProducts(org.springframework.data.domain.Pageable pageable);
+    
+    // Find products with upcoming stock depletion (low stock and active)
+    @Query("SELECT p FROM Product p WHERE p.quantity > 0 AND p.quantity <= :threshold AND p.active = true ORDER BY p.quantity ASC")
+    List<Product> findProductsWithUpcomingStockDepletion(Integer threshold);
+    
+    // Find products by price range and category
+    List<Product> findByPriceBetweenAndCategory(BigDecimal minPrice, BigDecimal maxPrice, String category);
+    
+    // Find active products by category in a specific shop
+    List<Product> findByShopAndCategoryAndActiveTrue(Shop shop, String category);
+    
+    // Find products with effective discounts (calculated field)
+    @Query("SELECT p FROM Product p WHERE (p.price - p.discount) / p.price >= :discountPercentage")
+    List<Product> findProductsWithMinimumDiscountPercentage(Double discountPercentage);
+    
+    // Find products updated since a certain date
+    List<Product> findByUpdatedAtAfter(java.time.LocalDateTime date);
 }
