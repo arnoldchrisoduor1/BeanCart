@@ -1,7 +1,6 @@
 package com.yourcompany.app.application.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.validation.constraints.Min;
