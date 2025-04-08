@@ -10,25 +10,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO for returning OrderItem information
+ * DTO for returning Payment information
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemResponseDto {
+public class PaymentResponseDto {
     private UUID id;
     private UUID orderId;
-    private UUID productId;
-    private UUID shopId;
-    private Integer quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal subtotal;
+    private BigDecimal amount;
+    private String stripePaymentId;
+    private String stripeCustomerId;
     private String status;
+    private String paymentMethod;
+    private boolean refunded;
+    private String refundReason;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
     // Additional fields that might be useful in responses
-    private String productName;
-    private String shopName;
+    private String buyerEmail;
+    private BigDecimal orderTotalAmount;
 }
