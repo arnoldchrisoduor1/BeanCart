@@ -54,10 +54,10 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-    <groupId>jakarta.annotation</groupId>
-    <artifactId>jakarta.annotation-api</artifactId>
-    <version>2.1.1</version>
-</dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
         
         <!-- JWT -->
         <dependency>
@@ -108,6 +108,14 @@
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-web</artifactId>
             <version>${ff4j.version}</version>
+        </dependency>
+
+        <!--Getters and setters-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- Use the latest version available -->
+            <scope>provided</scope>
         </dependency>
         
         <!-- Testing -->
