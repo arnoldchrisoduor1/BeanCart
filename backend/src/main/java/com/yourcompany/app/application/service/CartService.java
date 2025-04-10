@@ -1,4 +1,4 @@
-package com.yourcompany.app.service;
+package com.yourcompany.app.application.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -62,11 +62,11 @@ public class CartService {
         Product product = productRepository.findById(cartItemDto.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + cartItemDto.getProductId()));
         
-        if (!product.getActive()) {
+        if (!product.getIsActive()) {
             throw new BadRequestException("Product is not available");
         }
         
-        if (product.getStockQuantity() < cartItemDto.getQuantity()) {
+        if (product.getQuantity() < cartItemDto.getQuantity()) {
             throw new BadRequestException("Not enough stock available");
         }
         
@@ -93,7 +93,7 @@ public class CartService {
             // Update existing cart item quantity
             int newQuantity = cartItem.getQuantity() + cartItemDto.getQuantity();
             
-            if (product.getStockQuantity() < newQuantity) {
+            if (product.getQuantity() < newQuantity) {
                 throw new BadRequestException("Not enough stock available");
             }
             
@@ -136,7 +136,7 @@ public class CartService {
         Product product = productRepository.findById(cartItem.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + cartItem.getProductId()));
         
-        if (product.getStockQuantity() < updateDto.getQuantity()) {
+        if (product.getQuantity() < updateDto.getQuantity()) {
             throw new BadRequestException("Not enough stock available");
         }
         
