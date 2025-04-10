@@ -1,34 +1,44 @@
-<nav class="bg-blue-500 p-4 relative z-20">
+<nav class="bg-indigo-500 p-4 relative z-20">
   <div class="container mx-auto flex justify-between items-center">
-    <a routerLink="/" class="text-white text-xl font-bold">Marketplace</a>
+    <a routerLink="/" class="text-white text-xl font-bold">BeanCart</a>
     
     <!-- Mobile menu button -->
     <button (click)="toggleMenu()" class="text-white md:hidden">
-      <lucide-menu *ngIf="!isMenuOpen" class="h-6 w-6"></lucide-menu>
-      <lucide-x *ngIf="isMenuOpen" class="h-6 w-6"></lucide-x>
+      <lucide-angular [img]="menuIcon" *ngIf="!isMenuOpen" class="h-6 w-6"></lucide-angular>
     </button>
     
     <!-- Desktop menu -->
     <div class="hidden md:flex space-x-4">
-      <a routerLink="/" class="text-white hover:text-blue-200">Home</a>
-      <a routerLink="/products" class="text-white hover:text-blue-200">Products</a>
-      <a routerLink="/cart" class="text-white hover:text-blue-200">Cart</a>
-      <a routerLink="/user/login" class="text-white hover:text-blue-200">Login</a>
-      <a routerLink="/user/register" class="text-white hover:text-blue-200">Register</a>
+      @for (item of menuItems; track item.path) {
+        <a [routerLink]="item.path" class="text-white hover:text-blue-200" 
+           [ngClass]="{'font-bold underline': isActive(item.path)}">
+          {{item.name}}
+        </a>
+      }
     </div>
   </div>
   
   <!-- Mobile menu -->
-  <div *ngIf="isMenuOpen" class="md:hidden absolute top-full left-0 w-full bg-blue-500 z-10">
-    <div class="flex flex-col p-4 space-y-4">
-      <a routerLink="/" (click)="toggleMenu()" class="text-white hover:text-blue-200">Home</a>
-      <a routerLink="/products" (click)="toggleMenu()" class="text-white hover:text-blue-200">Products</a>
-      <a routerLink="/cart" (click)="toggleMenu()" class="text-white hover:text-blue-200">Cart</a>
-      <a routerLink="/user/login" (click)="toggleMenu()" class="text-white hover:text-blue-200">Login</a>
-      <a routerLink="/user/register" (click)="toggleMenu()" class="text-white hover:text-blue-200">Register</a>
+  <div [class]="'md:hidden fixed inset-y-0 right-0 w-[70%] bg-white z-10 transition-transform duration-300 ease-in-out ' + 
+                (isMenuOpen ? 'translate-x-0' : 'translate-x-full')">
+    <button (click)="toggleMenu()" class="text-indigo-500 md:hidden absolute right-5 top-3">
+      <lucide-angular [img]="closeIcon" *ngIf="isMenuOpen" class="h-6 w-6"></lucide-angular>
+    </button>
+    <div class="flex flex-col p-4 space-y-4 mt-12 h-full">
+      @for (item of menuItems; track item.path; let i = $index) {
+        <a [routerLink]="item.path" (click)="toggleMenu()" 
+           class="px-2 py-3 rounded-md font-semibold hover:text-blue-200 transition-all duration-300 transform"
+           [ngClass]="isActive(item.path) ? 'text-white bg-indigo-400' : 'text-indigo-500 border border-indigo-200'"
+           [style.transition-delay]="getItemDelay(i)"
+           [class]="isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'">
+          {{item.name}}
+        </a>
+      }
     </div>
   </div>
 </nav>
 
 <!-- Overlay -->
-<div *ngIf="isMenuOpen" (click)="toggleMenu()" class="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"></div>
+<div [class]="'fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden transition-opacity duration-300 ' + 
+              (isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none')" 
+     (click)="toggleMenu()"></div>

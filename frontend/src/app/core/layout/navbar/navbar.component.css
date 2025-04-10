@@ -1,0 +1,21 @@
+/* Animation styles. */
+.transition-transform {
+    transition-property: transform;
+}
+
+.transition-all {
+    transition-property: all;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.ease-in-out {
+    transition-timing-function: ease-in-out;
+}
+
+/* full height for mobile menu */
+.h-full {
+    height: 100%;
+}
