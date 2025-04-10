@@ -56,6 +56,7 @@ public class ProductController {
             @Valid @RequestBody ProductCreateDto productDto) {
         
         UUID userId = (UUID) request.getAttribute("userId");
+        // System.out.println("User uuid" + userId);
         logger.debug("Creating product for shop ID: {} by user ID: {}", productDto.getShopId(), userId);
         
         // TODO: Add authorization check to ensure user owns the shop

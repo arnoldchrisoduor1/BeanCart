@@ -1,4 +1,4 @@
-package com.yourcompany.app.controller;
+package com.yourcompany.app.interfaces.rest;
 
 import java.util.UUID;
 
