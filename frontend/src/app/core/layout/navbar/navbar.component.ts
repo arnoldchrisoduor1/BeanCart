@@ -11,6 +11,8 @@ import { filter } from 'rxjs/operators';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
+
 export class NavbarComponent {
   readonly menuIcon = Menu;
   readonly closeIcon = X;

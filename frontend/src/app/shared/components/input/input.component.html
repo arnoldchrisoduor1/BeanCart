@@ -1,0 +1,34 @@
+<div class="relative border border-slate-300 min-w-[300px] rounded-md inline-block">
+  <div class="flex items-center py-2">
+    <!-- Icon at the start if provided -->
+     <div class="flex flex-row items-center gap-3">
+    <lucide-angular 
+      *ngIf="icon" 
+      [img]="icon" 
+      class="text-gray-500 h-5 w-5 ml-1">
+    </lucide-angular>
+    
+    <input
+      [type]="showPassword ? 'text' : type"
+      [id]="id"
+      [name]="name"
+      [placeholder]="placeholder"
+      [ngModel]="value"
+      (ngModelChange)="onValueChange($event)"
+      class="block w-full rounded outline-none min-w-[240px]"
+      [required]="required">
+    </div>
+      
+    <!-- Password visibility toggle -->
+    <button 
+      *ngIf="type === 'password'" 
+      type="button"
+      (click)="togglePasswordVisibility()"
+      class="text-gray-500 hover:text-gray-700 focus:outline-none">
+      <lucide-angular 
+        [img]="showPassword ? eyeOffIcon : eyeIcon" 
+        class="h-5 w-5">
+      </lucide-angular>
+    </button>
+  </div>
+</div>

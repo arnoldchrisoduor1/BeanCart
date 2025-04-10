@@ -1,0 +1,10 @@
+
+.bg-indigo-500 {
+    background-color: #6366f1;
+  }
+  .hover\:bg-indigo-600:hover {
+    background-color: #4f46e5;
+  }
+  .bg-indigo-300 {
+    background-color: #a5b4fc;
+  }
