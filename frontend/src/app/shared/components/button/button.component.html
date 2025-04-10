@@ -1,0 +1,7 @@
+<button
+  [type]="type"
+  [disabled]="disabled || isLoading"
+  (click)="onClick()"
+  [class]="buttonClasses">
+  {{ isLoading ? loadingText : defaultText }}
+</button>
