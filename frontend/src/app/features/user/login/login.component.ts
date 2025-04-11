@@ -1,33 +1,64 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { AuthService } from '../../../core/auth/auth.service';
 import { Mail, Lock } from 'lucide-angular';
+import { response } from 'express';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, InputComponent, ButtonComponent],
+  imports: [FormsModule, InputComponent, ButtonComponent, NgIf],
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
   email: string = '';
   password: string = '';
   isLoggingIn: boolean = false;
+  errorMessage: string = '';
 
   readonly emailIcon = Mail;
   readonly passwordIcon = Lock;
 
-  onSubmit() {
-    console.log('Login attempt with:', this.email);
-    // You would typically call an auth service here
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
+  onSubmit() {
+    // Reseting the error message
+    this.errorMessage = '';
+
+    // validating the form
+    if(!this.email || !this.password) {
+      this.errorMessage = "Please fill in all the fields";
+    }
+
+    console.log("Attempting to sign in user: ", this.email);
     this.isLoggingIn = true;
 
-    setTimeout(() => {
-      this.isLoggingIn = false;
-    }, 2000);
+    // Preparing the request payload.
+    const userData = {
+      email: this.email,
+      password: this.password
+    };
 
-    console.log("done timing out");
+    // making the sign in request.
+    this.authService.login(userData).subscribe({
+      next: (response) => {
+        console.log("Loging in successfull", response);
+        this.isLoggingIn = false;
+        // navigating to home page.
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error("Failed to sign in:", error);
+        this.isLoggingIn = false;
+        this.errorMessage = error.error?.message || 'Sign in failed. Please try again'
+      }
+    })
   }
 }
