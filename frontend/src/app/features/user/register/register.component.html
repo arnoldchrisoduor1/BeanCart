@@ -12,7 +12,7 @@
         [icon]="emailIcon"
       >
       </app-input>
-
+      
       <app-input
         type="password"
         id="password"
@@ -22,8 +22,8 @@
         [required]="true"
         [icon]="passwordIcon"
       >
-        </app-input>
-
+      </app-input>
+      
       <app-input
         type="password"
         id="password"
@@ -34,22 +34,27 @@
         [icon]="passwordIcon"
       >
       </app-input>
-
+      
       <app-dropdown
-      [title]="'Select a Role'"
-      [options]="['Option 1', 'Option 2', 'Option 3']"
-      [(selectedValue)]="selectedOption"
+        [title]="'Select a Role'"
+        [options]="['Buyer', 'Seller']"
+        [(selectedValue)]="selectedOption"
       ></app-dropdown>
     </div>
-
+    
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2 text-center">
+      {{ errorMessage }}
+    </div>
+    
     <div class="w-[80%] mt-5 mx-auto">
-        <app-button
+      <app-button
         type="submit"
         [isLoading]="isRegistering"
         defaultText="Register"
         loadingText="Creating Account..."
         color="indigo">
-        </app-button>
+      </app-button>
     </div>
   </form>
 </div>
