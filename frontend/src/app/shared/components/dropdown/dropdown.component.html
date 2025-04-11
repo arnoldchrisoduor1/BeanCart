@@ -1,0 +1,17 @@
+<div class="relative border border-slate-300 w-full rounded-md inline-block">
+  <button type="button" (click)="toggleDropDown()" class="flex items-center justify-center w-full py-2 px-3 text-left focus:outline-none">
+    <div class="flex items-center gap-3">
+        <span>{{ selectedValue ? selectedValue : title }}</span>
+    </div>
+    <lucide-angular [img]="chevronDown" class="text-gray-500 h-5 w-5 transform transition-transform duration-200" [class.rotate-180]="isOpen"></lucide-angular>
+  </button>
+
+  <div
+  *ngIf="isOpen"
+  class="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg max-h-60 overflow-auto"
+  >
+  <ul class="py-1">
+    <li *ngFor="let option of options" (click)="selectOption(option)" class="px-4 py-4 hover:bg-slate-100 cursor-pointer">{{option}}</li>
+  </ul>
+  </div>
+</div>
