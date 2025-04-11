@@ -1,1 +1,55 @@
-<p>register works!</p>
+<div class="w-full">
+  <h2 class="text-2xl text-center font-semibold mb-6">Get Started</h2>
+  <form (ngSubmit)="onSubmit()" class="w-full">
+    <div class="flex flex-col gap-3">
+      <app-input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email address"
+        [(value)]="email"
+        [required]="true"
+        [icon]="emailIcon"
+      >
+      </app-input>
+
+      <app-input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        [(value)]="password"
+        [required]="true"
+        [icon]="passwordIcon"
+      >
+        </app-input>
+
+      <app-input
+        type="password"
+        id="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        [(value)]="confirmPassword"
+        [required]="true"
+        [icon]="passwordIcon"
+      >
+      </app-input>
+
+      <app-dropdown
+      [title]="'Select a Role'"
+      [options]="['Option 1', 'Option 2', 'Option 3']"
+      [(selectedValue)]="selectedOption"
+      ></app-dropdown>
+    </div>
+
+    <div class="w-[80%] mt-5 mx-auto">
+        <app-button
+        type="submit"
+        [isLoading]="isRegistering"
+        defaultText="Register"
+        loadingText="Creating Account..."
+        color="indigo">
+        </app-button>
+    </div>
+  </form>
+</div>
