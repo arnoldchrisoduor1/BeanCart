@@ -1,8 +1,10 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { UserComponent } from './features/user/user.component';
 import { LoginComponent } from './features/user/login/login.component';
 import { RegisterComponent } from './features/user/register/register.component';
+import { AuthGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
   // Home route
@@ -15,10 +17,39 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: '', redirectTo: 'login', pathMatch: 'full' }
+      // { 
+      //   path: 'profile', 
+      //   loadChildren: () => import('./features/user/profile/profile.routes').then(m => m.PROFILE_ROUTES),
+      //   canActivate: [AuthGuard]
+      // },
+      // { 
+      //   path: 'orders', 
+      //   loadChildren: () => import('./features/user/orders/orders.routes').then(m => m.ORDERS_ROUTES),
+      //   canActivate: [AuthGuard]
+      // },
+      // { path: '', redirectTo: 'login', pathMatch: 'full' }
     ]
   },
   
-  // Wildcard route for 404 page (optional)
-  { path: '**', redirectTo: '' }
+  // // Products route
+  // { 
+  //   path: 'products',
+  //   loadChildren: () => import('./features/products/products.routes').then(m => m.PRODUCTS_ROUTES)
+  // },
+  
+  // // Cart route
+  // { 
+  //   path: 'cart',
+  //   loadChildren: () => import('./features/cart/cart.routes').then(m => m.CART_ROUTES)
+  // },
+  
+  // // Checkout route (protected)
+  // { 
+  //   path: 'checkout',
+  //   loadChildren: () => import('./features/checkout/checkout.routes').then(m => m.CHECKOUT_ROUTES),
+  //   canActivate: [AuthGuard]
+  // },
+  
+  // // Wildcard route for 404 page
+  // { path: '**', redirectTo: '' }
 ];

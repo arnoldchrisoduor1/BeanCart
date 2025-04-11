@@ -6,7 +6,6 @@ import { InputComponent } from '../../../shared/components/input/input.component
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Mail, Lock } from 'lucide-angular';
-import { response } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -19,37 +18,38 @@ export class LoginComponent {
   password: string = '';
   isLoggingIn: boolean = false;
   errorMessage: string = '';
-
+  
   readonly emailIcon = Mail;
   readonly passwordIcon = Lock;
-
+  
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
-
+  
   onSubmit() {
     // Reseting the error message
     this.errorMessage = '';
-
+    
     // validating the form
-    if(!this.email || !this.password) {
+    if (!this.email || !this.password) {
       this.errorMessage = "Please fill in all the fields";
+      return;
     }
-
+    
     console.log("Attempting to sign in user: ", this.email);
     this.isLoggingIn = true;
-
+    
     // Preparing the request payload.
     const userData = {
       email: this.email,
       password: this.password
     };
-
+    
     // making the sign in request.
     this.authService.login(userData).subscribe({
       next: (response) => {
-        console.log("Loging in successfull", response);
+        console.log("Login successful", response);
         this.isLoggingIn = false;
         // navigating to home page.
         this.router.navigate(['/']);
@@ -57,8 +57,8 @@ export class LoginComponent {
       error: (error) => {
         console.error("Failed to sign in:", error);
         this.isLoggingIn = false;
-        this.errorMessage = error.error?.message || 'Sign in failed. Please try again'
+        this.errorMessage = error.error?.message || 'Sign in failed. Please try again';
       }
-    })
+    });
   }
 }

@@ -22,6 +22,11 @@
       [icon]="passwordIcon">
     </app-input>
   </div>
+
+  <!--Error message-->
+  <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2 text-center">
+    {{ errorMessage }}
+  </div>
     
   <div class="w-[80%] mt-3 mx-auto">
     <app-button
