@@ -18,8 +18,7 @@ export class AuthStateService {
     }
 
     private loadUserFromStorage(): void {
-        if (typeof window !== 'undefined' && localStorage.getItem('yourToken')) {
-            // safe to access localStorage
+        if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
             const storedUser = localStorage.getItem(this.USER_KEY);
             if (storedUser) {
                 try {
@@ -30,7 +29,7 @@ export class AuthStateService {
                     this.logout();
                 }
             }
-          }
+        }
     }
 
     public get currentUserValue(): User | null {
@@ -46,11 +45,10 @@ export class AuthStateService {
         this.currentUserSubject.next(user);
 
         // store in localStorage.
-        if (typeof window !== 'undefined' && localStorage.getItem('yourToken')) {
-            // safe to access localStorage
+        if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
             localStorage.setItem(this.TOKEN_KEY, user.token);
-            localStorage.setItem(this.USER_KEY,  JSON.stringify(user));
-          }
+            localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+        }
     }
 
     public logout(): void {
@@ -58,7 +56,9 @@ export class AuthStateService {
         this.currentUserSubject.next(null);
 
         // clear storage
-        localStorage.removeItem(this.TOKEN_KEY);
-        localStorage.removeItem(this.USER_KEY);
+        if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+            localStorage.removeItem(this.TOKEN_KEY);
+            localStorage.removeItem(this.USER_KEY);
+        }
     }
 }

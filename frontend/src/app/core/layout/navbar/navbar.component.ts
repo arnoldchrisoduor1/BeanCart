@@ -5,8 +5,7 @@ import { NgClass, NgIf, CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { AuthStateService } from '../../auth/auth-state.service';
 import { Subscription } from 'rxjs';
-
-// Import LucideAngularModule and the specific icons
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { LucideAngularModule } from 'lucide-angular';
 import { Menu, X, User } from 'lucide-angular';
 
@@ -15,10 +14,40 @@ import { Menu, X, User } from 'lucide-angular';
   standalone: true,
   imports: [RouterLink, NgIf, CommonModule, LucideAngularModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'translateX(100%)' }))
+      ])
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('staggerSlideIn', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateX(20px)' }),
+          stagger('50ms', [
+            animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', 
+              style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  // Define icon references
   readonly menuIcon = Menu;
   readonly closeIcon = X;
   readonly userIcon = User;
