@@ -1,1 +1,216 @@
-<p>profile works!</p>
+<div class="relative overflow-hidden mb-10">
+  <!-- Semi-circle top background -->
+  <div
+    class="absolute -top-[58%] -right-[2%] w-[250%] h-[100%] rounded-full bg-indigo-500 -z-10"
+  ></div>
+
+  <!--  Semi-circle middle backgorund -->
+    <div class="absolute top-[55%] left-[80%] w-[150%] h-[50%] rounded-full bg-indigo-500 -z-10">
+
+    </div>
+
+  <div class="container mx-auto flex-grow p-4 pb-24">
+    <!--------Main app container----->
+
+    <!--Profile section-->
+    <div class="flex flex-row items-center gap-5">
+      <!-- @if (isLoggedIn) { -->
+      <div class="h-20 w-20">
+        @if (userProfile?.profileImageUrl) {
+        <img
+          [src]="userProfile.profileImageUrl"
+          alt="Profile"
+          class="border-4 border-indigo-200 object-cover rounded-full"
+        />
+        } @else {
+        <span
+          class="w-20 h-20 rounded-full bg-indigo-200 flex items-center justify-center"
+        >
+          <lucide-angular
+            [img]="userIcon"
+            size="16"
+            class="text-indigo-600"
+          ></lucide-angular>
+        </span>
+        }
+        <!-- Username and Address -->
+      </div>
+      <!-- } -->
+      <!-- @if (userProfile) { -->
+      <div class="text-lg text-indigo-200">
+        <div class="flex flex-row gap-2">
+          <p class="font-semibold">{{ userProfile?.firstName || "Arnold" }}</p>
+          <p class="font-semibold">{{ userProfile?.firstName || "Chris" }}</p>
+        </div>
+        <P class="text-sm">{{
+          userProfile?.email || "arnoldchris262@gmail.com"
+        }}</P>
+      </div>
+      <!-- } -->
+    </div>
+
+    <!-- Statistics section -->
+    <div class="mt-10 flex flex-row justify-between">
+      <div
+        class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
+      >
+        <p class="text-sm font-semibold">Orders</p>
+        <p class="text-2xl font-bold">34</p>
+      </div>
+      <div
+        class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
+      >
+        <p class="text-sm font-semibold">Spent</p>
+        <p class="text-2xl font-bold">$ 200</p>
+      </div>
+      <div
+        class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
+      >
+        <p class="text-sm font-semibold">Sale</p>
+        <p class="text-2xl font-bold">45</p>
+      </div>
+    </div>
+
+    <!-- Update profile section -->
+    <div
+      class="mt-16 py-2 px-5 border text-lg text-indigo-200 font-semibold border-indigo-400 w-fit bg-indigo-600 mx-auto rounded-md shadow-xl shadow-indigo-700/50"
+    >
+      <p>Update Profile</p>
+    </div>
+
+    <!--  Payment Methods  -->
+    <div class="mt-20">
+      <div>
+        <h2 class="font-bold text-3xl text-indigo-900">Payment Methods</h2>
+        <!-- <hr class="bg-indigo-200 h-[2px]" /> -->
+      </div>
+      <div class="flex flex-row justify-between mt-5">
+        <div class="bg-green-500 py-2 px-3 rounded-md shadow-lg shadow-green-400/50">
+          <div>
+            <p class="text-indigo-100 font-extrabold text-3xl text-center">M-PESA</p>
+          </div>
+          <div
+          class="flex items-center gap-3 py-1 px-4 rounded-md bg-white mt-4 w-fit"
+        >
+          <p class="font-semibold text-green-400">Configure</p>
+          <lucide-angular
+            [img]="moveRight"
+            size="16"
+            class="text-green-400"
+          ></lucide-angular>
+        </div>
+        </div>
+
+        <div class="bg-indigo-500 py-2 px-3 rounded-md shadow-lg shadow-indigo-400/50">
+          <div>
+            <p class="text-indigo-100 font-extrabold text-3xl text-center">STRIPE</p>
+          </div>
+          <div
+          class="flex w-fit items-center gap-3 py-1 px-4 rounded-md bg-white mt-4"
+        >
+          <p class="font-semibold text-indigo-400">Configure</p>
+          <lucide-angular
+            [img]="moveRight"
+            size="16"
+            class="text-indigo-400"
+          ></lucide-angular>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders section -->
+    <div class="mt-20">
+      <h2 class="font-bold text-3xl text-indigo-900">My Orders</h2>
+      <!-- <hr class="bg-indigo-200 h-[2px]" /> -->
+
+      <div class="mt-5 flex flex-col gap-5">
+        <div
+          class="grid grid-cols-4 items-center border border-indigo-300 p-2 rounded-md shadow-md shadow-indigo-400/40"
+        >
+          <div>
+            <span
+              class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center"
+            >
+              <lucide-angular
+                [img]="userIcon"
+                size="16"
+                class="text-indigo-600"
+              ></lucide-angular>
+            </span>
+          </div>
+          <div>
+            <p>HP Mouse</p>
+          </div>
+          <div>
+            <p class="font-semibold">$ 235</p>
+          </div>
+          <div class="bg-green-200/50 p-1 rounded-full">
+            <p class="text-green-700 text-center">Delivered</p>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-4 items-center border border-indigo-300 p-2 rounded-md shadow-md shadow-indigo-400/40"
+        >
+          <div>
+            <span
+              class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center"
+            >
+              <lucide-angular
+                [img]="userIcon"
+                size="16"
+                class="text-indigo-600"
+              ></lucide-angular>
+            </span>
+          </div>
+          <div>
+            <p>Keyboard</p>
+          </div>
+          <div>
+            <p class="font-semibold">$ 341</p>
+          </div>
+          <div class="bg-indigo-200/50 p-1 rounded-full">
+            <p class="text-indigo-700 text-center">In Transit</p>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-4 items-center border border-indigo-300 p-2 rounded-md shadow-md shadow-indigo-400/40"
+        >
+          <div>
+            <span
+              class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center"
+            >
+              <lucide-angular
+                [img]="userIcon"
+                size="16"
+                class="text-indigo-600"
+              ></lucide-angular>
+            </span>
+          </div>
+          <div>
+            <p>Cooker</p>
+          </div>
+          <div>
+            <p class="font-semibold">$ 1,069</p>
+          </div>
+          <div class="bg-orange-200/50 p-1 rounded-full">
+            <p class="text-orange-500 text-center">Ordered</p>
+          </div>
+        </div>
+
+        <div
+          class="flex w-fit items-center gap-3 border border-indigo-400 py-1 px-4 rounded-md bg-indigo-500 shadow-md shadow-indigo-700/50"
+        >
+          <p class="font-semibold text-indigo-200">See More Orders</p>
+          <lucide-angular
+            [img]="moveRight"
+            size="16"
+            class="text-indigo-200"
+          ></lucide-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

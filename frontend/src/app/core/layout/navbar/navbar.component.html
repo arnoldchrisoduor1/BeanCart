@@ -45,7 +45,7 @@
 </nav>
 
 <!-- Mobile Navbar (Indigo Background) -->
-<nav class="md:hidden flex justify-between items-center py-4 px-4 bg-indigo-600 text-white">
+<nav class="md:hidden flex justify-between items-center py-4 px-4 bg-indigo-500 text-white">
   <a routerLink="/" class="text-xl font-bold">BeanCart</a>
   
   <div class="flex items-center">
@@ -78,7 +78,7 @@
 
 <!-- Mobile Menu (Indigo Theme) -->
 <div *ngIf="isMenuOpen" class="fixed right-0 top-0 bottom-0 w-64 bg-white z-50 shadow-lg transform transition-transform md:hidden">
-  <div class="flex justify-between items-center p-4 border-b bg-indigo-600 text-white">
+  <div class="flex justify-between items-center p-4 border-b bg-indigo-500 text-white">
     <h2 class="font-bold">Menu</h2>
     <button (click)="toggleMenu()" class="p-1">
       <lucide-angular [img]="closeIcon" size="24"></lucide-angular>
