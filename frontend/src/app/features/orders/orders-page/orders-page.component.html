@@ -1,0 +1,95 @@
+<div class="mx-2 my-5">
+
+    <div class="absolute top-[40%] -z-10 -right-[15%] rounded-full bg-indigo-500 h-[15%] w-[30%]"></div>
+    
+    <div class="absolute top-[90%] -z-10 -left-[5%] rounded-full bg-indigo-500 h-[15%] w-[30%]"></div>
+
+    <div class="px-3 py-5 bg-indigo-500 rounded-lg shadow-lg shadow-indigo-700/60">
+        <div class="mb-3">
+            <h2 class="text-3xl font-semibold tracking-tighter text-center text-indigo-200">Order Tracking</h2>
+        </div>
+        <div class="flex flex-row items-center justify-between">
+        <app-stats-box
+            title="Delivered"
+            [value]="34"
+        >
+        </app-stats-box>
+        <app-stats-box
+            title="Transit"
+            [value]="7"
+        >
+        </app-stats-box>
+        <app-stats-box
+            title="Ordered"
+            [value]="12"
+        >
+        </app-stats-box>
+    </div>
+    </div>
+
+    <div class="mt-5">
+  
+        <div class="flex flex-col gap-2 mt-5">
+          <app-orders
+          product="Dell Mouse"
+          [price]="17.99"
+          status="Delivered"
+          ></app-orders>
+          
+          <app-orders
+          product="Mobile Phone"
+          [price]="350.49"
+          status="Transit"
+          ></app-orders>
+          
+          <app-orders
+          product="Star Light"
+          [price]="89.69"
+          status="Ordered"
+          ></app-orders>
+          
+          <app-orders
+          product="Dell Mouse"
+          [price]="17.99"
+          status="Delivered"
+          ></app-orders>
+          
+          <app-orders
+          product="Mobile Phone"
+          [price]="350.49"
+          status="Transit"
+          ></app-orders>
+          
+          <app-orders
+          product="Star Light"
+          [price]="89.69"
+          status="Ordered"
+          ></app-orders>
+          
+          <app-orders
+          product="Dell Mouse"
+          [price]="17.99"
+          status="Delivered"
+          ></app-orders>
+          
+          <app-orders
+          product="Mobile Phone"
+          [price]="350.49"
+          status="Transit"
+          ></app-orders>
+          
+          <app-orders
+          product="Star Light"
+          [price]="89.69"
+          status="Ordered"
+          ></app-orders>
+  
+          <div
+            class="items-center gap-3 px-4 py-1 mx-auto mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50"
+          >
+            <p class="font-semibold text-indigo-200">See More Orders</p>
+          </div>
+        </div>
+      </div>
+
+</div>

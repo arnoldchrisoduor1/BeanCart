@@ -65,6 +65,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       { path: '/cart', name: 'Cart' },
       { path: '/user/login', name: 'Login' },
       { path: '/user/register', name: 'Register' },
+      { path: '/user/profile', name: 'Profile' },
+      { path: '/user/orders', name: 'Orders' },
     ];
     
     const authenticatedMenuItems = [
