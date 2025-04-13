@@ -1,4 +1,11 @@
 <div class="relative mb-10 overflow-hidden">
+
+  <div class="">
+    <app-update-profile-modal
+      [isVisible]="isModalVisible"
+      (closed)="closeModal()"
+    ></app-update-profile-modal>
+  </div>
   <!-- Semi-circle top background -->
   <div
     class="absolute -top-[72%] -right-[2%] w-[250%] h-[100%] rounded-full bg-indigo-500 -z-10"
@@ -8,6 +15,9 @@
   <div
     class="absolute top-[48%] left-[80%] w-[230%] h-[50%] rounded-full bg-indigo-500 -z-10"
   ></div>
+
+  <!--  Update profile Modal  -->
+  
 
   <div class="container flex-grow p-4 pb-24 mx-auto">
     <!--------Main app container----->
@@ -73,6 +83,7 @@
 
     <!-- Update profile section -->
     <div
+    (click)="openModal()"
       class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50"
     >
       <p>Update Profile</p>

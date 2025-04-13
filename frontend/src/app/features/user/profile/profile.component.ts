@@ -5,10 +5,11 @@ import { LucideAngularModule } from 'lucide-angular';
 import { User, MoveRight, ShoppingCart, Package  } from 'lucide-angular';
 import { WishlistComponent } from '../../../shared/components/wishlist/wishlist.component';
 import { OrdersComponent } from '../../../shared/components/orders/orders.component';
+import { UpdateProfileModalComponent } from '../../../shared/components/update-profile-modal/update-profile-modal.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [LucideAngularModule, WishlistComponent, OrdersComponent],
+  imports: [LucideAngularModule, WishlistComponent, OrdersComponent, UpdateProfileModalComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -18,6 +19,17 @@ export class ProfileComponent {
   readonly moveRight = MoveRight ;
   readonly shoppingCart = ShoppingCart;
   readonly package = Package;
+
+  isModalVisible = false;
+
+  openModal() {
+    this.isModalVisible = true;
+  }
+
+  closeModal() {
+    console.log("parent emitting close event");
+    this.isModalVisible = false;
+  }
 
   userProfile: any = null;
   private authSubsription!: Subscription;

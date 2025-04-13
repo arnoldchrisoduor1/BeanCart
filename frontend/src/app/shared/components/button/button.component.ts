@@ -29,7 +29,7 @@ get buttonClasses() {
   }
   // Add other color options as needed
   
-  return `w-full p-2 rounded transition-colors duration-200 text-white ${colorClasses} ${
+  return `w-full p-2 shadow-md shadow-indigo-700/50 rounded transition-colors duration-200 text-white ${colorClasses} ${
     (this.disabled || this.isLoading) ? 'cursor-not-allowed' : ''
   }`;
 }
