@@ -1,5 +1,10 @@
 <div
-  class="w-fit text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
+  class="w-fit text-center text-indigo-100 py-2 px-4 rounded-md min-w-[100px] shadow-lg border"
+  [ngClass]="{
+    'bg-indigo-500 border-indigo-300 shadow-indigo-700/70': status==='Transit',
+    'bg-orange-400 border-orange-300 shadow-orange-700/70': status==='Ordered',
+    'bg-emerald-500 border-emerald-300 shadow-emerald-700/70': status==='Delivered'
+  }"
 >
   <p class="text-sm font-semibold">{{title}}</p>
   <p class="text-2xl font-bold">{{value}}</p>
