@@ -67,6 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       { path: '/user/register', name: 'Register' },
       { path: '/user/profile', name: 'Profile' },
       { path: '/user/orders', name: 'Orders' },
+      { path: '/user/wishes', name: 'Wishes' },
     ];
     
     const authenticatedMenuItems = [
@@ -75,6 +76,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       { path: '/cart', name: 'Cart' },
       { path: '/user/profile', name: 'Profile' },
       { path: '/user/orders', name: 'Orders' },
+      { path: '/user/wishes', name: 'Wishes' },
     ];
     
     return this.isLoggedIn ? authenticatedMenuItems : guestMenuItems;

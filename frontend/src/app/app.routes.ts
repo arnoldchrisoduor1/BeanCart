@@ -7,6 +7,7 @@ import { RegisterComponent } from './features/user/register/register.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { OrdersPageComponent } from './features/orders/orders-page/orders-page.component';
+import { WishesPageComponent } from './features/wishes/wishes-page/wishes-page.component';
 
 export const routes: Routes = [
   // Home route
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       {path: 'profile', component: ProfileComponent},
       {path: 'orders', component: OrdersPageComponent},
+      {path: 'wishes', component: WishesPageComponent},
       // { 
       //   path: 'profile', 
       //   loadChildren: () => import('./features/user/profile/profile.routes').then(m => m.PROFILE_ROUTES),
