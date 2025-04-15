@@ -10,6 +10,8 @@ import { OrdersPageComponent } from './features/orders/orders-page/orders-page.c
 import { WishesPageComponent } from './features/wishes/wishes-page/wishes-page.component';
 import { ProductsComponent } from './features/products/products.component';
 import { ProductListComponent } from './features/products/product-list/product-list.component';
+import { ShopComponent } from './features/shop/shop.component';
+import { ShopProfileComponent } from './features/shop/shop-profile/shop-profile.component';
 
 export const routes: Routes = [
   // Home route
@@ -36,5 +38,14 @@ export const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'shop',
+    component: ShopComponent,
+    children: [
+      {
+        path: 'shop-profile', component: ShopProfileComponent
+      }
+    ]
+  }
   
 ];

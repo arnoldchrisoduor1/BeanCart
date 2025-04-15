@@ -7,7 +7,15 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function({addComponents}) {
+      addComponents({
+        '.header-title': {
+          '@apply text-3xl font-bold tracking-tighter text-indigo-900' : '',
+        }
+      })
+    }
+  ],
   safelist: [
     // Indigo colors
     'bg-indigo-500',

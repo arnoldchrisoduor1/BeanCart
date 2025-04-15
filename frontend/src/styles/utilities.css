@@ -1,6 +1,8 @@
 @layer components {
     .btn-primary {
-      @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600;
+      @apply px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600;
     }
-    /* Add more custom utility classes */
+    .header-title {
+      @apply text-3xl font-bold tracking-tighter text-indigo-900;
+    }
   }

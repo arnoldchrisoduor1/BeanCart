@@ -1,0 +1,9 @@
+/* Smooth transitions for the transforms */
+.sticky {
+    transition: transform 0.3s ease-out;
+  }
+  
+  /* Ensure the content below has proper spacing */
+  .relative {
+    overflow-x: hidden;
+  }

@@ -1,0 +1,95 @@
+<div class="relative">
+  <!-- Background image container -->
+  <!-- Background image with overlay -->
+  <div class="relative w-full h-64 overflow-hidden">
+    <!-- Background image -->
+    <img
+      [src]="shopBanner"
+      class="object-cover w-full h-full"
+      alt="Shop Banner"
+    />
+
+    <!-- Gradient overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent"
+    ></div>
+
+    <!-- Location  -->
+    <div class="absolute p-2 bg-white rounded-full top-4 right-4">
+      <div class="flex flex-row items-center">
+        <lucide-angular
+          [img]="mapIcon"
+          class="h-4 text-indigo-700"
+        ></lucide-angular>
+        <h2 class="text-sm">Awasi</h2>
+      </div>
+    </div>
+
+    <!-- Shop info text -->
+    <div
+      class="absolute inset-0 flex flex-col items-start justify-end p-6 mb-10 text-white"
+    >
+      <div class="flex flex-row justify-between w-full">
+        <div>
+          <p class="mb-1 text-3xl font-bold tracking-tighter">Real Touch</p>
+        </div>
+        
+        <div class="flex flex-row items-center justify-self-end">
+          <div class="relative flex items-center justify-center w-6 h-6 overflow-hidden rounded-full">
+            <div
+              class="absolute w-4 h-4 rounded-full opacity-75 bg-emerald-500 animate-ping"
+            ></div>
+            <div class="relative w-2 h-2 rounded-full bg-emerald-500/70"></div>
+          </div>
+          <div class="flex flex-row gap-2">
+              <p>active</p>
+              <p>21 hrs ago</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-lg tracking-tighter">
+        We deal in electronics and cyber services
+      </p>
+    </div>
+  </div>
+
+  <!-- Content below the banner -->
+  <div
+    class="relative z-10 w-full -mt-12 bg-indigo-500 border border-t-indigo-200 rounded-3xl"
+  >
+    <div class="flex flex-row justify-between px-4 py-8">
+      <app-stats-box
+        title="In Stock"
+        [value]="13"
+        status="Ordered"
+      ></app-stats-box>
+      <app-stats-box
+        title="Fulfilled"
+        [value]="56"
+        status="Delivered"
+      ></app-stats-box>
+      <app-stats-box
+        title="Pre-Order"
+        [value]="4"
+        status="Transit"
+      ></app-stats-box>
+    </div>
+
+    <!-- Locations -->
+    <div class="px-4">
+      <div></div>
+    </div>
+
+    <div class="flex flex-col gap-5 px-4 pb-8">
+      <app-product-item></app-product-item>
+      <app-product-item></app-product-item>
+      <app-product-item></app-product-item>
+      <app-product-item></app-product-item>
+    </div>
+    <div
+      class="items-center gap-3 px-4 py-1 mx-auto my-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50"
+    >
+      <p class="font-semibold text-indigo-200">See More Items</p>
+    </div>
+  </div>
+</div>
