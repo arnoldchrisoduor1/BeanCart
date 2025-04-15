@@ -8,6 +8,8 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { OrdersPageComponent } from './features/orders/orders-page/orders-page.component';
 import { WishesPageComponent } from './features/wishes/wishes-page/wishes-page.component';
+import { ProductsComponent } from './features/products/products.component';
+import { ProductListComponent } from './features/products/product-list/product-list.component';
 
 export const routes: Routes = [
   // Home route
@@ -23,39 +25,16 @@ export const routes: Routes = [
       {path: 'profile', component: ProfileComponent},
       {path: 'orders', component: OrdersPageComponent},
       {path: 'wishes', component: WishesPageComponent},
-      // { 
-      //   path: 'profile', 
-      //   loadChildren: () => import('./features/user/profile/profile.routes').then(m => m.PROFILE_ROUTES),
-      //   canActivate: [AuthGuard]
-      // },
-      // { 
-      //   path: 'orders', 
-      //   loadChildren: () => import('./features/user/orders/orders.routes').then(m => m.ORDERS_ROUTES),
-      //   canActivate: [AuthGuard]
-      // },
-      // { path: '', redirectTo: 'login', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    children : [
+      {
+        path: 'product-list', component: ProductListComponent
+      },
     ]
   },
   
-  // // Products route
-  // { 
-  //   path: 'products',
-  //   loadChildren: () => import('./features/products/products.routes').then(m => m.PRODUCTS_ROUTES)
-  // },
-  
-  // // Cart route
-  // { 
-  //   path: 'cart',
-  //   loadChildren: () => import('./features/cart/cart.routes').then(m => m.CART_ROUTES)
-  // },
-  
-  // // Checkout route (protected)
-  // { 
-  //   path: 'checkout',
-  //   loadChildren: () => import('./features/checkout/checkout.routes').then(m => m.CHECKOUT_ROUTES),
-  //   canActivate: [AuthGuard]
-  // },
-  
-  // // Wildcard route for 404 page
-  // { path: '**', redirectTo: '' }
 ];
