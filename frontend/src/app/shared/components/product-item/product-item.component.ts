@@ -16,6 +16,6 @@ export class ProductItemComponent {
   readonly shoppingCart = ShoppingCart;
   readonly expandIcon = Expand;
 
-  ProductImage :string  = 'assets/images/product1.jpg';
+  ProductImage :string  = 'assets/images/product2.jpg';
 
 }
