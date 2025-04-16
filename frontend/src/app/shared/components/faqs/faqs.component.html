@@ -1,0 +1,22 @@
+<div class="faq-item border border-gray-200 rounded-lg mb-4 overflow-hidden transition-all duration-200 hover:shadow-sm">
+    <div 
+      class="question flex justify-between items-center p-4 cursor-pointer bg-indigo-50 hover:bg-indigo-100 transition-colors duration-200"
+      (click)="toggleAnswer()"
+    >
+      <h3 class="text-base font-medium text-indigo-900 m-0">{{ question }}</h3>
+      <span class="icon transition-transform duration-200" [class.rotate-180]="isExpanded">
+        <lucide-angular [name]="chevronDown" size="20" class="text-indigo-600"></lucide-angular>
+      </span>
+    </div>
+    <div 
+      class="answer overflow-hidden transition-all duration-300 ease-in-out"
+      [class.max-h-0]="!isExpanded"
+      [class.max-h-[500px]]="isExpanded"
+      [class.pb-0]="!isExpanded"
+      [class.pb-4]="isExpanded"
+    >
+      <div class="px-4 pt-0 text-indigo-800">
+        <p class="m-0">{{ answer }}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,108 @@
+<div class="px-4 pb-20 mt-5">
+  <!-- Product Header -->
+  <div class="mb-4">
+    <p class="text-xs text-indigo-600 uppercase tracking-wider">BEAUTY & CREAMS</p>
+    <h2 class="text-2xl font-bold text-gray-900">Banana Republic</h2>
+  </div>
+
+  <!-- Product Image -->
+  <div class="mb-5 rounded-lg overflow-hidden shadow-sm">
+    <img [src]="Product2" alt="Banana Republic product" class="w-full aspect-square object-cover" />
+  </div>
+
+  <!-- Price Section -->
+  <div class="flex items-center gap-3 mb-4">
+    <span class="text-2xl font-bold text-indigo-700">${{discountedPrice.toFixed(2)}}</span>
+    <span class="text-gray-500 line-through">${{originalPrice.toFixed(2)}}</span>
+    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded-full">
+      {{discountPercentage}}% OFF
+    </span>
+  </div>
+
+  <!-- Reviews -->
+  <div class="flex items-center gap-2 mb-6">
+    <div class="flex">
+      <lucide-angular *ngFor="let star of [1,2,3,4,5]" 
+        [name]="starIcon" 
+        size="16"
+        [class.text-yellow-500]="star <= 4"
+        [class.fill-yellow-500]="star <= 4"
+        class="text-gray-300">
+      </lucide-angular>
+    </div>
+    <div class="flex gap-1 text-sm">
+      <p class="font-medium text-gray-900">4.4</p>
+      <p class="text-gray-500">(328 reviews)</p>
+    </div>
+  </div>
+
+  <!-- Style Selection -->
+  <div class="mb-5">
+    <p class="text-sm font-medium text-gray-700 mb-2">Style</p>
+    <div class="flex gap-2 overflow-x-auto pb-2">
+      <app-selection-tabs 
+        *ngFor="let style of ['Minimal', 'Bohemian', 'Floral', 'Other']"
+        [option]="style"
+        [isActive]="selectedStyle === style"
+        (click)="selectStyle(style)">
+      </app-selection-tabs>
+    </div>
+  </div>
+
+  <!-- Color selection -->
+  <div class="mb-5">
+    <p class="text-sm font-medium text-gray-700 mb-2">Color</p>
+    <app-color-selection 
+      (colorSelected)="selectColor($event)">
+    </app-color-selection>
+  </div>
+
+  <!-- Size Selection -->
+  <div class="mb-6">
+    <p class="text-sm font-medium text-gray-700 mb-2">Size</p>
+    <div class="flex gap-2 overflow-x-auto pb-2">
+      <app-selection-tabs 
+        *ngFor="let size of ['XXL', 'XL', 'MD', 'SM']"
+        [option]="size"
+        [isActive]="selectedSize === size"
+        (click)="selectSize(size)">
+      </app-selection-tabs>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex gap-3 mb-8">
+    <button class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium">
+      <lucide-angular [name]="cartIcon" size="18"></lucide-angular>
+      Add to Cart
+    </button>
+    <button class="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-lg">
+      <lucide-angular [name]="heartIcon" size="20" class="text-gray-600"></lucide-angular>
+    </button>
+  </div>
+
+  <!-- Tabs section -->
+  <div class="sticky top-0 bg-white pt-2 pb-2 z-10">
+    <div class="flex border-b border-gray-200">
+      <button 
+        *ngFor="let tab of tabs"
+        class="flex-1 py-3 text-sm font-medium relative"
+        [class.text-indigo-600]="activeTab === tab.id"
+        [class.text-gray-500]="activeTab !== tab.id"
+        (click)="setActiveTab(tab.id)">
+        {{tab.label}}
+        <span 
+          *ngIf="activeTab === tab.id"
+          class="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600">
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="mt-4">
+    <app-product-description *ngIf="activeTab === 'description'"></app-product-description>
+    <app-product-reviews *ngIf="activeTab === 'reviews'"></app-product-reviews>
+    <app-faqs *ngIf="activeTab === 'faqs'"></app-faqs>
+  </div>
+</div>

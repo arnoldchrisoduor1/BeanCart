@@ -12,6 +12,7 @@ import { ProductsComponent } from './features/products/products.component';
 import { ProductListComponent } from './features/products/product-list/product-list.component';
 import { ShopComponent } from './features/shop/shop.component';
 import { ShopProfileComponent } from './features/shop/shop-profile/shop-profile.component';
+import { ProductDetailsComponent } from './features/products/product-details/product-details.component';
 
 export const routes: Routes = [
   // Home route
@@ -34,7 +35,10 @@ export const routes: Routes = [
     component: ProductsComponent,
     children : [
       {
-        path: 'product-list', component: ProductListComponent
+        path: 'product-list', component: ProductListComponent,
+      },
+      {
+        path: 'product-details', component: ProductDetailsComponent,
       },
     ]
   },
