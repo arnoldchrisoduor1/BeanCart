@@ -1,6 +1,6 @@
 [build]
   command = "npm run build:ssr"
-  publish = "dist/your-app-name/browser"
+  publish = "dist/frontend/browser"
 
 [functions]
   directory = "netlify/functions"
