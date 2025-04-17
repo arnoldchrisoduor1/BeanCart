@@ -1,8 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-color-selection',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './color-selection.component.html',
   styleUrls: ['./color-selection.component.css']
 })
