@@ -10,6 +10,7 @@ import { User } from "../../models/user.model";
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUpdateUrl = 'http://localhost:3000/api/users'
   
   constructor(
     private http: HttpClient,
@@ -37,5 +38,20 @@ export class AuthService {
   
   logout(): void {
     this.authStateService.logout();
+  }
+
+  // Updating the user profile.
+  update(updateData: { firstName: string, lastName: string }): Observable<any> {
+    return this.http.put(`${this.apiUpdateUrl}/profile`, updateData);
+  }
+
+  // Getting the user profile.
+  getProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUpdateUrl}/profile`)
+    .pipe(
+      tap((response: User) => {
+        this.authStateService.setUser(response);
+      })
+    )
   }
 }

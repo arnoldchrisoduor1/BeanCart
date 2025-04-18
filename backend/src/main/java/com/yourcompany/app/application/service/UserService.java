@@ -77,7 +77,7 @@ public class UserService {
         profile.setLastName(user.getLastName());
         profile.setRole(user.getRole());
         profile.setisVerified(user.getIsverified());
-        profile.setProfileImgUrl(user.getProfileImageUrl());
+        profile.setProfileImageUrl(user.getProfileImageUrl());
         profile.setCreatedAt(user.getCreatedAt());
         
         return profile;
@@ -96,8 +96,8 @@ public class UserService {
             user.setLastName(profileDto.getLastName());
         }
 
-        if (profileDto.getProfileImgUrl() != null) {
-            user.setProfileImageUrl(profileDto.getProfileImgUrl());
+        if (profileDto.getProfileImageUrl() != null) {
+            user.setProfileImageUrl(profileDto.getProfileImageUrl());
         }
         
         userRepository.save(user);

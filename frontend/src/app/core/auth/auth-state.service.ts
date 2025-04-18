@@ -20,10 +20,15 @@ export class AuthStateService {
     private loadUserFromStorage(): void {
         if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
             const storedUser = localStorage.getItem(this.USER_KEY);
+            const storedToken = localStorage.getItem(this.TOKEN_KEY);
             if (storedUser) {
                 try {
                     const userData = JSON.parse(storedUser);
-                    this.currentUserSubject.next(userData);
+                // If the token exists separately, make sure the user object has it
+                if (storedToken && (!userData.token || userData.token !== storedToken)) {
+                    userData.token = storedToken;
+                }
+                this.currentUserSubject.next(userData);
                 } catch (e) {
                     // Handle parsing error.
                     this.logout();
@@ -41,13 +46,19 @@ export class AuthStateService {
     }
 
     public setUser(user: User): void {
-        // store in state
+        // Preserve the token from the current user if it exists and the new user doesn't have one
+        if (!user.token && this.currentUserValue?.token) {
+            user.token = this.currentUserValue.token;
+        }
+        
         this.currentUserSubject.next(user);
-
-        // store in localStorage.
+        
         if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-            localStorage.setItem(this.TOKEN_KEY, user.token);
             localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+            // Also update the token if it exists
+            if (user.token) {
+                localStorage.setItem(this.TOKEN_KEY, user.token);
+            }
         }
     }
 

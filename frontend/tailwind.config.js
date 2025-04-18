@@ -17,6 +17,9 @@ export default {
       addComponents({
         '.header-title': {
           '@apply text-3xl font-bold tracking-tighter text-indigo-900': '',
+        },
+        '.hover-animation': {
+          '@apply hover:scale-105 transition duration-300 cursor-pointer': '',
         }
       })
     }

@@ -1,4 +1,4 @@
-<div class="relative mb-10 overflow-hidden">
+<div class="relative mb-10 mt-5 overflow-hidden">
 
   <div class="">
     <app-update-profile-modal
@@ -24,7 +24,6 @@
 
     <!--Profile section-->
     <div class="flex flex-row items-center gap-5">
-      <!-- @if (isLoggedIn) { -->
       <div class="w-20 h-20">
         @if (userProfile?.profileImageUrl) {
         <img
@@ -45,18 +44,15 @@
         }
         <!-- Username and Address -->
       </div>
-      <!-- } -->
-      <!-- @if (userProfile) { -->
       <div class="text-lg text-indigo-200">
         <div class="flex flex-row gap-2">
           <p class="font-semibold">{{ userProfile?.firstName || "Arnold" }}</p>
-          <p class="font-semibold">{{ userProfile?.firstName || "Chris" }}</p>
+          <p class="font-semibold">{{ userProfile?.lastName || "Chris" }}</p>
         </div>
         <P class="text-sm">{{
           userProfile?.email || "arnoldchris262@gmail.com"
         }}</P>
       </div>
-      <!-- } -->
     </div>
 
     <!-- Statistics section -->
@@ -84,7 +80,7 @@
     <!-- Update profile section -->
     <div
     (click)="openModal()"
-      class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50"
+      class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
     >
       <p>Update Profile</p>
     </div>
@@ -163,7 +159,7 @@
         ></app-orders>
 
         <div
-          class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50"
+          class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50 hover-animation"
         >
           <p class="font-semibold text-indigo-200">See More Orders</p>
           <lucide-angular
@@ -194,7 +190,7 @@
       > </app-wishlist>
       
       <div
-          class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50"
+          class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50 hover-animation"
         >
           <p class="font-semibold text-indigo-200">See More Wishes</p>
           <lucide-angular

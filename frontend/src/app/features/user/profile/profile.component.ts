@@ -6,6 +6,7 @@ import { User, MoveRight, ShoppingCart, Package  } from 'lucide-angular';
 import { WishlistComponent } from '../../../shared/components/wishlist/wishlist.component';
 import { OrdersComponent } from '../../../shared/components/orders/orders.component';
 import { UpdateProfileModalComponent } from '../../../shared/components/update-profile-modal/update-profile-modal.component';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,10 @@ import { UpdateProfileModalComponent } from '../../../shared/components/update-p
 })
 export class ProfileComponent {
 
+  userProfile: any = null;
+  private authSubsription!: Subscription;
+  isLoggedIn = false;
+
   readonly userIcon = User;
   readonly moveRight = MoveRight ;
   readonly shoppingCart = ShoppingCart;
@@ -23,20 +28,18 @@ export class ProfileComponent {
   isModalVisible = false;
 
   openModal() {
+    console.log("Opening modal");
     this.isModalVisible = true;
   }
-
+  
   closeModal() {
-    console.log("parent emitting close event");
+    console.log("Closing modal");
     this.isModalVisible = false;
   }
 
-  userProfile: any = null;
-  private authSubsription!: Subscription;
-  isLoggedIn = false;
-
   constructor(
-    private authStateService: AuthStateService
+    private authStateService: AuthStateService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
