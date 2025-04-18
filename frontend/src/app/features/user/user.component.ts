@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   template: `
-    <div class="">
+    <div class="p-4">
       <router-outlet></router-outlet>
     </div>
   `

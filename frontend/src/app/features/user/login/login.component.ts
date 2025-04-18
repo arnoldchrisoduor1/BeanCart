@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -10,7 +10,7 @@ import { Mail, Lock } from 'lucide-angular';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, InputComponent, ButtonComponent, NgIf],
+  imports: [FormsModule, InputComponent, ButtonComponent, NgIf, RouterModule],
   templateUrl: './login.component.html'
 })
 export class LoginComponent {

@@ -9,8 +9,10 @@ import { FooterComponent } from './core/layout/footer/footer.component';
   imports: [RouterOutlet, NavbarComponent, FooterComponent],
   template: `
     <div class="flex flex-col min-h-screen">
+      <div class="sticky top-0 z-[200]">
       <app-navbar></app-navbar>
-      <main class="container mx-auto flex-grow">
+      </div>
+      <main class="-mt-5">
         <router-outlet></router-outlet>
       </main>
       <app-footer></app-footer>

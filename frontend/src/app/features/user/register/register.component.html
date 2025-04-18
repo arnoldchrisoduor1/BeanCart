@@ -1,5 +1,5 @@
 <div class="w-full">
-  <h2 class="text-2xl text-center font-semibold mb-6">Get Started</h2>
+  <h2 class="header-title py-4 text-center">Get Started</h2>
   <form (ngSubmit)="onSubmit()" class="w-full">
     <div class="flex flex-col gap-3">
       <app-input
@@ -57,4 +57,9 @@
       </app-button>
     </div>
   </form>
+  <div class="mt-4 text-center hover:cursor-pointer">
+    <a routerLink="/user/login" class="">
+      Don't have an account? <span class="text-indigo-900">Login</span>
+    </a>
+  </div>
 </div>

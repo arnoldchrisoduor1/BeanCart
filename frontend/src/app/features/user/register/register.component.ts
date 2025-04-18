@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { DropdownComponent } from '../../../shared/components/dropdown/dropdown.component';
@@ -10,7 +10,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, InputComponent, ButtonComponent, DropdownComponent, NgIf],
+  imports: [FormsModule, InputComponent, ButtonComponent, DropdownComponent, NgIf, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

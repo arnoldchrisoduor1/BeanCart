@@ -1,12 +1,14 @@
+/* Import Outfit from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 
-/* Your custom utility classes */
+/* Custom utilities */
 @layer components {
   .btn-primary {
     @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600;
   }
-  /* Add more custom utility classes */
 }
 
 @tailwind utilities;

@@ -1,6 +1,6 @@
 <!-- src/app/core/layout/navbar/navbar.component.html -->
 <!-- Desktop Navbar (Indigo Background) -->
-<nav class="hidden md:flex justify-between items-center py-4 px-6 bg-indigo-600 text-white relative z-20">
+<nav class="hidden md:flex justify-between sticky top-0 items-center py-4 px-6 bg-indigo-600 text-white  z-[200]">
   <div class="flex items-center">
     <a routerLink="/" class="text-xl font-bold">BeanCart</a>
   </div>
@@ -8,7 +8,7 @@
   <div class="flex items-center space-x-6">
     @for (item of menuItems; track item.path) {
       <a [routerLink]="item.path" 
-         [class.font-bold]="isActive(item.path)" 
+         [class.font-bold]="isActive(item.path)"
          class="hover:text-indigo-200 transition"
          [ngClass]="{'underline': isActive(item.path)}">
         {{item.name}}
@@ -45,14 +45,14 @@
 </nav>
 
 <!-- Mobile Navbar (Indigo Background) -->
-<nav class="md:hidden flex justify-between items-center py-4 px-4 bg-indigo-500 text-white">
+<nav class="md:hidden z-[150] sticky top-0 flex justify-between items-center py-4 px-4 bg-indigo-500 text-white">
   <a routerLink="/" class="text-xl font-bold">BeanCart</a>
   
   <div class="flex items-center">
     @if (isLoggedIn) {
       <div class="mr-4">
         @if (userProfile?.profileImageUrl) {
-          <img [src]="userProfile.profileImageUrl" 
+          <img [src]="userProfile.profileImageUrl"
                alt="Profile" 
                class="w-8 h-8 rounded-full object-cover border-2 border-indigo-200" />
         } @else {
@@ -74,10 +74,10 @@
 </nav>
 
 <!-- Mobile Menu Overlay -->
-<div *ngIf="isMenuOpen" class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" (click)="toggleMenu()"></div>
+<div *ngIf="isMenuOpen" class="fixed inset-0 bg-black bg-opacity-50 z-[150] md:hidden" (click)="toggleMenu()"></div>
 
 <!-- Mobile Menu (Indigo Theme) -->
-<div *ngIf="isMenuOpen" class="fixed right-0 top-0 bottom-0 w-64 bg-white z-50 shadow-lg transform transition-transform md:hidden">
+<div *ngIf="isMenuOpen" class="fixed right-0 top-2 bottom-0 w-64 bg-white z-[200] shadow-lg transform transition-transform md:hidden overflow-y-auto">
   <div class="flex justify-between items-center p-4 border-b bg-indigo-500 text-white">
     <h2 class="font-bold">Menu</h2>
     <button (click)="toggleMenu()" class="p-1">
