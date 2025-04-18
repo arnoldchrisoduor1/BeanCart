@@ -1,0 +1,55 @@
+<!-- src/app/shared/components/profile-photo-upload/profile-photo-upload.component.html -->
+<div 
+  class="relative w-32 h-32 rounded-full cursor-pointer group"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
+  <input
+    type="file"
+    accept="image/*"
+    class="absolute inset-0 opacity-0 cursor-pointer z-10"
+    (change)="onFileSelected($event)"
+    [disabled]="isLoading"
+  />
+
+  <!-- Display current profile photo or placeholder -->
+  <div class="w-full h-full rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+    @if (profilePhoto) {
+      <img 
+        [src]="profilePhoto" 
+        alt="Profile photo"
+        class="w-full h-full object-cover"
+      />
+    } @else {
+      <span class="text-gray-500 text-lg">No photo</span>
+    }
+  </div>
+
+  <!-- Hover overlay with camera icon -->
+  @if (isHovered && !isLoading) {
+    <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        class="w-8 h-8"
+      >
+        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+        <circle cx="12" cy="13" r="3"></circle>
+      </svg>
+    </div>
+  }
+
+  <!-- Loading spinner -->
+  @if (isLoading) {
+    <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+    </div>
+  }
+</div>

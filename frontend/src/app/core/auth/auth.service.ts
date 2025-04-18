@@ -41,7 +41,14 @@ export class AuthService {
   }
 
   // Updating the user profile.
-  update(updateData: { firstName: string, lastName: string }): Observable<any> {
+  update(updateData: { 
+    firstName: string, 
+    lastName: string,
+    email?: string,
+    address?: string,
+    mobileNumber?: string,
+    profileImageUrl?: string,
+    occupation?: string }): Observable<any> {
     return this.http.put(`${this.apiUpdateUrl}/profile`, updateData);
   }
 

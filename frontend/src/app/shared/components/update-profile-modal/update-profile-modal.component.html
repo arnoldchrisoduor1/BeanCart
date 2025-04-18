@@ -27,16 +27,55 @@
       ></lucide-angular>
     </div>
 
-    <!-- Rest of your modal content -->
-    <span
-      class="flex items-center justify-center w-20 h-20 bg-indigo-200 rounded-full"
+    <!-- Profile Photo Upload -->
+    <div 
+      class="relative w-20 h-20 rounded-full cursor-pointer group"
+      [class.bg-indigo-200]="!profileImageUrl"
     >
-      <lucide-angular
-        [img]="userIcon"
-        size="16"
-        class="text-indigo-600"
-      ></lucide-angular>
-    </span>
+      <input
+        type="file"
+        accept="image/*"
+        id="profileImageUrl"
+        class="absolute inset-0 opacity-0 cursor-pointer z-10"
+        (change)="onFileSelected($event)"
+        [disabled]="isUploading"
+      />
+
+      <!-- Display current profile photo or placeholder -->
+      <div class="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+        @if (profileImageUrl) {
+          <img 
+            [src]="profileImageUrl" 
+            alt="Profile photo"
+            class="w-full h-full object-cover"
+          />
+        } @else {
+          <lucide-angular
+            [img]="userIcon"
+            size="32"
+            class="text-indigo-600"
+          ></lucide-angular>
+        }
+      </div>
+
+      <!-- Hover overlay with camera icon -->
+      @if (!isUploading) {
+        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 rounded-full flex items-center justify-center transition-all duration-300">
+          <lucide-angular
+            [img]="cameraIcon"
+            size="24"
+            class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></lucide-angular>
+        </div>
+      }
+
+      <!-- Loading spinner -->
+      @if (isUploading) {
+        <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+        </div>
+      }
+    </div>
 
     <!-- Inputs & Button -->
     <form (ngSubmit)="onSubmit()" class="flex flex-col gap-3 w-[90%] justify-center items-center">
@@ -59,6 +98,10 @@
           [icon]="userPen"
         ></app-input>
       </div>
+
+      @if (errorMessage) {
+        <div class="text-red-500 text-sm">{{ errorMessage }}</div>
+      }
 
       <div class="w-[60%] hover-animation">
         <app-button

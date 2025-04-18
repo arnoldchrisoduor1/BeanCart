@@ -69,8 +69,8 @@ public class UserProfileDto {
         return isVerified;
     }
 
-    public void setProfileImageUrl(String url) {
-        this.profileImageUrl = url;
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public String getProfileImageUrl() {

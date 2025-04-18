@@ -1,5 +1,9 @@
-/* update-profile-modal.component.css */
-.snackbar-success {
+/* src/app/shared/components/profile-photo-upload/profile-photo-upload.component.scss */
+:host {
+    display: block;
+  }
+  
+  .snackbar-success {
     background-color: #4caf50;
     color: white;
   }
@@ -12,12 +16,4 @@
   .snackbar-loading {
     background-color: #2196f3;
     color: white;
-  }
-  
-  .hover-animation {
-    transition: all 0.3s ease;
-  }
-  
-  .hover-animation:hover {
-    transform: translateY(-1px);
   }

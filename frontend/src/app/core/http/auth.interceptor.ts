@@ -1,4 +1,3 @@
-// src/app/core/http/auth.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthStateService } from '../auth/auth-state.service';
@@ -6,20 +5,24 @@ import { AuthStateService } from '../auth/auth-state.service';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authStateService = inject(AuthStateService);
   const currentUser = authStateService.currentUserValue;
-  
-  console.log('Request URL:', req.url);
-  console.log('Request method:', req.method);
-  
-  if (currentUser && currentUser.token) {
-    console.log('Adding token:', currentUser.token);
+
+  // Add URLs here that should be excluded from the auth header
+  const excludedUrls = [
+    // exclude all S3 signed URLs (or you can use a regex if dynamic)
+    's3.amazonaws.com', // or use 'https://s3.amazonaws.com' depending on the format
+    'amazonaws.com', // wildcard approach
+  ];
+
+  // Check if the URL should be excluded
+  const shouldExclude = excludedUrls.some(url => req.url.includes(url));
+
+  if (!shouldExclude && currentUser && currentUser.token) {
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${currentUser.token}`
       }
     });
-  } else {
-    console.log('No user or token available');
   }
-  
+
   return next(req);
 };

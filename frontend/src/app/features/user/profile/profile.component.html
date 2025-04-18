@@ -24,12 +24,12 @@
 
     <!--Profile section-->
     <div class="flex flex-row items-center gap-5">
-      <div class="w-20 h-20">
+      <div class="w-20 h-20 overflow-hidden">
         @if (userProfile?.profileImageUrl) {
         <img
           [src]="userProfile.profileImageUrl"
           alt="Profile"
-          class="object-cover border-4 border-indigo-200 rounded-full"
+          class="w-full h-full object-cover border-4 border-indigo-200 rounded-full"
         />
         } @else {
         <span
