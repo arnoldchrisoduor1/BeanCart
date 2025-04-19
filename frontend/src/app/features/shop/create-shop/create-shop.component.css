@@ -1,0 +1,24 @@
+/* shop-create.component.css */
+/* Add any custom styles here if needed */
+
+/* Make sure the page takes full height */
+:host {
+    display: block;
+    min-height: 100vh;
+  }
+  
+  /* Custom snackbar styles */
+  .snackbar-success {
+    background-color: #4f46e5; /* indigo-600 */
+    color: white;
+  }
+  
+  .snackbar-error {
+    background-color: #ef4444; /* red-500 */
+    color: white;
+  }
+  
+  .snackbar-loading {
+    background-color: #4f46e5; /* indigo-600 */
+    color: white;
+  }

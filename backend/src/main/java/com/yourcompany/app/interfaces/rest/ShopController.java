@@ -42,6 +42,7 @@ public class ShopController {
         shopDto.setSellerId(userId);
         
         ShopResponseDto createdShop = shopService.createShop(shopDto);
+        System.out.println("==============Shop created successfully============");
         return new ResponseEntity<>(createdShop, HttpStatus.CREATED);
     }
     

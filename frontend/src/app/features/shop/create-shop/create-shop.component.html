@@ -1,0 +1,143 @@
+<!-- shop-create.component.html -->
+<div class="min-h-screen bg-indigo-50 p-6 mt-5">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+      <!-- Header -->
+      <h2 class="text-2xl font-bold text-indigo-800 mb-6 text-center">Create Your Shop</h2>
+  
+      <!-- Shop Logo Upload -->
+      <div class="flex flex-col items-center mb-6">
+        <div 
+          class="relative w-32 h-32 rounded-full cursor-pointer group mb-3"
+          [class.bg-indigo-200]="!formData.logoUrl"
+        >
+          <input
+            type="file"
+            accept="image/*"
+            id="shopLogo"
+            class="absolute inset-0 opacity-0 cursor-pointer z-10"
+            (change)="onFileSelected($event)"
+            [disabled]="isUploading"
+          />
+  
+          <!-- Display current logo or placeholder -->
+          <div class="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+            @if (formData.logoUrl) {
+              <img 
+                [src]="formData.logoUrl" 
+                alt="Shop logo"
+                class="w-full h-full object-cover"
+              />
+            } @else {
+              <lucide-angular
+                [img]="storeIcon"
+                size="48"
+                class="text-indigo-600"
+              ></lucide-angular>
+            }
+          </div>
+  
+          <!-- Hover overlay with camera icon -->
+          @if (!isUploading) {
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 rounded-full flex items-center justify-center transition-all duration-300">
+              <lucide-angular
+                [img]="cameraIcon"
+                size="32"
+                class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></lucide-angular>
+            </div>
+          }
+  
+          <!-- Loading spinner -->
+          @if (isUploading) {
+            <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            </div>
+          }
+        </div>
+        <label for="shopLogo" class="text-indigo-600 text-sm font-medium">Upload Shop Logo</label>
+      </div>
+  
+      <!-- Form -->
+      <form (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+        <!-- Shop Name -->
+        <app-input
+          type="text"
+          id="shopName"
+          name="name"
+          placeholder="Shop Name"
+          [(value)]="formData.name"
+          [icon]="storeIcon"
+          [required]=true
+        ></app-input>
+  
+        <!-- Description -->
+        <div class="relative border border-slate-300 w-full rounded-md">
+          <div class="flex items-start w-full">
+            <div class="pl-3 pt-3 pr-2 text-gray-500">
+              <lucide-angular [img]="alignLeftIcon" class="h-5 w-5"></lucide-angular>
+            </div>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              [(ngModel)]="formData.description"
+              placeholder="Shop description..."
+              class="flex-1 py-2 outline-none bg-transparent resize-none"
+            ></textarea>
+          </div>
+        </div>
+  
+        <!-- Contact Information -->
+        <h3 class="text-lg font-semibold text-indigo-700 mt-4">Contact Information</h3>
+  
+        <app-input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Contact Email"
+          [(value)]="formData.email"
+          [icon]="mailIcon"
+          [required]=true
+        ></app-input>
+  
+        <app-input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Phone Number"
+          [(value)]="formData.phone"
+          [icon]="phoneIcon"
+          [required]=true
+        ></app-input>
+  
+        <div class="relative border border-slate-300 w-full rounded-md">
+          <div class="flex items-start w-full">
+            <div class="pl-3 pt-3 pr-2 text-gray-500">
+              <lucide-angular [img]="mapPinIcon" class="h-5 w-5"></lucide-angular>
+            </div>
+            <textarea
+              id="address"
+              name="address"
+              rows="2"
+              [(ngModel)]="formData.address"
+              placeholder="Shop Address"
+              class="flex-1 py-2 outline-none bg-transparent resize-none"
+            ></textarea>
+          </div>
+        </div>
+  
+        @if (errorMessage) {
+          <div class="text-red-500 text-sm mt-2">{{ errorMessage }}</div>
+        }
+  
+        <div class="w-full mt-6">
+          <app-button
+            type="submit"
+            [isLoading]="isSubmitting"
+            defaultText="Create Shop"
+            loadingText="Creating..."
+          ></app-button>
+        </div>
+      </form>
+    </div>
+  </div>

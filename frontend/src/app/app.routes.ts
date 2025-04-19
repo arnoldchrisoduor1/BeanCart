@@ -13,6 +13,7 @@ import { ProductListComponent } from './features/products/product-list/product-l
 import { ShopComponent } from './features/shop/shop.component';
 import { ShopProfileComponent } from './features/shop/shop-profile/shop-profile.component';
 import { ProductDetailsComponent } from './features/products/product-details/product-details.component';
+import { CreateShopComponent } from './features/shop/create-shop/create-shop.component';
 
 export const routes: Routes = [
   // Home route
@@ -48,6 +49,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'shop-profile', component: ShopProfileComponent
+      }, {
+        path: 'create-shop', component: CreateShopComponent
       }
     ]
   }

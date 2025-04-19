@@ -70,6 +70,7 @@ export class AuthStateService {
         if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
             localStorage.removeItem(this.TOKEN_KEY);
             localStorage.removeItem(this.USER_KEY);
+            localStorage.removeItem('shop_data');
         }
     }
 }
