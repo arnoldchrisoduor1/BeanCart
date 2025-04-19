@@ -1,6 +1,5 @@
-<div class="relative">
+<div class="relative bg-gray-50 min-h-screen mt-5">
   <!-- Background image container -->
-  <!-- Background image with overlay -->
   <div class="relative w-full h-64 overflow-hidden">
     <!-- Background image -->
     <img
@@ -15,13 +14,13 @@
     ></div>
 
     <!-- Location  -->
-    <div class="absolute p-2 bg-white rounded-full top-4 right-4">
-      <div class="flex flex-row items-center">
+    <div class="absolute p-2 bg-white rounded-full top-4 right-4 shadow-md">
+      <div class="flex flex-row items-center gap-1">
         <lucide-angular
           [img]="mapIcon"
           class="h-4 text-indigo-700"
         ></lucide-angular>
-        <h2 class="text-sm">Awasi</h2>
+        <h2 class="text-sm font-medium">Awasi</h2>
       </div>
     </div>
 
@@ -34,20 +33,20 @@
           <p class="mb-1 text-3xl font-bold tracking-tighter">Real Touch</p>
         </div>
         
-        <div class="flex flex-row items-center justify-self-end">
+        <div class="flex flex-row items-center gap-2">
           <div class="relative flex items-center justify-center w-6 h-6 overflow-hidden rounded-full">
             <div
               class="absolute w-4 h-4 rounded-full opacity-75 bg-emerald-500 animate-ping"
             ></div>
             <div class="relative w-2 h-2 rounded-full bg-emerald-500/70"></div>
           </div>
-          <div class="flex flex-row gap-2">
-              <p>active</p>
-              <p>21 hrs ago</p>
+          <div class="flex flex-row gap-2 text-sm">
+            <p class="font-medium">active</p>
+            <p class="text-gray-300">21 hrs ago</p>
           </div>
         </div>
       </div>
-      <p class="text-lg tracking-tighter">
+      <p class="text-lg tracking-tighter text-gray-200">
         We deal in electronics and cyber services
       </p>
     </div>
@@ -55,9 +54,10 @@
 
   <!-- Content below the banner -->
   <div
-    class="relative z-10 w-full -mt-12 bg-indigo-500 border border-t-indigo-200 rounded-3xl"
+    class="relative z-10 w-full -mt-12 bg-white border border-gray-200 rounded-t-3xl shadow-sm"
   >
-    <div class="flex flex-row justify-between px-4 py-8">
+    <!-- Stats boxes -->
+    <div class="flex flex-row justify-between px-4 py-8 bg-indigo-50 rounded-t-3xl">
       <app-stats-box
         title="In Stock"
         [value]="13"
@@ -75,21 +75,49 @@
       ></app-stats-box>
     </div>
 
-    <!-- Locations -->
-    <div class="px-4">
-      <div></div>
+    <!-- Dynamic product categories with carousels -->
+    <div class="px-4 py-6">
+      <!-- Loop through each category -->
+      <div *ngFor="let category of categories" class="mb-8">
+        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}}</h3>
+        <div class="relative">
+          <!-- Navigation buttons -->
+          <button 
+            class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
+            (click)="scrollLeft(categoryScrollContainer)"
+          >
+            <lucide-angular [img]="chevronLeft" class="w-5 h-5 text-indigo-700"></lucide-angular>
+          </button>
+          
+          <!-- Product carousel -->
+          <div 
+            #categoryScrollContainer
+            class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
+          >
+            <!-- Loop through products in this category -->
+            <app-product-item 
+              *ngFor="let product of category.products"
+              class="flex-shrink-0 w-64 snap-start"
+              
+            ></app-product-item>
+          </div>
+          
+          <!-- Navigation buttons -->
+          <button 
+            class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
+            (click)="scrollRight(categoryScrollContainer)"
+          >
+            <lucide-angular [img]="chevronRight" class="w-5 h-5 text-indigo-700"></lucide-angular>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="flex flex-col gap-5 px-4 pb-8">
-      <app-product-item></app-product-item>
-      <app-product-item></app-product-item>
-      <app-product-item></app-product-item>
-      <app-product-item></app-product-item>
-    </div>
+    <!-- See More Button -->
     <div
-      class="items-center gap-3 px-4 py-1 mx-auto my-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50"
+      class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-indigo-600 rounded-md shadow-md w-fit hover:bg-indigo-700 transition-colors"
     >
-      <p class="font-semibold text-indigo-200">See More Items</p>
+      <p class="font-semibold text-white">See More Items</p>
     </div>
   </div>
 </div>

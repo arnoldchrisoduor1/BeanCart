@@ -7,10 +7,13 @@ import { WishlistComponent } from '../../../shared/components/wishlist/wishlist.
 import { OrdersComponent } from '../../../shared/components/orders/orders.component';
 import { UpdateProfileModalComponent } from '../../../shared/components/update-profile-modal/update-profile-modal.component';
 import { AuthService } from '../../../core/auth/auth.service';
+import { RouterLink } from '@angular/router';
+import { StatsBoxComponent } from "../../../shared/components/stats-box/stats-box.component";
+import { ShopTileComponent } from "../../../shared/components/shop-tile/shop-tile.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [LucideAngularModule, WishlistComponent, OrdersComponent, UpdateProfileModalComponent],
+  imports: [LucideAngularModule, WishlistComponent, OrdersComponent, UpdateProfileModalComponent, RouterLink, StatsBoxComponent, ShopTileComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -39,7 +42,7 @@ export class ProfileComponent {
 
   constructor(
     private authStateService: AuthStateService,
-    private authService: AuthService
+      private authService: AuthService
   ) {}
 
   ngOnInit() {

@@ -1,9 +1,33 @@
-/* Smooth transitions for the transforms */
-.sticky {
-    transition: transform 0.3s ease-out;
-  }
-  
-  /* Ensure the content below has proper spacing */
-  .relative {
-    overflow-x: hidden;
-  }
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Optional: Add some styling for scroll indicators */
+.scroll-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scroll-indicator.left {
+  left: -20px;
+}
+
+.scroll-indicator.right {
+  right: -20px;
+}
