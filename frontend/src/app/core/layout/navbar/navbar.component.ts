@@ -81,7 +81,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       { path: '/products/product-list', name: 'Product-List' },
       { path: '/shop/shop-profile', name: 'Shop-Profile' },
       { path: '/shop/create-shop', name: 'Create Shop' },
-      {path: '/products/product-details', name: 'Product-Details'}
+      {path: '/products/product-details', name: 'Product-Details'},
+      {path: '/products/product-create', name: 'Add Product'}
     ];
     
     return this.isLoggedIn ? authenticatedMenuItems : guestMenuItems;

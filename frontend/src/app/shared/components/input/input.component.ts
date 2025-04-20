@@ -16,18 +16,25 @@ export class InputComponent {
   @Input() name: string = '';
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
-  @Input() value: string = '';
+  @Input() value: string | number | undefined = '';  // Changed to accept string or number
   @Input() icon: any = null;
   
-  @Output() valueChange = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<string | number>();  // Updated to emit string or number
 
   showPassword: boolean = false;
   readonly eyeIcon = Eye;
   readonly eyeOffIcon = EyeOff;
 
   onValueChange(newValue: string) {
-    this.value = newValue;
-    this.valueChange.emit(newValue);
+    let emittedValue: string | number = newValue;
+    
+    // Convert to number if input type is number and value is not empty
+    if (this.type === 'number' && newValue !== '') {
+      emittedValue = newValue.includes('.') ? parseFloat(newValue) : parseInt(newValue, 10);
+    }
+    
+    this.value = emittedValue;
+    this.valueChange.emit(emittedValue);
   }
 
   togglePasswordVisibility() {

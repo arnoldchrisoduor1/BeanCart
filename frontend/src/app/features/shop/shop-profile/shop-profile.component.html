@@ -1,9 +1,51 @@
-<div class="relative bg-gray-50 min-h-screen mt-5">
+<div *ngIf="isLoading" class="relative bg-gray-50 min-h-screen mt-5">
+  <!-- Banner skeleton -->
+  <div class="relative w-full h-64 overflow-hidden bg-gray-200 animate-pulse"></div>
+  
+  <!-- Content skeleton -->
+  <div class="relative z-10 w-full -mt-12 bg-white border border-gray-200 rounded-t-3xl shadow-sm">
+    <!-- Stats boxes skeleton -->
+    <div class="flex flex-row justify-between px-4 py-8 bg-gray-100 rounded-t-3xl">
+      <div class="w-1/3 px-2">
+        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
+        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
+        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
+      </div>
+      <div class="w-1/3 px-2">
+        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
+        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
+        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
+      </div>
+      <div class="w-1/3 px-2">
+        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
+        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
+        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
+      </div>
+    </div>
+    
+    <!-- Products skeleton -->
+    <div class="px-4 py-6">
+      <div *ngFor="let i of [1, 2]" class="mb-8">
+        <div class="h-6 mb-4 bg-gray-200 w-1/4 rounded-md animate-pulse"></div>
+        <div class="flex gap-4 overflow-x-auto">
+          <div *ngFor="let j of [1, 2, 3]" class="flex-shrink-0 w-64">
+            <div class="w-full h-40 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
+            <div class="h-5 mb-1 bg-gray-200 rounded-md animate-pulse"></div>
+            <div class="h-4 mb-1 bg-gray-200 w-3/4 rounded-md animate-pulse"></div>
+            <div class="h-6 mt-2 bg-gray-300 w-1/2 rounded-md animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading" class="relative bg-gray-50 min-h-screen mt-5">
   <!-- Background image container -->
   <div class="relative w-full h-64 overflow-hidden">
     <!-- Background image -->
     <img
-      [src]="shopBanner"
+      [src]="shopProfile?.logoUrl || shopBanner"
       class="object-cover w-full h-full"
       alt="Shop Banner"
     />
@@ -20,7 +62,7 @@
           [img]="mapIcon"
           class="h-4 text-indigo-700"
         ></lucide-angular>
-        <h2 class="text-sm font-medium">Awasi</h2>
+        <h2 class="text-xs font-medium">{{shopProfile?.address}}</h2>
       </div>
     </div>
 
@@ -30,7 +72,7 @@
     >
       <div class="flex flex-row justify-between w-full">
         <div>
-          <p class="mb-1 text-3xl font-bold tracking-tighter">Real Touch</p>
+          <p class="mb-1 text-2xl font-bold tracking-tighter">{{shopProfile?.name}}</p>
         </div>
         
         <div class="flex flex-row items-center gap-2">
@@ -46,8 +88,8 @@
           </div>
         </div>
       </div>
-      <p class="text-lg tracking-tighter text-gray-200">
-        We deal in electronics and cyber services
+      <p class="text-md tracking-tighter text-gray-200">
+        {{ shopProfile?.description }}
       </p>
     </div>
   </div>
@@ -77,12 +119,18 @@
 
     <!-- Dynamic product categories with carousels -->
     <div class="px-4 py-6">
+      <!-- Show message if no products -->
+      <div *ngIf="categories.length === 0" class="text-center py-10">
+        <p class="text-gray-500">No products available in this shop yet.</p>
+      </div>
+
       <!-- Loop through each category -->
       <div *ngFor="let category of categories" class="mb-8">
-        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}}</h3>
+        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
         <div class="relative">
-          <!-- Navigation buttons -->
+          <!-- Navigation buttons - note the updated condition -->
           <button 
+            *ngIf="category.products && category.products.length > 1"
             class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
             (click)="scrollLeft(categoryScrollContainer)"
           >
@@ -98,12 +146,13 @@
             <app-product-item 
               *ngFor="let product of category.products"
               class="flex-shrink-0 w-64 snap-start"
-              
+              [product]="product"
             ></app-product-item>
           </div>
           
-          <!-- Navigation buttons -->
+          <!-- Navigation buttons - note the updated condition -->
           <button 
+            *ngIf="category.products && category.products.length > 1"
             class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
             (click)="scrollRight(categoryScrollContainer)"
           >
@@ -114,8 +163,8 @@
     </div>
 
     <!-- See More Button -->
-    <div
-      class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-indigo-600 rounded-md shadow-md w-fit hover:bg-indigo-700 transition-colors"
+    <div *ngIf="categories.length > 0"
+      class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-indigo-600 rounded-md shadow-md w-fit hover:bg-indigo-700 transition-colors cursor-pointer"
     >
       <p class="font-semibold text-white">See More Items</p>
     </div>

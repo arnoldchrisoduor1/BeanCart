@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from "../../models/user.model";
+import { ShopStateService } from "../services/shop/shop-state.service";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthStateService {
     private currentUserSubject = new BehaviorSubject<User | null>(null);
     public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-    constructor() {
+    constructor(private shopState: ShopStateService) {
         // Initial state from localstorage on app startup
         this.loadUserFromStorage();
     }
@@ -65,6 +66,9 @@ export class AuthStateService {
     public logout(): void {
         // clear state
         this.currentUserSubject.next(null);
+
+        // clearing the shop data from local storage
+        this.shopState.clearShopData();
 
         // clear storage
         if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {

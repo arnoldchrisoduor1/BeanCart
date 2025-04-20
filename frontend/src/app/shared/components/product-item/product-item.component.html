@@ -1,56 +1,93 @@
-<div class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md shadow-indigo-700/30">
+<div
+  class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md shadow-indigo-700/30"
+>
   <div class="relative w-full">
-    <img [src]="ProductImage" alt="product 1 image" class="object-cover w-full rounded-md h-60" />
-    <div class="absolute flex flex-col gap-3 p-2 bg-white border border-indigo-300 rounded-full right-2 top-2">
-        <lucide-angular
+    <!-- Product image - now dynamic -->
+    <img
+      [src]="productImage"
+      [alt]="product.name"
+      class="object-cover w-full rounded-md h-60"
+    />
+
+    <!-- Action buttons -->
+    <div
+      class="absolute flex flex-col gap-3 p-2 bg-white border border-indigo-300 rounded-full right-2 top-2"
+    >
+      <lucide-angular
         [img]="heartIcon"
-        class="p-1 bg-gray-200 rounded-full"
+        class="p-1 bg-gray-200 rounded-full hover:bg-indigo-100 hover:text-indigo-700 cursor-pointer"
       ></lucide-angular>
-        <lucide-angular
+      <lucide-angular
         [img]="expandIcon"
-        class="p-1 bg-gray-200 rounded-full"
+        class="p-1 bg-gray-200 rounded-full hover:bg-indigo-100 hover:text-indigo-700 cursor-pointer"
       ></lucide-angular>
-        <lucide-angular
+      <lucide-angular
         [img]="shoppingCart"
-        class="p-1 bg-gray-200 rounded-full"
+        class="p-1 bg-gray-200 rounded-full hover:bg-indigo-100 hover:text-indigo-700 cursor-pointer"
       ></lucide-angular>
     </div>
-    <div class="absolute bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded-full top-2 left-2">
-        <p class="text-center">50% off</p>
+
+    <!-- Discount badge - only shown if there's a discount -->
+    <div
+      *ngIf="discountPercentage"
+      class="absolute bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded-full top-2 left-2"
+    >
+      <p class="text-center">{{ discountPercentage }}% off</p>
     </div>
-    <div class="absolute flex flex-row items-center gap-3 p-2 -translate-x-1/2 bg-indigo-100 border border-indigo-200 rounded-xl shadow-md shadow-indigo-700/30 bottom-2 left-1/2">
-        <div class="flex flex-col items-center justify-center">
-            <p class="text-lg font-semibold text-indigo-700">11</p>
-            <p class="text-sm">Days</p>
-        </div>
-        <div class="text-3xl font-extrabold text-indigo-900">:</div>
-        <div class="flex flex-col items-center justify-center">
-            <p class="text-lg font-semibold text-indigo-700">23</p>
-            <p class="text-sm">Hours</p>
-        </div>
-        <div class="text-3xl font-extrabold text-indigo-900">:</div>
-        <div class="flex flex-col items-center justify-center">
-            <p class="text-lg font-semibold text-indigo-700">49</p>
-            <p class="text-sm">Mins</p>
-        </div>
-        <div class="text-3xl font-extrabold text-indigo-900">:</div>
-        <div class="flex flex-col items-center justify-center">
-            <p class="text-lg font-semibold text-indigo-700">17</p>
-            <p class="text-sm">Sec</p>
-        </div>
-    </div>
-  </div>
-  <div class="flex flex-row justify-between p-3 bg-white rounded-b-md">
-    <div class="flex flex-col gap-3">
-      <p class="text-black/50">Skin Care</p>
-      <p class="text-xl font-semibold">SilkSculpt Serum</p>
-      <div class="flex flex-row items-center gap-5 text-xl">
-        <p class="font-bold text-2xl text-indigo-700">$ 35.05</p>
-        <p class="line-through text-black/30">$ 40.99</p>
+
+    <!-- Countdown timer (you might want to make this dynamic later) -->
+    <div
+      class="absolute flex flex-row items-center gap-3 p-2 -translate-x-1/2 bg-indigo-100 border border-indigo-200 rounded-xl shadow-md shadow-indigo-700/30 bottom-2 left-1/2"
+    >
+      <div class="flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-indigo-700">11</p>
+        <p class="text-sm">Days</p>
+      </div>
+      <div class="text-3xl font-extrabold text-indigo-900">:</div>
+      <div class="flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-indigo-700">23</p>
+        <p class="text-sm">Hours</p>
+      </div>
+      <div class="text-3xl font-extrabold text-indigo-900">:</div>
+      <div class="flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-indigo-700">49</p>
+        <p class="text-sm">Mins</p>
+      </div>
+      <div class="text-3xl font-extrabold text-indigo-900">:</div>
+      <div class="flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-indigo-700">17</p>
+        <p class="text-sm">Sec</p>
       </div>
     </div>
+  </div>
+
+  <!-- Product details -->
+  <div class="flex flex-row justify-between p-3 bg-white rounded-b-md relative min-h-32">
+    <div class="flex flex-col gap-3">
+      <p class="text-black/50">{{ product.category }}</p>
+      <p class="text-xl font-semibold">{{ product.name }}</p>
+      <div class="flex flex-row items-center gap-5 text-xl absolute bottom-4">
+        <!-- Show discounted price if available -->
+        <div>
+          <p *ngIf="discountedPrice" class="font-bold text-2xl text-indigo-700">
+            $ {{ discountedPrice | number : "1.2-2" }}
+          </p>
+        </div>
+        <div class="">
+          <p
+            [class.line-through]="discountedPrice"
+            [class]="discountedPrice ? 'text-black/30' : 'text-indigo-700'"
+            class="font-bold text-md"
+          >
+            $ {{ product.price | number : "1.2-2" }}
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="flex flex-row gap-3">
       <p>4.3</p>
+      <!-- You might want to make this dynamic if you have ratings -->
       <lucide-angular
         [img]="reviewStar"
         class="text-yellow-500 fill-yellow-500"

@@ -1,6 +1,5 @@
 <div class="relative border border-slate-300 w-full rounded-md">
-  <!-- Removed `inline-block` and `w-fit` -->
-  <div class="flex items-center w-full">  <!-- Made this `w-full` -->
+  <div class="flex items-center w-full">
     <!-- Icon container (left) -->
     <div *ngIf="icon" class="pl-3 pr-2 text-gray-500">
       <lucide-angular [img]="icon" class="h-5 w-5"></lucide-angular>
@@ -15,7 +14,9 @@
       [ngModel]="value"
       (ngModelChange)="onValueChange($event)"
       class="flex-1 py-2 outline-none bg-transparent"
-      [required]="required">
+      [required]="required"
+      [attr.step]="type === 'number' ? 'any' : null"
+      [attr.min]="type === 'number' ? '0' : null">  <!-- Added min for numbers -->
 
     <!-- Password toggle (right) -->
     <button 

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LucideAngularModule, Package, Trash2, MapPinned } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
+import { Shop } from '../../../models/shop.model';
 
 @Component({
   selector: 'app-shop-tile',
@@ -14,8 +15,15 @@ export class ShopTileComponent {
   readonly trash = Trash2;
   readonly map = MapPinned;
 
-  @Input() shop :string = 'Shop';
-  @Input() imageUrl :string = 'Shop';
-  @Input() isVerified :Boolean = false;
-  @Input() description :string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris';
+  @Input() shop!: Shop;
+  @Input() isSelected: boolean = false;
+  @Output() deleteShop = new EventEmitter<string>();
+
+  onDeleteClick(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.shop && this.shop.id) {
+      this.deleteShop.emit(this.shop.id);
+    }
+  }
 }
