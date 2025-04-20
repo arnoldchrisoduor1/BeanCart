@@ -1,18 +1,27 @@
-HELP.md
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
-!**/src/main/**/target/
+!**/src/test/**/target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Application properties
 /src/main/resources/application.properties
-/infrastructure/aws/.terraform
-/infrastructure/aws/terraform.tfstate
-/infrastructure/aws/terraform.tfstate.backup
 
-**/.terraform/
-
-
-### STS ###
-.apt_generated
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
 .classpath
 .factorypath
 .project
@@ -20,13 +29,7 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -36,13 +39,5 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
-
-### Docker ###
+# Docker
 docker-compose.override.yml
-
-### Maven ###
-.mvn/
-mvnw
-mvnw.cmd
