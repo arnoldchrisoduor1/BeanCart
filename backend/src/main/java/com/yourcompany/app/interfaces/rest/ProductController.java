@@ -128,6 +128,7 @@ public class ProductController {
         logger.debug("Fetching all active products");
         
         List<ProductResponseDto> products = productService.getActiveProducts();
+        System.out.println("Successfully gotten all active products");
         return ResponseEntity.ok(products);
     }
     
