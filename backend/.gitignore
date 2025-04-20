@@ -15,6 +15,7 @@ mvnw.cmd
 
 # Application properties
 /src/main/resources/application.properties
+/src/main/resources/application-prod.properties
 
 # IDE
 .idea/
