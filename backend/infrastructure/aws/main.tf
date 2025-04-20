@@ -133,8 +133,8 @@ resource "aws_security_group" "app_sg" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 3000
-    to_port     = 3000
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -220,7 +220,7 @@ resource "aws_db_instance" "postgres" {
   instance_class         = "db.t3.micro"
   db_name                = "beancartdb"
   username               = "postgres"
-  password               = "postgres" # You'll store the actual password in AWS Parameter Store
+  password               = "postgres"
   parameter_group_name   = "default.postgres15"
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.db_sg.id]
@@ -320,8 +320,8 @@ resource "aws_ecs_task_definition" "app" {
       image = "${aws_ecr_repository.app.repository_url}:latest"
       portMappings = [
         {
-          containerPort = 3000
-          hostPort      = 3000
+          containerPort = 8080
+          hostPort      = 8080
           protocol      = "tcp"
         }
       ]
@@ -376,7 +376,7 @@ resource "aws_lb" "main" {
 
 resource "aws_lb_target_group" "app" {
   name        = "beancart-target-group"
-  port        = 3000
+  port        = 8080
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
@@ -425,7 +425,7 @@ resource "aws_ecs_service" "app" {
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
     container_name   = "beancart-container"
-    container_port   = 3000
+    container_port   = 8080
   }
 
   depends_on = [aws_lb_listener.app]
@@ -460,4 +460,39 @@ output "load_balancer_dns" {
 
 output "ecr_repository_url" {
   value = aws_ecr_repository.app.repository_url
+}
+
+# SSM Parameter for database password
+resource "aws_ssm_parameter" "db_password" {
+  name        = "/beancart/db/password"
+  description = "Database password for BeanCart application"
+  type        = "SecureString"
+  value       = aws_db_instance.postgres.password  # This references your RDS password
+}
+
+# IAM Policy for accessing SSM parameters
+resource "aws_iam_policy" "ssm_parameter_access" {
+  name        = "beancart-ssm-parameter-access"
+  description = "Allow access to SSM parameters for ECS tasks"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameters"
+        ]
+        Resource = [
+          "arn:aws:ssm:us-east-1:975049898506:parameter/beancart/db/password"
+        ]
+      }
+    ]
+  })
+}
+
+# Attach the policy to the ECS task execution role
+resource "aws_iam_role_policy_attachment" "ssm_parameter_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ssm_parameter_access.arn
 }
