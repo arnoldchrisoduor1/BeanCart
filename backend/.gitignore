@@ -8,6 +8,9 @@ target/
 /infrastructure/aws/terraform.tfstate
 /infrastructure/aws/terraform.tfstate.backup
 
+**/.terraform/
+
+
 ### STS ###
 .apt_generated
 .classpath

@@ -1,1 +1,7 @@
 backend/src/main/resources/application.properties
+
+backend/infrastructure/aws/.terraform
+backend/infrastructure/aws/terraform.tfstate.backup
+
+
+**/.terraform/
