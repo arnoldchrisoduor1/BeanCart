@@ -41,18 +41,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Set up Maven
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-        
-
       - name: Build with Maven
         run: |
           cd backend
-          mvnw clean package -DskipTests
+          ./mvnw clean package -DskipTests
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image

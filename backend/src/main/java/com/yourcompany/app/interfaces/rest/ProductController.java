@@ -140,6 +140,7 @@ public class ProductController {
         logger.debug("Fetching products for shop: {}", shopId);
         
         List<ProductResponseDto> products = productService.getProductsByShopId(shopId);
+        System.out.println("==== got product by shop id===");
         return ResponseEntity.ok(products);
     }
     
