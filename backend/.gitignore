@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/main/**/target/
 /src/main/resources/application.properties
+/infrastructure/aws/.terraform
+/infrastructure/aws/terraform.tfstate
+/infrastructure/aws/terraform.tfstate.backup
 
 ### STS ###
 .apt_generated
