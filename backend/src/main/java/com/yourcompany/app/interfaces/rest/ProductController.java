@@ -94,7 +94,7 @@ public class ProductController {
         logger.debug("Fetching product with ID: {}", productId);
         
         ProductResponseDto product = productService.getProductById(productId);
-        System.out.println("Returning product gotten by id ===============")
+        System.out.println("Returning product gotten by id ===============");
         return ResponseEntity.ok(product);
     }
     
