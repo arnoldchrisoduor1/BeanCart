@@ -1,4 +1,4 @@
-name: Deploy to AWS Fargate
+name: Deploy Backend to AWS Fargate
 
 on:
   push:
@@ -18,9 +18,6 @@ jobs:
   deploy:
     name: Deploy to AWS Fargate
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend
 
     steps:
       - name: Checkout code
@@ -45,7 +42,9 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        run: ./mvnw clean package -DskipTests
+        run: |
+          cd backend
+          ./mvnw clean package -DskipTests
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -53,9 +52,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          cd backend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Download task definition
         run: |
@@ -66,7 +66,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: backend/task-definition.json
+          task-definition: task-definition.json
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
