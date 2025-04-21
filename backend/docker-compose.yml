@@ -16,6 +16,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    volumes:
+      - maven-cache:/workspace/app/.m2  # Mount volume for Maven dependencies
 
   db:
     image: postgres:15-alpine
@@ -58,3 +60,4 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+  maven-cache:  # Define the volume for Maven cache
