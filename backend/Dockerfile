@@ -2,15 +2,16 @@
 FROM eclipse-temurin:17-jdk-focal AS build
 WORKDIR /workspace/app
 
-COPY mvnw .
-COPY .mvn .mvn
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
 COPY pom.xml .
 # Download dependencies first for better caching
-RUN ./mvnw dependency:go-offline
+RUN mvn dependency:go-offline
 
 # Copy source code and build
 COPY src src
-RUN ./mvnw package -DskipTests
+RUN mvn package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 # Runtime stage
@@ -31,10 +32,8 @@ RUN chown -R spring:spring /app
 USER spring
 
 # Define health check
-HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost:3000/actuator/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost:8000/actuator/health || exit 1
 
-# Configure JVM options for containerized environment
-ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+COPY --from=build /workspace/app/target/app-0.0.1-SNAPSHOT.jar app.jar
 
-# Run the application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -cp app:app/lib/* com.yourcompany.app.Application"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

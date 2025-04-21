@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 import { ShopStateService } from "./shop-state.service";
 import { Shop } from "../../../models/shop.model";
+import { environment } from "../../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ShopService {
-    private apiUrl = 'http://localhost:3000/api/shops';
+    private apiUrl = `${environment.apiUrl}/api/shops`;
     
     constructor(
         private http: HttpClient,

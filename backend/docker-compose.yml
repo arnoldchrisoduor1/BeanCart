@@ -1,10 +1,11 @@
-version: '3.8'
-
 services:
-  app:
+  spring-boot-backend:
     build: .
+    container_name: spring-boot-backend
+    networks:
+      - beancart-net
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/beancartdb
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -19,6 +20,8 @@ services:
   db:
     image: postgres:15-alpine
     container_name: beancart-db
+    networks:
+      - beancart-net
     ports:
       - "5432:5432"
     environment:
@@ -28,7 +31,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d beancartdb"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -36,6 +39,8 @@ services:
   redis:
     image: redis:7-alpine
     container_name: beancart-redis
+    networks:
+      - beancart-net
     ports:
       - "6379:6379"
     volumes:
@@ -45,6 +50,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+networks:
+  beancart-net:
+    driver: bridge
 
 volumes:
   postgres_data:
