@@ -224,6 +224,7 @@ public class ProductController {
         logger.debug("Fetching active featured products for shop: {}", shopId);
         
         List<ProductResponseDto> products = productService.getActiveFeaturedProductsByShopId(shopId);
+        System.out.println("Successfully gotten featured products =======");
         return ResponseEntity.ok(products);
     }
     
