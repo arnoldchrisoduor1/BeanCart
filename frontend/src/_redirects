@@ -1,5 +1,1 @@
-# Handles frontend routing for a single-page app
-/*    /index.html   200
-
-# Proxies API requests to your backend server
-/api/*    http://13.233.223.216:8000/:splat   200
+/* /index.html 200

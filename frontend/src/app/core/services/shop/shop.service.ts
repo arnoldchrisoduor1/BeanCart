@@ -9,8 +9,8 @@ import { environment } from "../../../../environments/environment";
     providedIn: 'root'
 })
 export class ShopService {
-    // private apiUrl = `${environment.apiUrl}/api/shops`;
-    private apiUrl = '/api/shops';
+    private apiUrl = `${environment.apiUrl}/api/shops`;
+    // private apiUrl = '/api/shops';
     
     constructor(
         private http: HttpClient,

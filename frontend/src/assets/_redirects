@@ -1,0 +1,5 @@
+# Redirect all Angular routes to index.html
+/* /index.html 200
+
+# Proxy API requests to your backend
+/api/*  https://13.233.223.216:8000/:splat  200
