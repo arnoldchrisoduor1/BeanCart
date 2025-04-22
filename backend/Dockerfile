@@ -5,13 +5,16 @@ WORKDIR /workspace/app
 # Install Maven
 RUN apt-get update && apt-get install -y maven
 
+# Configure Maven to use mounted volume
+ENV MAVEN_OPTS="-Dmaven.repo.local=/workspace/app/.m2/repository"
+
 COPY pom.xml .
-# Download dependencies first for better caching
-RUN mvn dependency:go-offline
+# Use fewer threads and limit memory usage
+RUN mvn dependency:go-offline -B -T 1C
 
 # Copy source code and build
 COPY src src
-RUN mvn package -DskipTests
+RUN mvn package -DskipTests -B -T 1C
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 # Runtime stage

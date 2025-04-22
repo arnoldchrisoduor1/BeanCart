@@ -2,6 +2,7 @@ services:
   spring-boot-backend:
     build: .
     container_name: spring-boot-backend
+    mem_limit: 512m
     networks:
       - beancart-net
     ports:
