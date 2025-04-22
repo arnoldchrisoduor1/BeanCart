@@ -23,6 +23,7 @@ services:
   db:
     image: postgres:15-alpine
     container_name: beancart-db
+    mem_limit: 256m
     networks:
       - beancart-net
     ports:
@@ -42,6 +43,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: beancart-redis
+    mem_limit: 128m
     networks:
       - beancart-net
     ports:
