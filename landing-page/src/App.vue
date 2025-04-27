@@ -1,6 +1,8 @@
 <script setup>
 import Navbar from "./components/Navbar.vue";
 import Hero from "../src/sections/Hero.vue";
+import Footer from "../src/sections/Footer.vue";
+
 </script>
 
 <template>
@@ -10,10 +12,10 @@ import Hero from "../src/sections/Hero.vue";
     <div class="sticky top-2 md:top-4 z-4">
       <Navbar />
     </div>
-    <div class="max-w-screen-xl mx-auto">
+    <main class="max-w-screen-xl mx-auto">
       <Hero />
-    </div>
-    <main class="max-w-screen-xl mx-auto"></main>
+    </main>
+    <Footer />
   </div>
 </template>
 
