@@ -3,6 +3,7 @@ import { LucideAngularModule, Star, Heart, ShoppingCart, Expand } from 'lucide-a
 import { Product } from '../../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { NumberPipe } from '../../pipes/number.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
@@ -19,6 +20,8 @@ export class ProductItemComponent {
   readonly heartIcon = Heart;
   readonly shoppingCart = ShoppingCart;
   readonly expandIcon = Expand;
+
+  constructor(private router: Router) {}
 
   // Default image if product doesn't have one
   get productImage(): string {
@@ -39,5 +42,9 @@ export class ProductItemComponent {
       return this.product.price - this.product.discount;
     }
     return null;
+  }
+
+  navigateToProductDetails() {
+    this.router.navigate(['/products/product-details', this.product.id]);
   }
 }

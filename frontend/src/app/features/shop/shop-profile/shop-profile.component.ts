@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductStateService } from '../../../core/services/product/product-state.service';
 import { ShopStateService } from '../../../core/services/shop/shop-state.service';
 import { Product } from '../../../models/product.model';
@@ -19,7 +19,8 @@ import { Subscription } from 'rxjs';
     StatsBoxComponent, 
     ProductItemComponent,
     LucideAngularModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class ShopProfileComponent implements OnInit, OnDestroy {
@@ -101,6 +102,7 @@ export class ShopProfileComponent implements OnInit, OnDestroy {
     // Subscribe to products changes
     this.productsSubscription = this.productState.products$.subscribe((products: Product[]) => {
       console.log("Products loaded:", products.length);
+      console.log("Product loaded details", products);
       if (products && products.length > 0) {
         this.organizeProductsByCategory(products);
       } else {

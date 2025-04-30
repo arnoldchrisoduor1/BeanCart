@@ -27,7 +27,7 @@ const isActive = (path) => {
   <!-- Mobile Menu Toggle Button -->
   <div class="flex justify-between items-center py-2 px-4 w-[95%] md:w-[60%] mx-auto shadow-sm rounded-sm backdrop-blur-[5px] ">
     <div>
-      <p class="bg-gradient-to-r from-indigo-500 to-indigo-900 font-bold text-2xl text-transparent bg-clip-text">BeanCart</p>
+      <p class="bg-gradient-to-r from-indigo-500 to-indigo-900 font-bold text-2xl text-transparent bg-clip-text hover:cursor-pointer">BeanCart</p>
     </div>
     <div class="hidden md:block">
   <ul class="flex flex-row gap-2">
@@ -46,10 +46,10 @@ const isActive = (path) => {
 </div>
 
     <div class="flex gap-5 items-center">
-      <div>
+      <div class="hover:cursor-pointer">
         <Bell class="text-indigo-900"/>
       </div>
-    <button @click="toggleMenu" class="md:hidden  z-40">
+    <button @click="toggleMenu" class="md:hidden z-40 hover:cursor-pointer">
       <AlignJustify v-if="!isMenuOpen" class="text-indigo-900" />
     </button>
   </div>
@@ -70,7 +70,7 @@ const isActive = (path) => {
             <h2 class="bg-gradient-to-r from-indigo-500 to-indigo-900 font-bold text-2xl text-transparent bg-clip-text">BeanCart</h2>
           </div>
         </Transition>
-        <div class="absolute top-2 right-2" @click="toggleMenu">
+        <div class="absolute top-2 right-2 hover:cursor-pointer" @click="toggleMenu">
           <X class="w-8 h-7 text-indigo-300" />
         </div>
 

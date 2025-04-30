@@ -7,9 +7,9 @@
   </div>
   
   <!-- Semi-circle top background -->
-  <div
+  <!-- <div
     class="absolute -top-[450px] -right-[1px] w-[250%] h-[100%] rounded-full bg-indigo-500 -z-10"
-  ></div>
+  ></div> -->
 
   <!-- Semi-circle middle background -->
   <div
@@ -18,6 +18,7 @@
 
   <div class="container flex-grow p-4 pb-24 mx-auto">
     <!-- Profile section with skeleton loading -->
+     <div class="p-2 bg-gradient-to-t from-indigo-200 to-indigo-500 rounded-lg shadow-lg">
     @if (isLoadingProfile) {
       <div class="flex flex-row items-center gap-5">
         <div class="w-20 h-20 relative">
@@ -138,19 +139,20 @@
         <div class="flex flex-row justify-between items-center">
           <div 
             routerLink="/shop/create-shop"
-            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
+            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-gradient-to-r from-indigo-400 to-indigo-700  rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
           >
             <p>Create Shop</p>
           </div>
           <div
             (click)="openModal()"
-            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
+            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-gradient-to-r from-indigo-400 to-indigo-700  rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
           >
             <p>Update Profile</p>
           </div>
         </div>
       }
     }
+  </div>
 
     <!-- Payment Methods with skeleton loading -->
     @if (isLoadingProfile) {
@@ -278,7 +280,9 @@
           @if (!isLoadingShops && userShops.length > 0) {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               @for (shopItem of userShops; track shopItem.id) {
-                <div class="cursor-pointer relative" (click)="selectShop(shopItem)">
+                <div class="cursor-pointer relative" (click)="selectShop(shopItem)"
+                routerLink="/shop/shop-profile"
+                >
                   <app-shop-tile
                     [shop]="shopItem"
                     [isSelected]="currentShop?.id === shopItem.id"

@@ -1,20 +1,20 @@
-<div class="px-4 pb-20 mt-5">
+<div class="px-4 pb-20 mt-5" *ngIf="product && !loading">
   <!-- Product Header -->
   <div class="mb-4">
-    <p class="text-xs text-indigo-600 uppercase tracking-wider">BEAUTY & CREAMS</p>
-    <h2 class="text-2xl font-bold text-gray-900">Banana Republic</h2>
+    <p class="text-xs text-indigo-600 uppercase tracking-wider">{{product.category}}</p>
+    <h2 class="text-2xl font-bold text-gray-900">{{product.name}}</h2>
   </div>
 
   <!-- Product Image -->
   <div class="mb-5 rounded-lg overflow-hidden shadow-sm">
-    <img [src]="Product2" alt="Banana Republic product" class="w-full aspect-square object-cover" />
+    <img [src]="productImage" [alt]="product.name" class="w-full aspect-square object-cover" />
   </div>
 
   <!-- Price Section -->
   <div class="flex items-center gap-3 mb-4">
     <span class="text-2xl font-bold text-indigo-700">${{discountedPrice.toFixed(2)}}</span>
-    <span class="text-gray-500 line-through">${{originalPrice.toFixed(2)}}</span>
-    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded-full">
+    <span *ngIf="discountPercentage > 0" class="text-gray-500 line-through">${{originalPrice.toFixed(2)}}</span>
+    <span *ngIf="discountPercentage > 0" class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2 py-0.5 rounded-full">
       {{discountPercentage}}% OFF
     </span>
   </div>
@@ -105,4 +105,8 @@
     <app-product-reviews *ngIf="activeTab === 'reviews'"></app-product-reviews>
     <app-faqs *ngIf="activeTab === 'faqs'"></app-faqs>
   </div>
+</div>
+
+<div *ngIf="loading" class="flex justify-center items-center h-64">
+  <p>Loading product details...</p>
 </div>

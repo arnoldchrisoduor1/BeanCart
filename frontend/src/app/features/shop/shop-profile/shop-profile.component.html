@@ -96,10 +96,10 @@
 
   <!-- Content below the banner -->
   <div
-    class="relative z-10 w-full -mt-12 bg-white border border-gray-200 rounded-t-3xl shadow-sm"
+    class="relative z-10 w-full -mt-12 bg-gradient-to-t from-indigo-200 to-white rounded-t-3xl shadow-sm"
   >
     <!-- Stats boxes -->
-    <div class="flex flex-row justify-between px-4 py-8 bg-indigo-50 rounded-t-3xl">
+    <div class="flex flex-row justify-between px-4 py-8 rounded-t-3xl">
       <app-stats-box
         title="In Stock"
         [value]="13"
@@ -162,11 +162,12 @@
       </div>
     </div>
 
-    <!-- See More Button -->
-    <div *ngIf="categories.length > 0"
-      class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-indigo-600 rounded-md shadow-md w-fit hover:bg-indigo-700 transition-colors cursor-pointer"
-    >
-      <p class="font-semibold text-white">See More Items</p>
-    </div>
+    <!-- Add products button -->
+    <div 
+      routerLink="/products/product-create"
+        class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-md shadow-sm w-fit hover:bg-indigo-900 transition-colors cursor-pointer"
+      >
+        <p class="font-semibold text-white">Add Products</p>
+      </div>
   </div>
 </div>
