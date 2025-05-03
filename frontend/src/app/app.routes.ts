@@ -15,6 +15,7 @@ import { ShopProfileComponent } from './features/shop/shop-profile/shop-profile.
 import { ProductDetailsComponent } from './features/products/product-details/product-details.component';
 import { CreateShopComponent } from './features/shop/create-shop/create-shop.component';
 import { ProductCreateComponent } from './features/products/product-create/product-create.component';
+import { CartComponent } from './features/cart/cart.component';
 
 export const routes: Routes = [
   // Home route
@@ -56,6 +57,13 @@ export const routes: Routes = [
       }, {
         path: 'create-shop', component: CreateShopComponent
       }
+    ]
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    children: [
+      
     ]
   }
   
