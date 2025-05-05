@@ -1,22 +1,11 @@
 package com.yourcompany.app.application.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 // DTO for cart item operations
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CartItemDto {
     
     @NotNull(message = "Product ID is required")
@@ -25,4 +14,64 @@ public class CartItemDto {
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1")
     private Integer quantity;
+    
+    // Default constructor
+    public CartItemDto() {
+    }
+    
+    // Parameterized constructor
+    public CartItemDto(UUID productId, Integer quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+    
+    // Getters and Setters
+    public UUID getProductId() {
+        return productId;
+    }
+    
+    public void setProductId(UUID productId) {
+        this.productId = productId;
+    }
+    
+    public Integer getQuantity() {
+        return quantity;
+    }
+    
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+    
+    // Builder pattern implementation
+    public static CartItemDtoBuilder builder() {
+        return new CartItemDtoBuilder();
+    }
+    
+    // Builder class
+    public static class CartItemDtoBuilder {
+        private UUID productId;
+        private Integer quantity;
+        
+        public CartItemDtoBuilder productId(UUID productId) {
+            this.productId = productId;
+            return this;
+        }
+        
+        public CartItemDtoBuilder quantity(Integer quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+        
+        public CartItemDto build() {
+            return new CartItemDto(productId, quantity);
+        }
+    }
+    
+    @Override
+    public String toString() {
+        return "CartItemDto{" +
+                "productId=" + productId +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

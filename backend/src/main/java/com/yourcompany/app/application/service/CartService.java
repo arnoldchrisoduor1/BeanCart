@@ -19,6 +19,7 @@ import com.yourcompany.app.application.dto.CartResponseDto;
 import com.yourcompany.app.domain.model.Cart;
 import com.yourcompany.app.domain.model.CartItem;
 import com.yourcompany.app.domain.model.Product;
+import com.yourcompany.app.domain.model.User;
 import com.yourcompany.app.domain.repository.CartItemRepository;
 import com.yourcompany.app.domain.repository.CartRepository;
 import com.yourcompany.app.domain.repository.ProductRepository;
@@ -212,9 +213,8 @@ public class CartService {
      */
     private Cart getOrCreateCart(UUID buyerId) {
         // Check if user exists
-        if (!userRepository.existsById(buyerId)) {
-            throw new ResourceNotFoundException("User not found with id: " + buyerId);
-        }
+        User user = userRepository.findById(buyerId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + buyerId));
         
         // Try to find existing cart
         return cartRepository.findByBuyerId(buyerId)
@@ -241,17 +241,15 @@ public class CartService {
                 .collect(Collectors.toList());
         
         // Calculate totals
-        int totalItems = itemDtos.stream()
-                .mapToInt(CartItemResponseDto::getQuantity)
-                .sum();
+        int totalItems = 0;
+        BigDecimal subtotal = BigDecimal.ZERO;
+        BigDecimal discount = BigDecimal.ZERO;
         
-        BigDecimal subtotal = itemDtos.stream()
-                .map(CartItemResponseDto::getTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        
-        BigDecimal discount = itemDtos.stream()
-                .map(item -> item.getProductDiscount().multiply(BigDecimal.valueOf(item.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        for (CartItemResponseDto item : itemDtos) {
+            totalItems += item.getQuantity();
+            subtotal = subtotal.add(item.getTotalPrice());
+            discount = discount.add(item.getProductDiscount().multiply(BigDecimal.valueOf(item.getQuantity())));
+        }
         
         BigDecimal total = subtotal.subtract(discount);
         
