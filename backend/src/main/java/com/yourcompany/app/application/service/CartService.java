@@ -111,6 +111,8 @@ public class CartService {
         
         // Get updated cart items
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+
+        System.out.println("Product added to cart");
         
         return buildCartResponseDto(cart, cartItems);
     }
@@ -154,6 +156,8 @@ public class CartService {
         
         // Get updated cart items
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+
+        System.out.println("Successfully update the item quantity");
         
         return buildCartResponseDto(cart, cartItems);
     }
@@ -185,6 +189,8 @@ public class CartService {
         
         // Get updated cart items
         List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+
+        System.out.println("Successfully removed items from cart");
         
         return buildCartResponseDto(cart, cartItems);
     }
@@ -204,6 +210,8 @@ public class CartService {
         // Update cart updated_at
         cart.setUpdatedAt(LocalDateTime.now());
         cartRepository.save(cart);
+
+        System.out.println("Successfully cleared cart");
         
         return buildCartResponseDto(cart, List.of());
     }
@@ -227,7 +235,7 @@ public class CartService {
                             .createdAt(now)
                             .updatedAt(now)
                             .build();
-                    
+                    System.out.println("Successfuly created  cart for the buyer");
                     return cartRepository.save(newCart);
                 });
     }

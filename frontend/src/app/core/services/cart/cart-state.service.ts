@@ -18,6 +18,22 @@ export class CartStateService {
 
     constructor(private cartService: CartService) {}
 
+    addItem(item: CartItemDto): Observable<CartResponse | null> {
+        this.loadingSubject.next(true);
+        return this.cartService.addItemToCart(item).pipe(
+          tap(cart => {
+            this.cartSubject.next(cart);
+            this.loadingSubject.next(false);
+            this.errorSubject.next(null);
+          }),
+          catchError(error => {
+            this.loadingSubject.next(false);
+            this.errorSubject.next(error.message || 'Failed to add item to cart');
+            return of(null);
+          })
+        );
+      }
+
     loadCart(): void {
         this.loadingSubject.next(true);
         this.cartService.getCart().pipe(
@@ -25,6 +41,7 @@ export class CartStateService {
                 this.cartSubject.next(cart);
                 this.loadingSubject.next(false);
                 this.errorSubject.next(null);
+                console.log("Loading cart with", cart);
             }),
             catchError(error => {
                 this.loadingSubject.next(false);

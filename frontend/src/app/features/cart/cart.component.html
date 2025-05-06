@@ -1,22 +1,46 @@
-<div class="mt-10 mx-5 ">
+<div class="mt-10 mx-5">
     <div class="flex justify-around py-5 bg-indigo-500 items-between w-[98%] justify-self-center rounded-md shadow-md shadow-indigo-700/70">
-        <app-stats-box
+      <app-stats-box
         title="In Stock"
         [value]="9"
-        status="Transit"
-        >
-        </app-stats-box>
-        <app-stats-box
+        status="Transit">
+      </app-stats-box>
+      <app-stats-box
         title="Pre-order"
         [value]="11"
-        status="Transit"
-        >
-        </app-stats-box>
+        status="Transit">
+      </app-stats-box>
     </div>
-    <div class="mt-5">
-        <app-cart-item></app-cart-item>
-        <app-cart-item></app-cart-item>
-        <app-cart-item></app-cart-item>
-        <app-cart-item></app-cart-item>
+    
+    <div *ngIf="isLoading" class="mt-5 flex justify-center">
+      <p>Loading cart...</p>
     </div>
-</div>
+    
+    <div *ngIf="error" class="mt-5 p-4 bg-red-100 text-red-700 rounded-md">
+      {{ error }}
+    </div>
+    
+    <div class="mt-5" *ngIf="cartState.getCartValue()?.items as items">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Your Cart</h2>
+        <p class="text-lg font-medium">Total: ${{ getTotalCartPrice() }}</p>
+      </div>
+      
+      <app-cart-item
+        *ngFor="let item of items"
+        [productName]="item.productName"
+        [price]="item.productPrice"
+        [quantity]="item.quantity"
+        [imageUrl]="item.productImageUrl"
+        [totalPrice]="item.totalPrice"
+        [itemId]="item.id"
+        (deleteItem)="onDeleteItem($event)"
+        (increaseQuantity)="onIncreaseQuantity($event)"
+        (decreaseQuantity)="onDecreaseQuantity($event)">
+      </app-cart-item>
+      
+      <div *ngIf="items.length === 0" class="mt-5 p-4 bg-gray-100 text-gray-700 rounded-md text-center">
+        Your cart is empty.
+      </div>
+    </div>
+  </div>

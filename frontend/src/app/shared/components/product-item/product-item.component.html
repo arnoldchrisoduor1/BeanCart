@@ -1,5 +1,5 @@
 <div
-  class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md shadow-indigo-700/30 hover:cursor-pointer hover-animation"
+  class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md shadow-indigo-700/30 hover:cursor-pointer"
   (click)="navigateToProductDetails()"
 >
   <div class="relative w-full">
@@ -24,7 +24,9 @@
       ></lucide-angular>
       <lucide-angular
         [img]="shoppingCart"
+        [class.text-indigo-700]="isInCart$ | async"
         class="p-1 bg-gray-200 rounded-full hover:bg-indigo-100 hover:text-indigo-700 cursor-pointer"
+        (click)="toggleCart($event)"
       ></lucide-angular>
     </div>
 

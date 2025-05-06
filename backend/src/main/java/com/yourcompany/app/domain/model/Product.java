@@ -1,9 +1,17 @@
 package com.yourcompany.app.domain.model;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name="products")
@@ -32,7 +40,7 @@ public class Product {
     private String imageUrl = "https://robohash.org/food";
 
     @Column(name="stock_quantity")
-    private Integer quantity = 0;
+    private Integer quantity = 1;
 
     @Column(name="category", nullable = false)
     private String category;
@@ -59,11 +67,12 @@ public class Product {
     }
 
     // Building the initial product constructor.
-    public Product(Shop shop, String name, BigDecimal price, String category) {
+    public Product(Shop shop, String name, BigDecimal price, String category, Integer quantity) {
         this();
         this.shop = shop;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
         this.category = category;
     }
 

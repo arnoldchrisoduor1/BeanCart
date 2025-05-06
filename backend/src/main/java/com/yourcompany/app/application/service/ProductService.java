@@ -50,7 +50,7 @@ public class ProductService {
         
         // Set default values if needed
         if (product.getQuantity() == null) {
-            product.setQuantity(0);
+            product.setQuantity(1);
         }
         
         if (product.getDiscount() == null) {
