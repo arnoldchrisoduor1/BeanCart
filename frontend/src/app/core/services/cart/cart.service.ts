@@ -22,7 +22,7 @@ export class CartService {
     }
 
     updateCartItem(itemId: string, update: CartItemUpdateDto): Observable<CartResponse> {
-        return this.http.put<CartResponse>(`${this.apiUrl}/items/${itemId}`, update)
+        return this.http.put<CartResponse>(`${this.apiUrl}/items/${itemId}`, update);
     }
 
     removeItemFromCart(itemId: string): Observable<CartResponse> {

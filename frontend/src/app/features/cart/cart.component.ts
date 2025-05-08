@@ -4,11 +4,12 @@ import { CartStateService } from '../../core/services/cart/cart-state.service';
 import { CartResponse, CartItemUpdateDto } from '../../models/cart.model';
 import { CartItemComponent } from '../../shared/components/cart-item/cart-item.component';
 import { StatsBoxComponent } from '../../shared/components/stats-box/stats-box.component';
+import { ButtonComponent } from "../../shared/components/button/button.component";
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, CartItemComponent, StatsBoxComponent],
+  imports: [CommonModule, CartItemComponent, StatsBoxComponent, ButtonComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -32,8 +33,10 @@ export class CartComponent implements OnInit {
     
     this.cartState.cart$.subscribe(cartData => {
       this.cart = cartData;
+      console.log("Cart: ", this.cart);
     });
   }
+
 
   onDeleteItem(itemId: string): void {
     console.log("Attempting to delete item", itemId);

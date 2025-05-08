@@ -1,19 +1,21 @@
 <div class="mt-10 mx-5">
     <div class="flex justify-around py-5 bg-indigo-500 items-between w-[98%] justify-self-center rounded-md shadow-md shadow-indigo-700/70">
       <app-stats-box
-        title="In Stock"
-        [value]="9"
-        status="Transit">
+      *ngIf="cartState.getCartValue()?.items as items"
+        title="Sub Total"
+        [value]="getTotalCartPrice()"
+        status="Delivered">
       </app-stats-box>
       <app-stats-box
-        title="Pre-order"
-        [value]="11"
-        status="Transit">
+      *ngIf="cart?.totalItems !== null"
+        title="Total Items"
+        [value]="cart!.totalItems"
+        status="Ordered">
       </app-stats-box>
     </div>
-    
-    <div *ngIf="isLoading" class="mt-5 flex justify-center">
-      <p>Loading cart...</p>
+
+    <div *ngIf="isLoading" class="fixed top-20 bg-violet-300 px-4 py-2 rounded-full z-40 left-1/2 -translate-x-1/2 shadow-md">
+      <p>Refreshing cart...</p>
     </div>
     
     <div *ngIf="error" class="mt-5 p-4 bg-red-100 text-red-700 rounded-md">
@@ -21,10 +23,10 @@
     </div>
     
     <div class="mt-5" *ngIf="cartState.getCartValue()?.items as items">
-      <div class="flex justify-between items-center mb-4">
+      <!-- <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold">Your Cart</h2>
         <p class="text-lg font-medium">Total: ${{ getTotalCartPrice() }}</p>
-      </div>
+      </div> -->
       
       <app-cart-item
         *ngFor="let item of items"
@@ -41,6 +43,13 @@
       
       <div *ngIf="items.length === 0" class="mt-5 p-4 bg-gray-100 text-gray-700 rounded-md text-center">
         Your cart is empty.
+      </div>
+
+      <div class="my-10 w-[70%] mx-auto">
+        <app-button
+        defaultText="Checkout"
+        >
+        </app-button>
       </div>
     </div>
   </div>
