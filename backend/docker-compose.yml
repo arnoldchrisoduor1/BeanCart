@@ -1,54 +1,54 @@
 services:
-  # spring-boot-backend:
-  #   build: .
-  #   container_name: spring-boot-backend
-  #   mem_limit: 512m
-  #   networks:
-  #     - beancart-net
-  #   ports:
-  #     - "8000:8000"
-  #   environment:
-  #     # Database configuration
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/beancartdb
-  #     - SPRING_DATASOURCE_USERNAME=postgres
-  #     - SPRING_DATASOURCE_PASSWORD=postgres
-  #     - SPRING_JPA_HIBERNATE_DDL_AUTO=none
-  #     - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+  spring-boot-backend:
+    build: .
+    container_name: spring-boot-backend
+    mem_limit: 512m
+    networks:
+      - beancart-net
+    ports:
+      - "8000:8000"
+    environment:
+      # Database configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/beancartdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
       
-  #     # Disable Spring Security auto-configuration
-  #     - SPRING_AUTOCONFIGURE_EXCLUDE=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      # Disable Spring Security auto-configuration
+      - SPRING_AUTOCONFIGURE_EXCLUDE=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       
-  #     # Server configuration
-  #     - SERVER_PORT=8000
+      # Server configuration
+      - SERVER_PORT=8000
       
-  #     # Flyway migration configuration
-  #     - SPRING_FLYWAY_ENABLED=true
-  #     - SPRING_FLYWAY_BASELINE_ON_MIGRATION=true
-  #     - SPRING_FLYWAY_LOCATIONS=classpath:db/migration
+      # Flyway migration configuration
+      - SPRING_FLYWAY_ENABLED=true
+      - SPRING_FLYWAY_BASELINE_ON_MIGRATION=true
+      - SPRING_FLYWAY_LOCATIONS=classpath:db/migration
       
-  #     # JPA configuration
-  #     - SPRING_DATA_JPA_REPOSITORIES_ENABLED=true
+      # JPA configuration
+      - SPRING_DATA_JPA_REPOSITORIES_ENABLED=true
       
-  #     # Redis configuration
-  #     - SPRING_REDIS_HOST=redis
-  #     - SPRING_REDIS_PORT=6379
+      # Redis configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
   
       
-  #     # Feature flags
-  #     - FEATURE_PAYMENT_PROCESSING=true
-  #     - FEATURE_NEW_USER_ONBOARDING=false
+      # Feature flags
+      - FEATURE_PAYMENT_PROCESSING=true
+      - FEATURE_NEW_USER_ONBOARDING=false
       
-  #     # Logging
-  #     - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
-  #     - LOGGING_LEVEL_COM_YOURCOMPANY=DEBUG
+      # Logging
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
+      - LOGGING_LEVEL_COM_YOURCOMPANY=DEBUG
       
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #     redis:
-  #       condition: service_healthy
-  #   volumes:
-  #     - maven-cache:/workspace/app/.m2  # Mount volume for Maven dependencies
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - maven-cache:/workspace/app/.m2  # Mount volume for Maven dependencies
 
   db:
     image: postgres:15-alpine
@@ -93,4 +93,4 @@ networks:
 volumes:
   postgres_data:
   redis_data:
-  # maven-cache:  # Define the volume for Maven cache
+  maven-cache:  # Define the volume for Maven cache
