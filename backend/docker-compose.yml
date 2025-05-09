@@ -25,6 +25,8 @@ services:
       - SPRING_FLYWAY_ENABLED=true
       - SPRING_FLYWAY_BASELINE_ON_MIGRATION=true
       - SPRING_FLYWAY_LOCATIONS=classpath:db/migration
+      - SPRING_FLYWAY_CLEAN_DISABLED=false
+      - SPRING_FLYWAY_CLEAN_ON_VALIDATION_ERROR=true
       
       # JPA configuration
       - SPRING_DATA_JPA_REPOSITORIES_ENABLED=true
