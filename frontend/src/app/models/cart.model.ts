@@ -1,6 +1,7 @@
 export interface CartItem {
     id: string;
     productId: string;
+    shopId: string;
     productName: string;
     productDescription: string;
     productPrice: number;
@@ -24,6 +25,7 @@ export interface CartResponse {
 
 export interface CartItemDto {
     productId: string;
+    shopId: string;
     quantity: number;
 }
 

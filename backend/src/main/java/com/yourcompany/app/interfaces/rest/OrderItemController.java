@@ -33,6 +33,7 @@ public class OrderItemController {
     @PostMapping
     public ResponseEntity<OrderItemResponseDto> createOrderItem(@Valid @RequestBody OrderItemCreateDto createDto) {
         OrderItemResponseDto responseDto = orderItemService.createOrderItem(createDto);
+        System.out.println("=========Successfully created new item========");
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
@@ -50,7 +51,9 @@ public class OrderItemController {
      */
     @GetMapping("/order/{orderId}")
     public ResponseEntity<List<OrderItemResponseDto>> getOrderItemsByOrderId(@PathVariable UUID orderId) {
+        System.out.println("------Getting all orderd for user---------");
         List<OrderItemResponseDto> items = orderItemService.getOrderItemsByOrderId(orderId);
+        System.out.println("=======Successfully retrieved orderd for user=========");
         return ResponseEntity.ok(items);
     }
 

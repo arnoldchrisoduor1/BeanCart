@@ -2,6 +2,7 @@ CREATE TABLE cart_items (
     id UUID PRIMARY KEY,
     cart_id UUID NOT NULL REFERENCES carts(id),
     product_id UUID NOT NULL REFERENCES products(id),
+    shop_id UUID NOT NULL REFERENCES shops(id),
     quantity INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()

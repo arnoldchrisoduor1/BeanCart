@@ -7,6 +7,7 @@ public class CartItemResponseDto {
     
     private UUID id;
     private UUID productId;
+    private UUID shopId;
     private String productName;
     private String productDescription;
     private BigDecimal productPrice;
@@ -20,11 +21,12 @@ public class CartItemResponseDto {
     }
     
     // Parameterized constructor
-    public CartItemResponseDto(UUID id, UUID productId, String productName, String productDescription,
+    public CartItemResponseDto(UUID id, UUID productId, UUID shopId, String productName, String productDescription,
             BigDecimal productPrice, BigDecimal productDiscount, String productImageUrl,
             Integer quantity, BigDecimal totalPrice) {
         this.id = id;
         this.productId = productId;
+        this.shopId = shopId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
@@ -53,6 +55,14 @@ public class CartItemResponseDto {
     
     public String getProductName() {
         return productName;
+    }
+
+    public UUID getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(UUID shopId) {
+        this.shopId = shopId;
     }
     
     public void setProductName(String productName) {
@@ -116,6 +126,7 @@ public class CartItemResponseDto {
     public static class CartItemResponseDtoBuilder {
         private UUID id;
         private UUID productId;
+        private UUID shopId;
         private String productName;
         private String productDescription;
         private BigDecimal productPrice;
@@ -131,6 +142,11 @@ public class CartItemResponseDto {
         
         public CartItemResponseDtoBuilder productId(UUID productId) {
             this.productId = productId;
+            return this;
+        }
+
+        public CartItemResponseDtoBuilder shopId(UUID shopId) {
+            this.shopId = shopId;
             return this;
         }
         
@@ -170,7 +186,7 @@ public class CartItemResponseDto {
         }
         
         public CartItemResponseDto build() {
-            return new CartItemResponseDto(id, productId, productName, productDescription,
+            return new CartItemResponseDto(id, productId, shopId, productName, productDescription,
                     productPrice, productDiscount, productImageUrl, quantity, totalPrice);
         }
     }
@@ -180,6 +196,7 @@ public class CartItemResponseDto {
         return "CartItemResponseDto{" +
                 "id=" + id +
                 ", productId=" + productId +
+                ", shopId=" + shopId +
                 ", productName='" + productName + '\'' +
                 ", productDescription='" + productDescription + '\'' +
                 ", productPrice=" + productPrice +

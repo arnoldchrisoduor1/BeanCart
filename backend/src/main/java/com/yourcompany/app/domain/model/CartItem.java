@@ -23,6 +23,9 @@ public class CartItem {
     
     @Column(name = "product_id", nullable = false)
     private UUID productId;
+
+    @Column(name = "shop_id", nullable=false)
+    private UUID shopId;
     
     @Column(nullable = false)
     private Integer quantity;
@@ -46,11 +49,12 @@ public class CartItem {
     }
     
     // Parameterized constructor
-    public CartItem(UUID id, UUID cartId, UUID productId, Integer quantity, LocalDateTime createdAt, 
+    public CartItem(UUID id, UUID cartId, UUID productId, UUID shopId, Integer quantity, LocalDateTime createdAt, 
                    LocalDateTime updatedAt, Cart cart, Product product) {
         this.id = id;
         this.cartId = cartId;
         this.productId = productId;
+        this.shopId = shopId;
         this.quantity = quantity;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -73,6 +77,14 @@ public class CartItem {
     
     public void setCartId(UUID cartId) {
         this.cartId = cartId;
+    }
+
+    public UUID getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(UUID shopId) {
+        this.shopId = shopId;
     }
     
     public UUID getProductId() {
@@ -133,6 +145,7 @@ public class CartItem {
         private UUID id;
         private UUID cartId;
         private UUID productId;
+        private UUID shopId;
         private Integer quantity;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
@@ -151,6 +164,11 @@ public class CartItem {
         
         public CartItemBuilder productId(UUID productId) {
             this.productId = productId;
+            return this;
+        }
+
+        public CartItemBuilder shopId(UUID shopId) {
+            this.shopId = shopId;
             return this;
         }
         
@@ -180,8 +198,9 @@ public class CartItem {
         }
         
         public CartItem build() {
-            return new CartItem(id, cartId, productId, quantity, createdAt, updatedAt, cart, product);
+            return new CartItem(id, cartId, productId, shopId, quantity, createdAt, updatedAt, cart, product);
         }
+
     }
     
     // equals, hashCode, and toString methods
@@ -204,6 +223,7 @@ public class CartItem {
                 "id=" + id +
                 ", cartId=" + cartId +
                 ", productId=" + productId +
+                ", shopId=" + shopId +
                 ", quantity=" + quantity +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

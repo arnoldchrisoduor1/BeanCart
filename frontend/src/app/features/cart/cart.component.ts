@@ -5,11 +5,12 @@ import { CartResponse, CartItemUpdateDto } from '../../models/cart.model';
 import { CartItemComponent } from '../../shared/components/cart-item/cart-item.component';
 import { StatsBoxComponent } from '../../shared/components/stats-box/stats-box.component';
 import { ButtonComponent } from "../../shared/components/button/button.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, CartItemComponent, StatsBoxComponent, ButtonComponent],
+  imports: [CommonModule, CartItemComponent, StatsBoxComponent, ButtonComponent, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

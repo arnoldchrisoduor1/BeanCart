@@ -89,6 +89,21 @@ public class OrderService {
     }
 
     @Transactional
+    public OrderResponseDto updateOrderStatus(UUID orderId, String status) {
+        System.out.println("--- update order status service called--");
+        Order order = orderRepository.findById(orderId)
+            .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + orderId));
+        
+        order.setStatus(status);
+        
+        Order updatedOrder = orderRepository.save(order);
+
+        System.out.println("==== Successfully updated order payment status=====");
+
+        return convertToResponseDTO(updatedOrder);
+}
+
+    @Transactional
     public OrderResponseDto updateOrder(UUID orderId, OrderUpdateDto updateOrderDTO) {
         Order order = orderRepository.findById(orderId)
             .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + orderId));

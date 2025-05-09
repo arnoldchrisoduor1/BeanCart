@@ -47,34 +47,31 @@ public class OrderItemService {
      * Create a new order item
      */
     @Transactional
-    public OrderItemResponseDto createOrderItem(OrderItemCreateDto createDto) {
-        // Fetch related entities
-        Order order = orderRepository.findById(createDto.getOrderId())
-                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + createDto.getOrderId()));
-        
-        Product product = productRepository.findById(createDto.getProductId())
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + createDto.getProductId()));
-        
-        Shop shop = shopRepository.findById(createDto.getShopId())
-                .orElseThrow(() -> new ResourceNotFoundException("Shop not found with id: " + createDto.getShopId()));
+public OrderItemResponseDto createOrderItem(OrderItemCreateDto createDto) {
+    // Fetch related entities
+    Order order = orderRepository.findById(createDto.getOrderId())
+            .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+    
+    Product product = productRepository.findById(createDto.getProductId())
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+    
+    Shop shop = shopRepository.findById(createDto.getShopId())
+            .orElseThrow(() -> new ResourceNotFoundException("Shop not found"));
 
-        // Create new order item
-        OrderItem orderItem = new OrderItem();
-        orderItem.setOrder(order);
-        orderItem.setProduct(product);
-        orderItem.setShop(shop);
-        orderItem.setQuantity(createDto.getQuantity());
-        orderItem.setUnitPrice(createDto.getUnitPrice());
-        orderItem.setStatus(createDto.getStatus());
-        
-        // Calculate subtotal
-        BigDecimal subtotal = createDto.getUnitPrice().multiply(new BigDecimal(createDto.getQuantity()));
-        orderItem.setSubtotal(subtotal);
-        
-        // Save and return
-        OrderItem savedItem = orderItemRepository.save(orderItem);
-        return mapToResponseDto(savedItem);
-    }
+    // Create new order item - let the constructor handle calculations
+    OrderItem orderItem = new OrderItem(
+        order,
+        product,
+        shop,
+        createDto.getQuantity(),
+        createDto.getUnitPrice()
+    );
+    orderItem.setStatus(createDto.getStatus());
+
+    OrderItem savedItem = orderItemRepository.save(orderItem);
+    System.out.println("=========Successfully created order item============");
+    return mapToResponseDto(savedItem);
+}
 
     /**
      * Get an order item by ID
@@ -90,6 +87,7 @@ public class OrderItemService {
      */
     public List<OrderItemResponseDto> getOrderItemsByOrderId(UUID orderId) {
         List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
+        System.out.println("=========Successfully gotten order items from specific order======");
         return orderItems.stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
@@ -152,6 +150,7 @@ public class OrderItemService {
      */
     @Transactional
     public OrderItemResponseDto updateOrderItemStatus(UUID id, String status) {
+        System.out.println("--------Attempting to update the status of order item---------");
         OrderItem orderItem = orderItemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order item not found with id: " + id));
         
@@ -159,6 +158,7 @@ public class OrderItemService {
         orderItem.setUpdatedAt(LocalDateTime.now());
         
         OrderItem updatedItem = orderItemRepository.save(orderItem);
+        System.out.println("======Updated status of item order=======");
         return mapToResponseDto(updatedItem);
     }
 

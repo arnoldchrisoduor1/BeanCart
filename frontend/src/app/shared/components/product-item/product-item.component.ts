@@ -67,8 +67,10 @@ export class ProductItemComponent implements OnInit, OnChanges {
       console.log("Adding to cart");
       const item: CartItemDto = {
         productId: this.product.id,
+        shopId: this.product.shopId,
         quantity: this.quantity
       };
+      console.log("Adding item to cart with: ", item);
       this.cartState.addItem(item).subscribe();
       console.log("Added to cart");
     }

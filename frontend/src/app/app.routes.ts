@@ -16,6 +16,7 @@ import { ProductDetailsComponent } from './features/products/product-details/pro
 import { CreateShopComponent } from './features/shop/create-shop/create-shop.component';
 import { ProductCreateComponent } from './features/products/product-create/product-create.component';
 import { CartComponent } from './features/cart/cart.component';
+import { CheckoutComponent } from './features/checkout/checkout.component';
 
 export const routes: Routes = [
   // Home route
@@ -65,6 +66,11 @@ export const routes: Routes = [
     children: [
       
     ]
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    children: []
   }
   
 ];

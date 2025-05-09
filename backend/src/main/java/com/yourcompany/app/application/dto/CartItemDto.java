@@ -10,6 +10,9 @@ public class CartItemDto {
     
     @NotNull(message = "Product ID is required")
     private UUID productId;
+
+    @NotNull(message = "Shop ID is required")
+    private UUID shopId;
     
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1")
@@ -20,8 +23,9 @@ public class CartItemDto {
     }
     
     // Parameterized constructor
-    public CartItemDto(UUID productId, Integer quantity) {
+    public CartItemDto(UUID productId, UUID shopId, Integer quantity) {
         this.productId = productId;
+        this.shopId = shopId;
         this.quantity = quantity;
     }
     
@@ -32,6 +36,14 @@ public class CartItemDto {
     
     public void setProductId(UUID productId) {
         this.productId = productId;
+    }
+
+    public UUID getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(UUID shopId) {
+        this.shopId = shopId;
     }
     
     public Integer getQuantity() {
@@ -50,6 +62,7 @@ public class CartItemDto {
     // Builder class
     public static class CartItemDtoBuilder {
         private UUID productId;
+        private UUID shopId;
         private Integer quantity;
         
         public CartItemDtoBuilder productId(UUID productId) {
@@ -57,13 +70,19 @@ public class CartItemDto {
             return this;
         }
         
+        public CartItemDtoBuilder shopId(UUID shopId) {
+            this.shopId = shopId;
+            return this;
+        }
+        
         public CartItemDtoBuilder quantity(Integer quantity) {
             this.quantity = quantity;
             return this;
         }
+
         
         public CartItemDto build() {
-            return new CartItemDto(productId, quantity);
+            return new CartItemDto(productId, shopId, quantity);
         }
     }
     
@@ -71,6 +90,7 @@ public class CartItemDto {
     public String toString() {
         return "CartItemDto{" +
                 "productId=" + productId +
+                ", shopId=" + shopId +
                 ", quantity=" + quantity +
                 '}';
     }

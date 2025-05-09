@@ -1,11 +1,9 @@
 <div class="relative border border-slate-300 w-full rounded-md">
   <div class="flex items-center w-full">
-    <!-- Icon container (left) -->
     <div *ngIf="icon" class="pl-3 pr-2 text-gray-500">
       <lucide-angular [img]="icon" class="h-5 w-5"></lucide-angular>
     </div>
 
-    <!-- Input (takes remaining space) -->
     <input
       [type]="showPassword ? 'text' : type"
       [id]="id"
@@ -16,9 +14,8 @@
       class="flex-1 py-2 outline-none bg-transparent"
       [required]="required"
       [attr.step]="type === 'number' ? 'any' : null"
-      [attr.min]="type === 'number' ? '0' : null">  <!-- Added min for numbers -->
+      [attr.min]="type === 'number' ? '0' : null">
 
-    <!-- Password toggle (right) -->
     <button 
       *ngIf="type === 'password'" 
       type="button"

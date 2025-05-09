@@ -33,6 +33,7 @@ public class CartController {
      */
     @GetMapping
     public ResponseEntity<CartResponseDto> getCart(@RequestAttribute("userId") UUID userId) {
+        System.out.println("=========== Getting cart of user ======");
         return ResponseEntity.ok(cartService.getCartByBuyerId(userId));
     }
     

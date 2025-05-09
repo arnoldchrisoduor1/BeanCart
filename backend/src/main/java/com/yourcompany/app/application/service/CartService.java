@@ -79,6 +79,10 @@ public class CartService {
                 .orElse(null);
         
         LocalDateTime now = LocalDateTime.now();
+
+        System.out.println("DTO received: " + cartItemDto);
+        System.out.println("ShopId in DTO: " + cartItemDto.getShopId());
+
         
         if (cartItem == null) {
             // Create new cart item
@@ -86,10 +90,14 @@ public class CartService {
                     .id(UUID.randomUUID())
                     .cartId(cart.getId())
                     .productId(cartItemDto.getProductId())
+                    .shopId(cartItemDto.getShopId())
                     .quantity(cartItemDto.getQuantity())
                     .createdAt(now)
                     .updatedAt(now)
                     .build();
+
+        System.out.println("ShopId in CartItem: " + cartItem.getShopId());
+
         } else {
             // Update existing cart item quantity
             int newQuantity = cartItem.getQuantity() + cartItemDto.getQuantity();
@@ -286,6 +294,7 @@ public class CartService {
         return CartItemResponseDto.builder()
                 .id(cartItem.getId())
                 .productId(product.getId())
+                .shopId(cartItem.getShopId())
                 .productName(product.getName())
                 .productDescription(product.getDescription())
                 .productPrice(product.getPrice())
