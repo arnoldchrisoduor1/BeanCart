@@ -1,130 +1,299 @@
 <!-- src/app/core/layout/navbar/navbar.component.html -->
-<!-- Desktop Navbar (Indigo Background) -->
-<nav class="hidden md:flex justify-between sticky top-0 items-center py-4 px-6 bg-indigo-600 text-white  z-[200]">
+<!-- Desktop Navbar -->
+<nav
+  class="hidden md:flex bg-gradient-to-r from-indigo-600 to-indigo-800 justify-between sticky top-0 items-center py-4 px-6 lg:px-12 text-white z-[200] shadow-lg"
+>
+  <!-- Logo/Brand -->
   <div class="flex items-center">
-    <a routerLink="/" class="text-xl font-bold">BeanCart</a>
-  </div>
-  
-  <div class="flex items-center space-x-6">
-    @for (item of menuItems; track item.path) {
-      <a [routerLink]="item.path" 
-         [class.font-bold]="isActive(item.path)"
-         class="hover:text-indigo-200 transition"
-         [ngClass]="{'underline': isActive(item.path)}">
-        {{item.name}}
-      </a>
-    }
-    
-    @if (isLoggedIn) {
-      <div class="relative group">
-        <div class="flex items-center cursor-pointer">
-          @if (userProfile?.profileImageUrl) {
-            <img [src]="userProfile.profileImageUrl" 
-                 alt="Profile" 
-                 class="w-8 h-8 rounded-full object-cover border-2 border-indigo-200" />
-          } @else {
-            <span class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center">
-              <lucide-angular [img]="userIcon" size="16" class="text-indigo-600"></lucide-angular>
-            </span>
-          }
-        </div>
-        
-        <!-- Dropdown Menu (Indigo Theme) -->
-        <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-10 hidden group-hover:block border border-indigo-100">
-          <div class="px-4 py-2 border-b bg-indigo-50">
-            <p class="font-medium text-indigo-800">{{ userProfile?.firstName || 'User' }} </p>
-            <p class="text-indigo-600 text-xs">{{ userProfile?.email }}</p>
-          </div>
-          <a routerLink="/user/profile" class="block px-4 py-2 hover:bg-indigo-50 text-sm text-indigo-700">View Profile</a>
-          <a routerLink="/user/orders" class="block px-4 py-2 hover:bg-indigo-50 text-sm text-indigo-700">My Orders</a>
-          <button (click)="logout()" class="w-full text-left px-4 py-2 hover:bg-indigo-50 text-sm text-red-600">Logout</button>
-        </div>
+    <div routerLink="/" class="relative w-[30px] h-[30px] shrink-0 mr-3">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="bg-indigo-100 h-[15px] w-[15px] rotate-45 absolute rounded-md"></div>
+        <div class="bg-indigo-100/30 h-[30px] w-[30px] rotate-45 absolute rounded-md"></div>
+        <div class="bg-indigo-100/10 h-[50px] w-[50px] rotate-45 absolute rounded-md"></div>
       </div>
+    </div>
+    <a routerLink="/" class="text-xl font-bold hover:text-indigo-100 transition">BeanCart</a>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="flex items-center space-x-8">
+    @for (item of menuItems; track item.path) {
+    <a
+      [routerLink]="item.path"
+      class="relative group hover:text-indigo-200 transition py-2 px-1"
+      [class.text-indigo-100]="isActive(item.path)"
+    >
+      {{ item.name }}
+      @if (isActive(item.path)) {
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-indigo-200 rounded-full scale-x-105 origin-center"></div>
+      } @else {
+      <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-200 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-center"></div>
+      }
+    </a>
+    }
+  </div>
+
+  <!-- User Section -->
+  <div class="flex items-center gap-4">
+    <!-- Notification Bell -->
+    <button class="relative p-2 rounded-full hover:bg-indigo-500/50 transition">
+      <lucide-angular [name]="bell" size="20" class="text-indigo-200 hover:text-white"></lucide-angular>
+      <span *ngIf="notificationCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+        {{ notificationCount > 9 ? '9+' : notificationCount }}
+      </span>
+    </button>
+
+    @if (isLoggedIn) {
+    <div class="relative group" #profileDropdown>
+      <div class="flex items-center cursor-pointer p-1 rounded-full hover:bg-indigo-500/50 transition">
+        @if (userProfile?.profileImageUrl) {
+        <img
+          [src]="userProfile.profileImageUrl"
+          alt="Profile"
+          class="w-8 h-8 rounded-full object-cover border-2 border-indigo-200"
+        />
+        } @else {
+        <span
+          class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center"
+        >
+          <lucide-angular
+            [name]="userIcon"
+            size="16"
+            class="text-indigo-600"
+          ></lucide-angular>
+        </span>
+        }
+        <lucide-angular [name]="chevronDown" size="16" class="ml-1 text-indigo-200 group-hover:text-white transition"></lucide-angular>
+      </div>
+
+      <!-- Dropdown Menu -->
+      <div
+        class="absolute right-0 mt-2 w-56 bg-white shadow-xl rounded-lg overflow-hidden z-10 hidden group-hover:block border border-indigo-100"
+        (mouseleave)="onDropdownLeave($event)"
+        (mouseenter)="onDropdownEnter()"
+        role="dropdown"
+      >
+        <div class="px-4 py-3 border-b bg-indigo-50">
+          <p class="font-medium text-indigo-800">
+            {{ userProfile?.firstName || "User" }}
+          </p>
+          <p class="text-indigo-600 text-xs truncate">{{ userProfile?.email }}</p>
+        </div>
+        <a
+          routerLink="/user/profile"
+          class="flex items-center px-4 py-3 hover:bg-indigo-50 text-sm text-indigo-700 transition"
+        >
+          <lucide-angular [name]="userIcon" size="16" class="mr-2 text-indigo-500"></lucide-angular>
+          View Profile
+        </a>
+        <a
+          routerLink="/user/orders"
+          class="flex items-center px-4 py-3 hover:bg-indigo-50 text-sm text-indigo-700 transition"
+        >
+          <lucide-angular [name]="shoppingBag" size="16" class="mr-2 text-indigo-500"></lucide-angular>
+          My Orders
+        </a>
+        <button
+          (click)="logout()"
+          class="w-full text-left flex items-center px-4 py-3 hover:bg-red-50 text-sm text-red-600 transition"
+        >
+          <lucide-angular [name]="logOut" size="16" class="mr-2"></lucide-angular>
+          Logout
+        </button>
+      </div>
+    </div>
+    } @else {
+    <button
+      (click)="login()"
+      class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg border border-white/20 transition"
+    >
+      <lucide-angular [name]="logIn" size="16"></lucide-angular>
+      Sign In
+    </button>
     }
   </div>
 </nav>
 
-<!-- Mobile Navbar (Indigo Background) -->
-<nav class="md:hidden z-[150] sticky top-0 flex justify-between items-center py-4 px-4 bg-indigo-500 text-white">
-  <a routerLink="/" class="text-xl font-bold">BeanCart</a>
-  
-  <div class="flex items-center">
-    @if (isLoggedIn) {
-      <div class="mr-4">
-        @if (userProfile?.profileImageUrl) {
-          <img [src]="userProfile.profileImageUrl"
-               alt="Profile" 
-               class="w-8 h-8 rounded-full object-cover border-2 border-indigo-200" />
-        } @else {
-          <span class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center">
-            <lucide-angular [img]="userIcon" size="16" class="text-indigo-600"></lucide-angular>
-          </span>
-        }
+<!-- Mobile Navbar -->
+<nav
+  class="md:hidden z-[150] sticky top-0 flex justify-between items-center py-4 px-4 bg-gradient-to-r from-indigo-600 to-indigo-800 text-white shadow-lg"
+>
+  <a routerLink="/" class="text-xl font-bold flex items-center">
+    <div class="relative w-[24px] h-[24px] shrink-0 mr-2">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="bg-indigo-100 h-[12px] w-[12px] rotate-45 absolute rounded-md"></div>
+        <div class="bg-indigo-100/30 h-[24px] w-[24px] rotate-45 absolute rounded-md"></div>
+        <div class="bg-indigo-100/10 h-[40px] w-[40px] rotate-45 absolute rounded-md"></div>
       </div>
-    }
-    
-    <button (click)="toggleMenu()" class="p-1 text-white">
-      @if (isMenuOpen) {
-        <lucide-angular [img]="closeIcon" size="24"></lucide-angular>
+    </div>
+    BeanCart
+  </a>
+
+  <div class="flex items-center gap-4">
+    <!-- Notification Bell for Mobile -->
+    <button class="relative p-1 rounded-full hover:bg-indigo-500/50 transition">
+      <lucide-angular [name]="bell" size="20" class="text-indigo-200 hover:text-white"></lucide-angular>
+      <span *ngIf="notificationCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+        {{ notificationCount > 9 ? '9+' : notificationCount }}
+      </span>
+    </button>
+
+    @if (isLoggedIn) {
+    <div class="mr-2">
+      @if (userProfile?.profileImageUrl) {
+      <img
+        [src]="userProfile.profileImageUrl"
+        alt="Profile"
+        class="w-8 h-8 rounded-full object-cover border-2 border-indigo-200"
+      />
       } @else {
-        <lucide-angular [img]="menuIcon" size="24"></lucide-angular>
+      <span
+        class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center"
+      >
+        <lucide-angular
+          [name]="userIcon"
+          size="16"
+          class="text-indigo-600"
+        ></lucide-angular>
+      </span>
+      }
+    </div>
+    } @else {
+    <button
+      (click)="login()"
+      class="flex items-center gap-1 bg-white/10 hover:bg-white/20 p-2 rounded-lg border border-white/20 transition"
+    >
+      <lucide-angular [name]="logIn" size="16"></lucide-angular>
+    </button>
+    }
+
+    <button (click)="toggleMenu()" class="p-1 text-white hover:bg-white/10 rounded-full transition">
+      @if (isMenuOpen) {
+      <lucide-angular [name]="x" size="24"></lucide-angular>
+      } @else {
+      <lucide-angular [name]="menu" size="24"></lucide-angular>
       }
     </button>
   </div>
 </nav>
 
 <!-- Mobile Menu Overlay -->
-<div *ngIf="isMenuOpen" class="fixed inset-0 bg-black bg-opacity-50 z-[150] md:hidden" (click)="toggleMenu()"></div>
+<div
+  *ngIf="isMenuOpen"
+  @fadeInOut
+  [@.disabled]="!isMenuOpen"
+  class="fixed inset-0 bg-black bg-opacity-50 z-[150] md:hidden"
+  (click)="toggleMenu()"
+></div>
 
-<!-- Mobile Menu (Indigo Theme) -->
-<div *ngIf="isMenuOpen" class="fixed right-0 top-2 bottom-0 w-64 bg-white z-[200] shadow-lg transform transition-transform md:hidden overflow-y-auto">
-  <div class="flex justify-between items-center p-4 border-b bg-indigo-500 text-white">
-    <h2 class="font-bold">Menu</h2>
-    <button (click)="toggleMenu()" class="p-1">
-      <lucide-angular [img]="closeIcon" size="24"></lucide-angular>
+<!-- Mobile Menu -->
+<div
+  *ngIf="isMenuOpen"
+  @slideInOut
+  [@.disabled]="!isMenuOpen"
+  class="fixed right-0 top-0 bottom-0 w-72 bg-white z-[200] shadow-2xl overflow-y-auto flex flex-col"
+>
+  <div
+    class="flex justify-between items-center p-4 bg-gradient-to-r from-indigo-600 to-indigo-800 text-white"
+  >
+    <h2 class="font-bold text-lg">Menu</h2>
+    <button (click)="toggleMenu()" class="p-1 hover:bg-white/10 rounded-full transition">
+      <lucide-angular [name]="x" size="24"></lucide-angular>
     </button>
   </div>
-  
-  <div class="p-4">
-    @if (isLoggedIn) {
-      <div class="flex items-center mb-6 pb-4 border-b border-indigo-100">
-        @if (userProfile?.profileImageUrl) {
-          <img [src]="userProfile.profileImageUrl" 
-               alt="Profile" 
-               class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-indigo-200" />
-        } @else {
-          <span class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center mr-3">
-            <lucide-angular [img]="userIcon" size="20" class="text-indigo-600"></lucide-angular>
-          </span>
-        }
-        <div>
-          <p class="font-medium text-indigo-800">{{ userProfile?.firstName || 'User' }} </p>
-          <p class="text-indigo-600 text-sm">{{ userProfile?.email }}</p>
-        </div>
-      </div>
+
+  @if (isLoggedIn) {
+  <div class="flex items-center p-4 border-b border-indigo-100 bg-indigo-50">
+    @if (userProfile?.profileImageUrl) {
+    <img
+      [src]="userProfile.profileImageUrl"
+      alt="Profile"
+      class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-indigo-200"
+    />
+    } @else {
+    <span
+      class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center mr-3"
+    >
+      <lucide-angular
+        [name]="userIcon"
+        size="20"
+        class="text-indigo-600"
+      ></lucide-angular>
+    </span>
     }
-    
-    <ul class="space-y-4">
+    <div>
+      <p class="font-medium text-indigo-800">
+        {{ userProfile?.firstName || "User" }}
+      </p>
+      <p class="text-indigo-600 text-sm">{{ userProfile?.email }}</p>
+    </div>
+  </div>
+  }
+
+  <div class="flex-grow p-4">
+    <ul class="space-y-2">
+      <!-- Add Notification item to mobile menu -->
+      <li>
+        <a
+          routerLink="/notifications"
+          class="flex items-center py-3 px-3 rounded-lg transition"
+          [class.bg-indigo-100]="isActive('/notifications')"
+          [class.text-indigo-800]="isActive('/notifications')"
+          [class.text-indigo-600]="!isActive('/notifications')"
+          [class.font-medium]="isActive('/notifications')"
+          (click)="toggleMenu()"
+        >
+          <lucide-angular [name]="bell" size="18" class="mr-3"></lucide-angular>
+          Notifications
+          @if (notificationCount > 0) {
+          <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            {{ notificationCount > 9 ? '9+' : notificationCount }}
+          </span>
+          }
+        </a>
+      </li>
+
       @for (item of menuItems; track item.path) {
-        <li>
-          <a [routerLink]="item.path" 
-             [class.font-bold]="isActive(item.path)"
-             class="block py-2 px-2 rounded hover:bg-indigo-50 text-indigo-700 transition"
-             [ngClass]="{'bg-indigo-100 text-indigo-800': isActive(item.path)}"
-             (click)="toggleMenu()">
-            {{item.name}}
-          </a>
-        </li>
-      }
-      
-      @if (isLoggedIn) {
-        <li class="border-t border-indigo-100 pt-2 mt-4">
-          <button (click)="logout(); toggleMenu()" 
-                  class="w-full text-left py-2 px-2 text-red-600 hover:bg-red-50 rounded transition">
-            Logout
-          </button>
-        </li>
+      <li>
+        <a
+          [routerLink]="item.path"
+          class="flex items-center py-3 px-3 rounded-lg transition"
+          [class.bg-indigo-100]="isActive(item.path)"
+          [class.text-indigo-800]="isActive(item.path)"
+          [class.text-indigo-600]="!isActive(item.path)"
+          [class.font-medium]="isActive(item.path)"
+          (click)="toggleMenu()"
+        >
+          @if (item.icon) {
+          <lucide-angular [name]="item.icon" size="18" class="mr-3"></lucide-angular>
+          }
+          {{ item.name }}
+          @if (isActive(item.path)) {
+          <div class="ml-auto w-2 h-2 bg-indigo-500 rounded-full"></div>
+          }
+        </a>
+      </li>
       }
     </ul>
+  </div>
+
+  <div class="p-4 border-t border-indigo-100">
+    @if (isLoggedIn) {
+    <button
+      (click)="logout(); toggleMenu()"
+      class="w-full flex items-center justify-center py-2 px-4 text-red-600 hover:bg-red-50 rounded-lg transition"
+    >
+      <lucide-angular [name]="logOut" size="18" class="mr-2"></lucide-angular>
+      Logout
+    </button>
+    } @else {
+    <button
+      (click)="login(); toggleMenu()"
+      class="w-full flex items-center justify-center py-2 px-4 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg transition"
+    >
+      <lucide-angular [name]="logIn" size="18" class="mr-2"></lucide-angular>
+      Sign In
+    </button>
+    }
   </div>
 </div>
