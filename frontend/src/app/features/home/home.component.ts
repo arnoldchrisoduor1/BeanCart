@@ -7,12 +7,7 @@ import { CategoriesComponent } from './categories/categories.component';
   selector: 'app-home',
   standalone: true,
   imports: [HeroComponent, FeaturedProductsComponent, CategoriesComponent],
-  template: `
-    <div class="space-y-8">
-      <app-hero></app-hero>
-      <app-featured-products></app-featured-products>
-      <app-categories></app-categories>
-    </div>
-  `
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
 export class HomeComponent {}
