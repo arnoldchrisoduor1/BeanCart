@@ -143,7 +143,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       price: 249.99,
       discount: 30,
       category: 'Electronics',
-      imageUrl: 'assets/images/smartwatch.jpg',
+      imageUrl: 'assets/images/smartwatch.jpeg',
       quantity: 75,
       isFeatured: true,
       active: true,
@@ -177,7 +177,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       price: 24.99,
       discount: 15,
       category: 'Home',
-      imageUrl: 'assets/images/water-bottle.jpg',
+      imageUrl: 'assets/images/water-bottle.jpeg',
       quantity: 150,
       isFeatured: true,
       active: true,
@@ -195,7 +195,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'CryptoPunk #1234',
       type: 'NFT',
       price: 2.5,
-      image: 'assets/images/nft1.jpg',
+      image: 'assets/images/nft1.jpeg',
       description: 'Rare collectible from the original CryptoPunks collection'
     },
     {
@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       name: 'DeFi Protocol Token',
       type: 'Token',
       price: 0.75,
-      image: 'assets/images/defi.jpg',
+      image: 'assets/images/defi.jpeg',
       description: 'Governance token for leading DeFi platform'
     },
     {
@@ -310,7 +310,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       id: 'seller2',
       name: 'DigitalArt Collective',
-      avatar: 'assets/images/seller2.jpg',
+      avatar: 'assets/images/seller2.jpeg',
       rating: 4.9,
       reviews: 876,
       description: 'Curated selection of premium digital art and NFTs',
@@ -319,7 +319,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       id: 'seller3',
       name: 'EcoLiving',
-      avatar: 'assets/images/seller3.jpg',
+      avatar: 'assets/images/seller3.jpeg',
       rating: 4.7,
       reviews: 1562,
       description: 'Sustainable products for eco-conscious living',
