@@ -1,4 +1,3 @@
-<!-- src/app/core/layout/navbar/navbar.component.html -->
 <!-- Desktop Navbar -->
 <nav
   class="hidden md:flex bg-gradient-to-r from-indigo-600 to-indigo-800 justify-between sticky top-0 items-center py-4 px-6 lg:px-12 text-white z-[200] shadow-lg"
@@ -38,14 +37,20 @@
     <!-- Notification Bell -->
     <button class="relative p-2 rounded-full hover:bg-indigo-500/50 transition">
       <lucide-angular [name]="bell" size="20" class="text-indigo-200 hover:text-white"></lucide-angular>
-      <span *ngIf="notificationCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-        {{ notificationCount > 9 ? '9+' : notificationCount }}
-      </span>
+      <ng-container *ngIf="notificationCount > 0">
+        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+          {{ notificationCount > 9 ? '9+' : notificationCount }}
+        </span>
+      </ng-container>
     </button>
 
     @if (isLoggedIn) {
     <div class="relative group" #profileDropdown>
-      <div class="flex items-center cursor-pointer p-1 rounded-full hover:bg-indigo-500/50 transition">
+      <!-- Profile dropdown trigger -->
+      <div 
+        class="flex items-center cursor-pointer p-1 rounded-full hover:bg-indigo-500/50 transition"
+        (click)="toggleDropdown($event)"
+      >
         @if (userProfile?.profileImageUrl) {
         <img
           [src]="userProfile.profileImageUrl"
@@ -68,8 +73,9 @@
 
       <!-- Dropdown Menu -->
       <div
-        class="absolute right-0 mt-2 w-56 bg-white shadow-xl rounded-lg overflow-hidden z-10 hidden group-hover:block border border-indigo-100"
-        (mouseleave)="onDropdownLeave($event)"
+        [ngClass]="{'block': isDropdownOpen, 'hidden': !isDropdownOpen}"
+        class="absolute right-0 mt-2 w-56 bg-white shadow-xl rounded-lg overflow-hidden z-10 transition-all duration-300"
+        (mouseleave)="onDropdownLeave()"
         (mouseenter)="onDropdownEnter()"
         role="dropdown"
       >
@@ -133,9 +139,11 @@
     <!-- Notification Bell for Mobile -->
     <button class="relative p-1 rounded-full hover:bg-indigo-500/50 transition">
       <lucide-angular [name]="bell" size="20" class="text-indigo-200 hover:text-white"></lucide-angular>
-      <span *ngIf="notificationCount > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-        {{ notificationCount > 9 ? '9+' : notificationCount }}
-      </span>
+      <ng-container *ngIf="notificationCount > 0">
+        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+          {{ notificationCount > 9 ? '9+' : notificationCount }}
+        </span>
+      </ng-container>
     </button>
 
     @if (isLoggedIn) {
@@ -179,19 +187,15 @@
 
 <!-- Mobile Menu Overlay -->
 <div
-  *ngIf="isMenuOpen"
-  @fadeInOut
-  [@.disabled]="!isMenuOpen"
-  class="fixed inset-0 bg-black bg-opacity-50 z-[150] md:hidden"
+  class="fixed inset-0 bg-black bg-opacity-50 z-[150] md:hidden mobile-menu-overlay transition-opacity duration-300"
+  [ngClass]="{'overlay-visible': isMenuOpen, 'overlay-hidden': !isMenuOpen}"
   (click)="toggleMenu()"
 ></div>
 
 <!-- Mobile Menu -->
 <div
-  *ngIf="isMenuOpen"
-  @slideInOut
-  [@.disabled]="!isMenuOpen"
-  class="fixed right-0 top-0 bottom-0 w-72 bg-white z-[200] shadow-2xl overflow-y-auto flex flex-col"
+  class="fixed right-0 top-0 bottom-0 w-72 bg-white z-[200] shadow-2xl overflow-y-auto flex flex-col mobile-menu transition-transform duration-300"
+  [ngClass]="{'mobile-menu-visible': isMenuOpen, 'mobile-menu-hidden': !isMenuOpen}"
 >
   <div
     class="flex justify-between items-center p-4 bg-gradient-to-r from-indigo-600 to-indigo-800 text-white"
@@ -245,16 +249,16 @@
         >
           <lucide-angular [name]="bell" size="18" class="mr-3"></lucide-angular>
           Notifications
-          @if (notificationCount > 0) {
-          <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-            {{ notificationCount > 9 ? '9+' : notificationCount }}
-          </span>
-          }
+          <ng-container *ngIf="notificationCount > 0">
+            <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {{ notificationCount > 9 ? '9+' : notificationCount }}
+            </span>
+          </ng-container>
         </a>
       </li>
 
-      @for (item of menuItems; track item.path) {
-      <li>
+      @for (item of menuItems; track item.path; let i = $index) {
+      <li class="animate-fade-in" [style.animation-delay.ms]="i * 50">
         <a
           [routerLink]="item.path"
           class="flex items-center py-3 px-3 rounded-lg transition"
@@ -264,9 +268,9 @@
           [class.font-medium]="isActive(item.path)"
           (click)="toggleMenu()"
         >
-          @if (item.icon) {
-          <lucide-angular [name]="item.icon" size="18" class="mr-3"></lucide-angular>
-          }
+          <ng-container *ngIf="item.icon">
+            <lucide-angular [name]="item.icon" size="18" class="mr-3"></lucide-angular>
+          </ng-container>
           {{ item.name }}
           @if (isActive(item.path)) {
           <div class="ml-auto w-2 h-2 bg-indigo-500 rounded-full"></div>

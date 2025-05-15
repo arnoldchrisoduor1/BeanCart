@@ -1,5 +1,4 @@
-// src/app/core/layout/navbar/navbar.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { NgClass, NgIf, CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
@@ -32,24 +31,24 @@ import {
   styleUrls: ['./navbar.component.css'],
   animations: [
     trigger('slideInOut', [
-      state('in', style({
-        transform: 'translateX(0)'
-      })),
-      state('out', style({
-        transform: 'translateX(100%)'
-      })),
-      transition('in => out', animate('300ms ease-in-out')),
-      transition('out => in', animate('300ms ease-in-out'))
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate('300ms ease-in-out', style({ transform: 'translateX(0)' }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)' }),
+        animate('300ms ease-in-out', style({ transform: 'translateX(100%)' }))
+      ])
     ]),
     trigger('fadeInOut', [
-      state('in', style({
-        opacity: 1
-      })),
-      state('out', style({
-        opacity: 0
-      })),
-      transition('in => out', animate('300ms ease-in-out')),
-      transition('out => in', animate('300ms ease-in-out'))
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in-out', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('300ms ease-in-out', style({ opacity: 0 }))
+      ])
     ])
   ]
 })
@@ -75,16 +74,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   userProfile: any = null;
   notificationCount = 3;
+  isDropdownOpen = false;
   private authSubscription!: Subscription;
   private dropdownCloseTimer: any;
+  private globalClickListener: Function | null = null;
 
-  get menuState() {
-    return this.isMenuOpen ? 'in' : 'out';
-  }
-
-  get overlayState() {
-    return this.isMenuOpen ? 'in' : 'out';
-  }
+  @ViewChild('profileDropdown', { static: false }) profileDropdown!: ElementRef;
 
   // Organized menu items with icons
   get menuItems() {
@@ -119,7 +114,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private authStateService: AuthStateService
+    private authStateService: AuthStateService,
+    private renderer: Renderer2
   ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -134,11 +130,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isLoggedIn = !!user;
       this.userProfile = user;
     });
+
+    // Add global click listener to close dropdown when clicking outside
+    this.globalClickListener = this.renderer.listen('document', 'click', (event) => {
+      if (this.profileDropdown && !this.profileDropdown.nativeElement.contains(event.target)) {
+        this.isDropdownOpen = false;
+      }
+    });
   }
 
   ngOnDestroy() {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
+    }
+
+    // Remove global click listener
+    if (this.globalClickListener) {
+      this.globalClickListener();
     }
   }
 
@@ -148,31 +156,29 @@ export class NavbarComponent implements OnInit, OnDestroy {
     document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
   }
 
-// Add this after your other methods
-onDropdownLeave(event: MouseEvent) {
-  // Get the dropdown element
-  const dropdown = (event.target as HTMLElement).closest('.group')?.querySelector('[role="dropdown"]');
-  
-  // If the mouse re-enters before the timer completes, clear the timer
-  if (this.dropdownCloseTimer) {
-    clearTimeout(this.dropdownCloseTimer);
+  toggleDropdown(event: Event) {
+    event.stopPropagation();
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
-  
-  // Set a timer to close the dropdown after a short delay
-  this.dropdownCloseTimer = setTimeout(() => {
-    if (dropdown) {
-      dropdown.classList.add('hidden');
-    }
-  }, 300); // 300ms delay
-}
 
-// Add this to handle mouse re-entry
-onDropdownEnter() {
-  // Clear any pending close operations
-  if (this.dropdownCloseTimer) {
-    clearTimeout(this.dropdownCloseTimer);
+  onDropdownLeave() {
+    // Clear any pending close operations
+    if (this.dropdownCloseTimer) {
+      clearTimeout(this.dropdownCloseTimer);
+    }
+    
+    // Set a longer delay before hiding the dropdown
+    this.dropdownCloseTimer = setTimeout(() => {
+      this.isDropdownOpen = false;
+    }, 500); // 500ms delay gives more time to move to the dropdown
   }
-}
+
+  onDropdownEnter() {
+    // Clear any pending close operations
+    if (this.dropdownCloseTimer) {
+      clearTimeout(this.dropdownCloseTimer);
+    }
+  }
 
   login() {
     this.router.navigate(['/user/login']);
