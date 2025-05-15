@@ -52,7 +52,7 @@ export class LoginComponent {
         console.log("Login successful", response);
         this.isLoggingIn = false;
         // navigating to home page.
-        this.router.navigate(['/user/profile']);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         console.error("Failed to sign in:", error);

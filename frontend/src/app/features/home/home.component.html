@@ -1,4 +1,4 @@
-<div class="mt-6 w-[95%] mx-auto">
+<div class="mt-6 w-[90%] mx-auto">
 
     <!-- Recommendation tab. -->
      <div class="flex flex-row w-fit mx-auto mt-8 mb-5 bg-indigo-100 rounded-2xl gap-1 p-1 border border-indigo-300">
@@ -20,13 +20,13 @@
     </div>
 
     <!-- Product section -->
-     <div class="mb-3">
+     <div class="mb-10">
         <h1 class="text-indigo-700 font-semibold text-4xl"><span class="font-extralight"><span class="font-normal">Join </span> Our</span> Flash <span class="font-normal">Sale</span> </h1>
       </div>
      <div>
-        <h1 class="text-indigo-900">Featured</h1>
+        <h1 class="text-indigo-700">FEATURED</h1>
      </div>
-     <div *ngFor="let category of categories" class="mb-8">
+     <div *ngFor="let category of categories" class="mb-10">
         <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
         <div class="relative">
           <!-- Navigation buttons - note the updated condition -->
@@ -62,14 +62,14 @@
         </div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-10">
         <h1 class="text-indigo-700 font-semibold text-4xl"><span class="font-extralight">Products</span> <span class="italic">Tailored </span> <span>Especially </span> <span class="font-extralight">for </span> <span class="normal">You</span></h1>
       </div>
 
       <div>
-        <h1 class="text-indigo-900">Recommended</h1>
+        <h1 class="text-indigo-700">RECOMMENDED</h1>
      </div>
-     <div *ngFor="let category of categories" class="mb-8">
+     <div *ngFor="let category of categories" class="mb-10">
         <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
         <div class="relative">
           <!-- Navigation buttons - note the updated condition -->

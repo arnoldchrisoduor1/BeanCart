@@ -1,31 +1,129 @@
-<div class="p-4 pt-20 relative overflow-hidden text-indigo-200">
+<div class="min-h-[400px] w-full bg-gradient-to-br from-indigo-600 to-indigo-800 relative pt-10 px-5 md:px-10 lg:px-20">
+  <div class="max-w-7xl mx-auto">
+    <!-- Logo and Tagline -->
+    <div class="flex flex-col md:flex-row items-center gap-5 pb-10 border-b border-indigo-400/30">
+      <div class="relative w-[100px] h-[100px] shrink-0">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="bg-indigo-100 h-[25px] w-[25px] rotate-45 absolute rounded-md"></div>
+          <div class="bg-indigo-100/30 h-[50px] w-[50px] rotate-45 absolute rounded-md"></div>
+          <div class="bg-indigo-100/10 h-[70px] w-[70px] rotate-45 absolute rounded-md"></div>
+        </div>
+      </div>
 
-    <!-- indigo background semicircle -->
-    <div class="h-[200%] w-[250%] bg-indigo-500 absolute rounded-full -top-[0%] -right-[5%] -z-10">
-
+      <div class="text-center md:text-left">
+        <h1 class="text-3xl md:text-4xl font-bold text-indigo-50">BeanCart Ltd</h1>
+        <div class="flex gap-2 text-sm w-fit mx-auto md:mx-0 mb-5 items-center">
+          <p class="text-indigo-100 tracking-tighter">Fast</p>
+          <p class="h-2 w-2 bg-indigo-100 rounded-full"></p>
+          <p class="text-indigo-100 tracking-tighter">Secure</p>
+          <p class="h-2 w-2 bg-indigo-100 rounded-full"></p>
+          <p class="text-indigo-100 tracking-tighter">Transparent</p>
+        </div>
+        <p class="text-indigo-200 max-w-md">
+          Your trusted partner for seamless e-commerce solutions and digital transformation.
+        </p>
+      </div>
     </div>
 
-    <h1 class="font-extrabold text-xl">BeanCart</h1>
-    <div class="flex flex-col gap-5 mt-7">
-    <div>
-        <h2 class="font-semibold text-lg text-indigo-100">About Us</h2>
-        <ul>
-            <li>Location</li>
-            <li>Mission</li>
-            <li>Vision</li>
+    <!-- Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 py-10">
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-indigo-50 font-semibold text-lg mb-4">Quick Links</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="#" class="text-indigo-200 hover:text-white transition flex items-center gap-2">
+              <lucide-angular [name]="chevronRight" size="18" class="text-indigo-300"></lucide-angular>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-indigo-200 hover:text-white transition flex items-center gap-2">
+              <lucide-angular [name]="chevronRight" size="18" class="text-indigo-300"></lucide-angular>
+              Products
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-indigo-200 hover:text-white transition flex items-center gap-2">
+              <lucide-angular [name]="chevronRight" size="18" class="text-indigo-300"></lucide-angular>
+              Services
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-indigo-200 hover:text-white transition flex items-center gap-2">
+              <lucide-angular [name]="chevronRight" size="18" class="text-indigo-300"></lucide-angular>
+              About Us
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-indigo-200 hover:text-white transition flex items-center gap-2">
+              <lucide-angular [name]="chevronRight" size="18" class="text-indigo-300"></lucide-angular>
+              Contact
+            </a>
+          </li>
         </ul>
-    </div>
+      </div>
 
-    <div>
-        <h2 class="text-lg font-semibold text-indigo-100">Find Us</h2>
-        <ul>
-            <li>+254 7911 6599 5</li>
-            <li>beancart&#64;gmail.com</li>
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-indigo-50 font-semibold text-lg mb-4">Contact Us</h3>
+        <ul class="space-y-3">
+          <li class="text-indigo-200 flex items-start gap-2">
+            <lucide-angular [name]="mapPin" size="18" class="text-indigo-300 mt-0.5"></lucide-angular>
+            <span>123 Business Ave, Suite 500<br>San Francisco, CA 94107</span>
+          </li>
+          <li class="text-indigo-200 flex items-center gap-2">
+            <lucide-angular [name]="phone" size="18" class="text-indigo-300"></lucide-angular>
+            <span>(123) 456-7890</span>
+          </li>
+          <li class="text-indigo-200 flex items-center gap-2">
+            <lucide-angular [name]="mail" size="18" class="text-indigo-300"></lucide-angular>
+            <span>{{ email }}</span>
+          </li>
         </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="md:col-span-2">
+        <h3 class="text-indigo-50 font-semibold text-lg mb-4">Newsletter</h3>
+        <p class="text-indigo-200 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+        <div class="flex gap-2 w-fit">
+          <input type="email" placeholder="Your email" class="bg-indigo-500/50 border border-indigo-400/50 rounded-lg px-4 py-2 text-indigo-50 placeholder-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-300 flex-grow w-[170px] md:full">
+          <button class="bg-indigo-100 text-indigo-700 hover:bg-white transition px-4 py-2 rounded-lg font-medium flex items-center gap-2">
+            <lucide-angular [name]="send" size="18"></lucide-angular>
+            Subscribe
+          </button>
+        </div>
+        <div class="flex gap-4 mt-6">
+          <a href="#" class="text-indigo-200 hover:text-white transition">
+            <lucide-angular [name]="facebook" size="20" class="text-indigo-300"></lucide-angular>
+          </a>
+          <a href="#" class="text-indigo-200 hover:text-white transition">
+            <lucide-angular [name]="twitter" size="20" class="text-indigo-300"></lucide-angular>
+          </a>
+          <a href="#" class="text-indigo-200 hover:text-white transition">
+            <lucide-angular [name]="instagram" size="20" class="text-indigo-300"></lucide-angular>
+          </a>
+          <a href="#" class="text-indigo-200 hover:text-white transition">
+            <lucide-angular [name]="linkedin" size="20" class="text-indigo-300"></lucide-angular>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div>
-        <p class="text-center">All right reserved - 2025</p>
+    <!-- Copyright -->
+    <div class="border-t border-indigo-400/30 py-6 flex flex-col md:flex-row justify-between items-center text-indigo-300 text-sm">
+      <div class="mb-3 md:mb-0">
+        &copy; 2023 BeanCart Ltd. All rights reserved.
+      </div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition">Terms of Service</a>
+        <a href="#" class="hover:text-white transition">Cookies</a>
+      </div>
+      <div class="mt-3 md:mt-0 text-indigo-400">
+        Crafted with <lucide-angular [name]="heart" size="16" class="text-pink-300 inline"></lucide-angular> by Digital Wilderness LLC
+      </div>
     </div>
-</div>
+  </div>
 </div>
