@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 import { ProductStateService } from '../../core/services/product/product-state.service';
+import { CtaComponent } from "../../shared/components/cta/cta.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FaqsComponent, ProductItemComponent, LucideAngularModule, CommonModule],
+  imports: [FaqsComponent, ProductItemComponent, LucideAngularModule, CommonModule, CtaComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
