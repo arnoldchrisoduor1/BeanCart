@@ -1,1 +1,66 @@
-<p>home works well!</p>
+<div class="mt-6 w-[95%] mx-auto">
+
+    <!-- Recommendation tab. -->
+     <div class="flex flex-row w-fit mx-auto my-8 bg-indigo-100 rounded-2xl gap-1 p-1 border border-indigo-300">
+        <div class="bg-indigo-400 p-2 text-indigo-900 rounded-2xl border border-indigo-500 hover:hover-animation">Normal Products</div>
+        <div class="bg-indigo-200 p-2 text-indigo-900 rounded-2xl hover:hover-animation">Digital Products</div>
+     </div>
+
+    <!-- Banner image carrousel -->
+    <div class="mb-10">
+        <img src="assets/images/ecommerce-banner-1.jpg" alt="banner image" class="h-[200px] w-full object-cover rounded-md">
+    </div>
+
+    <!-- Product section -->
+     <div *ngFor="let category of categories" class="mb-8">
+        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
+        <div class="relative">
+          <!-- Navigation buttons - note the updated condition -->
+          <button 
+            *ngIf="category.products && category.products.length > 1"
+            class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
+            (click)="scrollLeft(categoryScrollContainer)"
+          >
+            <lucide-angular [img]="chevronLeft" class="w-5 h-5 text-indigo-700"></lucide-angular>
+          </button>
+          
+          <!-- Product carousel -->
+          <div 
+            #categoryScrollContainer
+            class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
+          >
+            <!-- Loop through products in this category -->
+            <app-product-item
+              *ngFor="let product of category.products"
+              class="flex-shrink-0 w-64 snap-start"
+              [product]="product"
+            ></app-product-item>
+          </div>
+          
+          <!-- Navigation buttons - note the updated condition -->
+          <button 
+            *ngIf="category.products && category.products.length > 1"
+            class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
+            (click)="scrollRight(categoryScrollContainer)"
+          >
+            <lucide-angular [img]="chevronRight" class="w-5 h-5 text-indigo-700"></lucide-angular>
+          </button>
+        </div>
+      </div>
+
+     <!-- FAQs section -->
+      <div>
+        <app-faqs
+        question="What is beancart ?"
+        answer="This is an e-commerce platform that sells normal goods and digital products."
+        ></app-faqs>
+        <app-faqs
+        question="How do you pay in beancart ?"
+        answer="This is an e-commerce platform that sells normal goods and digital products."
+        ></app-faqs>
+        <app-faqs
+        question="What digital products are sold ?"
+        answer="This is an e-commerce platform that sells normal goods and digital products."
+        ></app-faqs>
+      </div>
+</div>

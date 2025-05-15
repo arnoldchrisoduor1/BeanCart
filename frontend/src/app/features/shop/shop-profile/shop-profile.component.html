@@ -143,7 +143,7 @@
             class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
           >
             <!-- Loop through products in this category -->
-            <app-product-item 
+            <app-product-item
               *ngFor="let product of category.products"
               class="flex-shrink-0 w-64 snap-start"
               [product]="product"
