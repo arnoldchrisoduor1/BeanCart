@@ -13,4 +13,7 @@ export interface Shop {
     sellerName: string;
     sellerEmail: string;
     verified: boolean;
+    rating?: number;  // Added for display purposes
+    reviews?: number; // Added for display purposes
+    tags?: string[];  // Added for display purposes
 }

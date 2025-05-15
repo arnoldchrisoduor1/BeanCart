@@ -1,127 +1,261 @@
 <div class="mt-6 w-[90%] max-w-7xl mx-auto">
 
-    <!-- Recommendation tab. -->
-     <div class="flex flex-row w-fit mx-auto mt-8 mb-5 bg-indigo-100 rounded-2xl gap-1 p-1 border border-indigo-300">
-        <div class="bg-indigo-400 p-2 text-indigo-100 rounded-2xl border border-indigo-500 hover:hover-animation">Daily Products</div>
-        <div class="bg-indigo-200 p-2 text-white rounded-2xl hover:hover-animation">Digital Products</div>
-     </div>
+  <!-- Hero Section -->
+  <section class="relative mb-16 rounded-2xl overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-indigo-900/80 to-indigo-700/80 z-10 flex items-center px-10">
+      <div class="max-w-2xl">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Your Gateway to <span class="text-indigo-200">Everyday Essentials</span> & <span class="text-indigo-200">Digital Assets</span></h1>
+        <p class="text-indigo-100 text-lg mb-6">Shop physical products or invest in blockchain assets - all in one secure platform.</p>
+        <div class="flex gap-4">
+          <button class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-medium hover:bg-indigo-100 transition">Shop Now</button>
+          <button class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition">Explore Digital</button>
+        </div>
+      </div>
+    </div>
+    <img src="assets/images/ecommerce-banner-1.jpg" alt="Modern shopping experience" class="w-full h-[400px] md:h-[500px] object-cover">
+  </section>
 
-     <div class="flex gap-5 w-fit mx-auto mb-5 items-center">
-        <p class="text-indigo-900 tracking-tighter">Fast</p>
-        <p class="h-2 w-2 bg-indigo-900 rounded-full"></p>
-        <p class="text-indigo-900 tracking-tighter">Secure</p>
-        <p class="h-2 w-2 bg-indigo-900 rounded-full"></p>
-        <p class="text-indigo-900 tracking-tighter">Transparent</p>
-     </div>
+  <!-- Product Type Selector -->
+  <div class="flex flex-row w-full max-w-md mx-auto mb-12 bg-indigo-100 rounded-2xl gap-1 p-1 border border-indigo-300 shadow-md">
+    <div class="flex-1 text-center bg-indigo-600 p-3 text-white rounded-xl border border-indigo-700 hover:bg-indigo-700 transition cursor-pointer">
+      <div class="flex items-center justify-center gap-2">
+        <lucide-angular [name]="shoppingBag" size="20"></lucide-angular>
+        <span>Daily Products</span>
+      </div>
+      <p class="text-xs mt-1 text-indigo-100">Physical goods & essentials</p>
+    </div>
+    <div class="flex-1 text-center bg-indigo-200 p-3 text-indigo-800 rounded-xl hover:bg-indigo-300 transition cursor-pointer">
+      <div class="flex items-center justify-center gap-2">
+        <lucide-angular [name]="bitcoin" size="20"></lucide-angular>
+        <span>Digital Assets</span>
+      </div>
+      <p class="text-xs mt-1 text-indigo-700">Blockchain & NFTs</p>
+    </div>
+  </div>
 
-    <!-- Banner image carrousel -->
-    <div class="mb-10">
-        <img src="assets/images/ecommerce-banner-1.jpg" alt="banner image" class="h-[200px] w-full object-cover rounded-md">
+  <!-- Value Propositions -->
+  <div class="flex flex-wrap justify-center gap-6 mb-16">
+    <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-indigo-100">
+      <div class="bg-indigo-100 p-2 rounded-full">
+        <lucide-angular [name]="zap" size="20" class="text-indigo-600"></lucide-angular>
+      </div>
+      <div>
+        <p class="font-medium text-indigo-900">Fast Transactions</p>
+        <p class="text-sm text-indigo-600">Instant processing</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-indigo-100">
+      <div class="bg-indigo-100 p-2 rounded-full">
+        <lucide-angular [name]="shield" size="20" class="text-indigo-600"></lucide-angular>
+      </div>
+      <div>
+        <p class="font-medium text-indigo-900">Secure Payments</p>
+        <p class="text-sm text-indigo-600">Encrypted & safe</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-indigo-100">
+      <div class="bg-indigo-100 p-2 rounded-full">
+        <lucide-angular [name]="eye" size="20" class="text-indigo-600"></lucide-angular>
+      </div>
+      <div>
+        <p class="font-medium text-indigo-900">Transparent Process</p>
+        <p class="text-sm text-indigo-600">No hidden fees</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-indigo-100">
+      <div class="bg-indigo-100 p-2 rounded-full">
+        <lucide-angular [name]="globe" size="20" class="text-indigo-600"></lucide-angular>
+      </div>
+      <div>
+        <p class="font-medium text-indigo-900">Global Marketplace</p>
+        <p class="text-sm text-indigo-600">Worldwide access</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flash Sale Section -->
+  <section class="mb-16">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+      <div>
+        <h2 class="text-indigo-700 font-semibold text-3xl md:text-4xl">
+          <span class="font-light">Join Our</span> Flash <span class="font-normal">Sale</span>
+        </h2>
+        <p class="text-indigo-600 mt-2">Limited time offers on trending products</p>
+      </div>
+      <div class="flex items-center gap-3 bg-indigo-100 px-4 py-2 rounded-full">
+        <lucide-angular [name]="clock" size="18" class="text-indigo-700"></lucide-angular>
+        <div class="flex gap-2">
+          <span class="bg-white px-2 py-1 rounded text-indigo-700 text-sm font-medium">12h</span>
+          <span class="bg-white px-2 py-1 rounded text-indigo-700 text-sm font-medium">45m</span>
+          <span class="bg-white px-2 py-1 rounded text-indigo-700 text-sm font-medium">22s</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Product section -->
-     <div class="mb-10">
-        <h1 class="text-indigo-700 font-semibold text-4xl"><span class="font-extralight"><span class="font-normal">Join </span> Our</span> Flash <span class="font-normal">Sale</span> </h1>
-      </div>
-     <div>
-        <h1 class="text-indigo-700">FEATURED</h1>
-     </div>
-     <div *ngFor="let category of categories" class="mb-10">
-        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
-        <div class="relative">
-          <!-- Navigation buttons - note the updated condition -->
-          <button 
-            *ngIf="category.products && category.products.length > 1"
-            class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
-            (click)="scrollLeft(categoryScrollContainer)"
-          >
-            <lucide-angular [img]="chevronLeft" class="w-5 h-5 text-indigo-700"></lucide-angular>
-          </button>
-          
-          <!-- Product carousel -->
-          <div 
-            #categoryScrollContainer
-            class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
-          >
-            <!-- Loop through products in this category -->
-            <app-product-item
-              *ngFor="let product of category.products"
-              class="flex-shrink-0 w-64 snap-start"
-              [product]="product"
-            ></app-product-item>
-          </div>
-          
-          <!-- Navigation buttons - note the updated condition -->
-          <button 
-            *ngIf="category.products && category.products.length > 1"
-            class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
-            (click)="scrollRight(categoryScrollContainer)"
-          >
-            <lucide-angular [img]="chevronRight" class="w-5 h-5 text-indigo-700"></lucide-angular>
-          </button>
-        </div>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <app-product-item *ngFor="let product of flashSaleProducts" [product]="product"></app-product-item>
+    </div>
 
-      <div class="mb-10">
-        <h1 class="text-indigo-700 font-semibold text-4xl"><span class="font-extralight">Products</span> <span class="italic">Tailored </span> <span>Especially </span> <span class="font-extralight">for </span> <span class="normal">You</span></h1>
-      </div>
+    <div class="text-center mt-8">
+      <button class="border-2 border-indigo-700 text-indigo-700 px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 hover:text-white transition">
+        View All Flash Deals
+      </button>
+    </div>
+  </section>
 
+  <!-- Digital Assets Section -->
+  <section class="mb-16 bg-gradient-to-r from-indigo-900 to-indigo-700 rounded-2xl p-8 text-white">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
       <div>
-        <h1 class="text-indigo-700">RECOMMENDED</h1>
-     </div>
-     <div *ngFor="let category of categories" class="mb-10">
-        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
-        <div class="relative">
-          <!-- Navigation buttons - note the updated condition -->
-          <button 
-            *ngIf="category.products && category.products.length > 1"
-            class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
-            (click)="scrollLeft(categoryScrollContainer)"
-          >
-            <lucide-angular [img]="chevronLeft" class="w-5 h-5 text-indigo-700"></lucide-angular>
-          </button>
-          
-          <!-- Product carousel -->
-          <div 
-            #categoryScrollContainer
-            class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
-          >
-            <!-- Loop through products in this category -->
-            <app-product-item
-              *ngFor="let product of category.products"
-              class="flex-shrink-0 w-64 snap-start"
-              [product]="product"
-            ></app-product-item>
+        <h2 class="font-semibold text-3xl md:text-4xl">
+          <span class="font-light">Explore</span> Digital <span class="font-normal">Assets</span>
+        </h2>
+        <p class="text-indigo-200 mt-2">Blockchain products & NFTs with secure transactions</p>
+      </div>
+      <button class="flex items-center gap-2 bg-white text-indigo-700 px-6 py-3 rounded-lg font-medium hover:bg-indigo-100 transition">
+        <lucide-angular [name]="bitcoin" size="18"></lucide-angular>
+        View Marketplace
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let asset of digitalAssets" class="bg-white/10 rounded-xl overflow-hidden border border-white/20 hover:border-white/40 transition">
+        <img [src]="asset.image" alt="Digital asset" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="font-medium text-lg">{{asset.name}}</h3>
+            <span class="bg-indigo-100/20 px-2 py-1 rounded text-sm">{{asset.type}}</span>
           </div>
-          
-          <!-- Navigation buttons - note the updated condition -->
-          <button 
-            *ngIf="category.products && category.products.length > 1"
-            class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
-            (click)="scrollRight(categoryScrollContainer)"
-          >
-            <lucide-angular [img]="chevronRight" class="w-5 h-5 text-indigo-700"></lucide-angular>
-          </button>
+          <p class="text-indigo-200 text-sm mb-4">{{asset.description}}</p>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-indigo-300 text-sm">Current Price</p>
+              <p class="font-bold">{{asset.price}} ETH</p>
+            </div>
+            <button class="bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-100 transition">
+              View Details
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
-     <!-- FAQs section -->
-      <div class="mb-10">
-        <app-faqs
-        question="What is beancart ?"
-        answer="This is an e-commerce platform that sells normal goods and digital products."
-        ></app-faqs>
-        <app-faqs
-        question="How do you pay in beancart ?"
-        answer="This is an e-commerce platform that sells normal goods and digital products."
-        ></app-faqs>
-        <app-faqs
-        question="What digital products are sold ?"
-        answer="This is an e-commerce platform that sells normal goods and digital products."
-        ></app-faqs>
-      </div>
+  <!-- Categories Section -->
+  <section class="mb-16">
+    <h2 class="text-indigo-700 font-semibold text-3xl md:text-4xl mb-8">
+      <span class="font-light">Shop by</span> Category
+    </h2>
 
-      <div class="mb-10">
-        <app-cta></app-cta>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div *ngFor="let category of categories" class="bg-white rounded-xl shadow-sm border border-indigo-100 overflow-hidden hover:shadow-md transition cursor-pointer">
+        <div class="aspect-square bg-indigo-50 flex items-center justify-center">
+          <lucide-angular [name]="star" size="32" class="text-indigo-600"></lucide-angular>
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="font-medium text-indigo-900">{{category.name}}</h3>
+          <p class="text-sm text-indigo-600">3 items</p>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Personalized Recommendations -->
+  <section class="mb-16">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+      <div>
+        <h2 class="text-indigo-700 font-semibold text-3xl md:text-4xl">
+          <span class="font-light">Tailored</span> Just <span class="font-normal">For You</span>
+        </h2>
+        <p class="text-indigo-600 mt-2">Products we think you'll love</p>
+      </div>
+      <button class="text-indigo-700 font-medium hover:text-indigo-900 transition flex items-center gap-2">
+        See more
+        <lucide-angular [name]="chevronRight" size="18"></lucide-angular>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <app-product-item *ngFor="let product of recommendedProducts" [product]="product"></app-product-item>
+    </div>
+  </section>
+
+  <!-- Seller Spotlight -->
+  <section class="mb-16 bg-indigo-50 rounded-2xl p-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <div>
+        <h2 class="text-indigo-700 font-semibold text-3xl md:text-4xl">
+          <span class="font-light">Seller</span> Spotlight
+        </h2>
+        <p class="text-indigo-600 mt-2">Featured merchants on our platform</p>
+      </div>
+      <button class="text-indigo-700 font-medium hover:text-indigo-900 transition flex items-center gap-2">
+        Become a seller
+        <lucide-angular [name]="chevronRight" size="18"></lucide-angular>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let seller of featuredSellers" class="bg-white rounded-xl shadow-sm p-6 border border-indigo-100 hover:shadow-md transition">
+        <div class="flex items-center gap-4 mb-4">
+          <img [src]="seller.avatar" alt="Seller" class="w-16 h-16 rounded-full object-cover border-2 border-indigo-200">
+          <div>
+            <h3 class="font-medium text-indigo-900">{{seller.name}}</h3>
+            <div class="flex items-center gap-1">
+              <lucide-angular [name]="star" size="16" class="text-yellow-500 fill-yellow-500"></lucide-angular>
+              <span class="text-sm text-indigo-700">{{seller.rating}} ({{seller.reviews}} reviews)</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-indigo-600 text-sm mb-4">{{seller.description}}</p>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let tag of seller.tags" class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs">{{tag}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs Section -->
+  <section class="mb-16">
+    <h2 class="text-indigo-700 font-semibold text-3xl md:text-4xl mb-8 text-center">
+      Frequently Asked <span class="font-normal">Questions</span>
+    </h2>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      <app-faqs
+        question="What is BeanCart?"
+        answer="BeanCart is a dual marketplace platform that combines traditional e-commerce for physical goods with a secure marketplace for digital assets and blockchain products. We provide a seamless shopping experience for both buyers and sellers."
+      ></app-faqs>
+      <app-faqs
+        question="How do payments work for digital assets?"
+        answer="Digital asset purchases are processed through our secure blockchain payment system. We support various cryptocurrencies and ensure all transactions are transparent and verifiable on the blockchain."
+      ></app-faqs>
+      <app-faqs
+        question="Can I sell both physical and digital products?"
+        answer="Yes! BeanCart allows merchants to sell both physical goods and digital assets. Our platform provides different storefront setups optimized for each product type."
+      ></app-faqs>
+      <app-faqs
+        question="How are physical products shipped?"
+        answer="We partner with reliable logistics providers worldwide. Sellers can choose from our integrated shipping options or set up their own preferred carriers."
+      ></app-faqs>
+      <app-faqs
+        question="Is my digital wallet secure?"
+        answer="Absolutely. We use industry-leading security measures including multi-signature wallets, cold storage for majority of funds, and two-factor authentication for all transactions."
+      ></app-faqs>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="mb-16 bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-2xl p-10 text-center text-white">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Experience the Future of Commerce?</h2>
+    <p class="text-xl text-indigo-200 max-w-2xl mx-auto mb-8">Join thousands of buyers and sellers in our innovative marketplace.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <button class="bg-white text-indigo-700 px-8 py-4 rounded-lg font-bold hover:bg-indigo-100 transition">
+        Start Shopping
+      </button>
+      <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition">
+        Become a Seller
+      </button>
+    </div>
+  </section>
 </div>

@@ -1,5 +1,5 @@
 <div
-  class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md shadow-indigo-700/30 hover:cursor-pointer"
+  class="mx-auto border border-indigo-200 rounded-md w-[99%] shadow-md bg-indigo-700 shadow-indigo-700/30 hover:cursor-pointer"
   (click)="navigateToProductDetails()"
 >
   <div class="relative w-full">
@@ -65,21 +65,21 @@
   </div>
 
   <!-- Product details -->
-  <div class="flex flex-row justify-between p-3 bg-white rounded-b-md relative min-h-32">
+  <div class="flex flex-row justify-between p-3 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-b-md relative min-h-32">
     <div class="flex flex-col gap-3">
-      <p class="text-black/50">{{ product.category }}</p>
-      <p class="text-xl font-semibold">{{ product.name }}</p>
+      <p class="text-indigo-300">{{ product.category }}</p>
+      <p class="text-xl font-semibold text-indigo-100">{{ product.name }}</p>
       <div class="flex flex-row items-center gap-5 text-xl absolute bottom-4">
         <!-- Show discounted price if available -->
         <div>
-          <p *ngIf="discountedPrice" class="font-bold text-xl text-indigo-700">
+          <p *ngIf="discountedPrice" class="font-bold text-xl text-indigo-100">
             $ {{ discountedPrice | number : "1.2-2" }}
           </p>
         </div>
         <div class="">
           <p
             [class.line-through]="discountedPrice"
-            [class]="discountedPrice ? 'text-black/30' : 'text-indigo-700'"
+            [class]="discountedPrice ? 'text-indigo-400' : 'text-indigo-400'"
             class="font-bold text-sm"
           >
             $ {{ product.price | number : "1.2-2" }}
@@ -89,7 +89,7 @@
     </div>
 
     <div class="flex flex-row gap-3">
-      <p>4.3</p>
+      <p class="text-indigo-300">4.3</p>
       <!-- You might want to make this dynamic if you have ratings -->
       <lucide-angular
         [img]="reviewStar"
