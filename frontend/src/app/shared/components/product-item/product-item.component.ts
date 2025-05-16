@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { LucideAngularModule, Star, Heart, ShoppingCart, Expand } from 'lucide-angular';
+import { LucideAngularModule, Star, Heart, ShoppingCart, Expand, ChevronRight } from 'lucide-angular';
 import { Product } from '../../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { NumberPipe } from '../../pipes/number.pipe';
@@ -25,6 +25,7 @@ export class ProductItemComponent implements OnInit, OnChanges {
   readonly heartIcon = Heart;
   readonly shoppingCart = ShoppingCart;
   readonly expandIcon = Expand;
+  readonly rightIcon = ChevronRight;
 
   constructor(private router: Router, private cartState: CartStateService) {}
 
