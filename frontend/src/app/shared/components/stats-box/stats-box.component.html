@@ -1,11 +1,60 @@
 <div
-  class="w-fit text-center text-indigo-100 py-2 px-4 rounded-md min-w-[100px] shadow-lg border"
-  [ngClass]="{
-    'bg-indigo-500 border-indigo-300 shadow-indigo-700/70': status==='Transit',
-    'bg-orange-400 border-orange-300 shadow-orange-700/70': status==='Ordered',
-    'bg-emerald-500 border-emerald-300 shadow-emerald-700/70': status==='Delivered'
-  }"
+  class="relative w-full max-w-[220px] text-center rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-white border border-gray-100 shadow-sm group"
 >
-  <p class="text-sm font-semibold">{{title}}</p>
-  <p class="text-2xl font-bold">{{value}}</p>
+  <!-- Vibrant overhead border (now consistent for all statuses) -->
+  <div class="h-1.5 w-full"
+       [ngClass]="{
+         'bg-gradient-to-r from-indigo-500 to-indigo-400': status==='Transit',
+         'bg-gradient-to-r from-amber-500 to-amber-400': status==='Ordered',
+         'bg-gradient-to-r from-emerald-500 to-emerald-400': status==='Delivered'
+       }">
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 p-4 md:p-5"
+       [ngClass]="{
+         'bg-indigo-50/20': status==='Transit',
+         'bg-amber-50/20': status==='Ordered',
+         'bg-emerald-50/20': status==='Delivered'
+       }">
+    
+    <!-- Title (smaller on mobile) -->
+    <p class="text-[0.65rem] md:text-xs font-semibold tracking-wider uppercase mb-1"
+       [ngClass]="{
+         'text-indigo-600': status==='Transit',
+         'text-amber-600': status==='Ordered',
+         'text-emerald-600': status==='Delivered'
+       }">
+      {{title}}
+    </p>
+    
+    <!-- Value (adjusts for mobile) -->
+    <p class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{{value}}</p>
+    
+    <!-- Status pill (responsive text scaling) -->
+    <div class="inline-flex items-center px-2.5 py-1 rounded-full text-[0.7rem] md:text-xs font-medium whitespace-nowrap"
+         [ngClass]="{
+           'bg-indigo-100 text-indigo-800': status==='Transit',
+           'bg-amber-100 text-amber-800': status==='Ordered',
+           'bg-emerald-100 text-emerald-800': status==='Delivered'
+         }">
+      <span class="h-2 w-2 rounded-full mr-1.5 shrink-0"
+            [ngClass]="{
+              'bg-indigo-500': status==='Transit',
+              'bg-amber-500': status==='Ordered',
+              'bg-emerald-500': status==='Delivered'
+            }">
+      </span>
+      {{status}}
+    </div>
+  </div>
+
+  <!-- Subtle colored hover glow -->
+  <div class="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+       [ngClass]="{
+         'shadow-[0_0_0_2px_rgba(99,102,241,0.15)]': status==='Transit',
+         'shadow-[0_0_0_2px_rgba(245,158,11,0.15)]': status==='Ordered',
+         'shadow-[0_0_0_2px_rgba(16,185,129,0.15)]': status==='Delivered'
+       }">
+  </div>
 </div>
