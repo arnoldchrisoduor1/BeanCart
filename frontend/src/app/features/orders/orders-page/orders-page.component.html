@@ -1,4 +1,4 @@
-<div class="relative px-2 my-5 overflow-hidden">
+<div class="relative px-5 pt-10 md:py-5 md:my-12 overflow-hidden max-w-4xl mx-auto bg-gradient-to-r from-indigo-100/80 to-indigo-200/80 rounded-md">
   <div
     class="absolute top-[25%] -z-10 -right-[35%] rounded-full bg-indigo-500 h-[15%] w-[45%]"
   ></div>
@@ -17,7 +17,7 @@
         Order Tracking
       </h2>
     </div>
-    <div class="flex flex-row items-center justify-between">
+    <div class="flex flex-row items-center justify-between md:justify-around">
         <app-stats-box title="Ordered" [value]="12" status="Ordered">
         </app-stats-box>
       <app-stats-box title="Transit" [value]="7" status="Transit">
@@ -28,7 +28,7 @@
   </div>
 
   <div class="mt-5">
-    <div class="flex flex-col gap-2 mt-5">
+    <div class="flex flex-col gap-5 mt-5">
       <app-orders
         product="Dell Mouse"
         [price]="17.99"

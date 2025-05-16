@@ -1,38 +1,33 @@
 <div *ngIf="isLoading" class="relative bg-gray-50 min-h-screen mt-5">
-  <!-- Banner skeleton -->
-  <div class="relative w-full h-64 overflow-hidden bg-gray-200 animate-pulse"></div>
-  
-  <!-- Content skeleton -->
-  <div class="relative z-10 w-full -mt-12 bg-white border border-gray-200 rounded-t-3xl shadow-sm">
-    <!-- Stats boxes skeleton -->
-    <div class="flex flex-row justify-between px-4 py-8 bg-gray-100 rounded-t-3xl">
-      <div class="w-1/3 px-2">
-        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
-        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
-        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-      </div>
-      <div class="w-1/3 px-2">
-        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
-        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
-        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-      </div>
-      <div class="w-1/3 px-2">
-        <div class="h-6 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
-        <div class="h-8 mb-1 bg-gray-300 rounded-md animate-pulse"></div>
-        <div class="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-      </div>
-    </div>
+  <!-- Modern skeleton loader with shimmer effect -->
+  <div class="animate-pulse">
+    <!-- Banner skeleton with gradient -->
+    <div class="h-64 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"></div>
     
-    <!-- Products skeleton -->
-    <div class="px-4 py-6">
-      <div *ngFor="let i of [1, 2]" class="mb-8">
-        <div class="h-6 mb-4 bg-gray-200 w-1/4 rounded-md animate-pulse"></div>
-        <div class="flex gap-4 overflow-x-auto">
-          <div *ngFor="let j of [1, 2, 3]" class="flex-shrink-0 w-64">
-            <div class="w-full h-40 mb-2 bg-gray-200 rounded-md animate-pulse"></div>
-            <div class="h-5 mb-1 bg-gray-200 rounded-md animate-pulse"></div>
-            <div class="h-4 mb-1 bg-gray-200 w-3/4 rounded-md animate-pulse"></div>
-            <div class="h-6 mt-2 bg-gray-300 w-1/2 rounded-md animate-pulse"></div>
+    <!-- Content skeleton -->
+    <div class="relative z-10 w-full -mt-12 bg-white rounded-t-3xl shadow-lg">
+      <!-- Stats grid skeleton -->
+      <div class="grid grid-cols-3 gap-4 px-6 py-8">
+        <div *ngFor="let i of [1,2,3]" class="space-y-3">
+          <div class="h-4 bg-gray-200 rounded-full w-3/4"></div>
+          <div class="h-8 bg-gray-300 rounded-lg"></div>
+          <div class="h-3 bg-gray-200 rounded-full w-1/2"></div>
+        </div>
+      </div>
+      
+      <!-- Products skeleton with card grid -->
+      <div class="px-6 pb-8">
+        <div *ngFor="let i of [1,2]" class="mb-10">
+          <div class="h-5 bg-gray-200 rounded-full w-1/3 mb-6"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div *ngFor="let j of [1,2,3]" class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+              <div class="aspect-square bg-gray-200"></div>
+              <div class="p-4 space-y-2">
+                <div class="h-5 bg-gray-200 rounded-full"></div>
+                <div class="h-4 bg-gray-200 rounded-full w-2/3"></div>
+                <div class="h-6 bg-gray-300 rounded-lg w-1/2 mt-3"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -41,119 +36,128 @@
 </div>
 
 <div *ngIf="!isLoading" class="relative bg-gray-50 min-h-screen mt-5">
-  <!-- Background image container -->
-  <div class="relative w-full h-64 overflow-hidden">
-    <!-- Background image -->
-    <img
-      [src]="shopProfile?.logoUrl || shopBanner"
-      class="object-cover w-full h-full"
-      alt="Shop Banner"
-    />
+  <!-- Hero banner with parallax effect -->
+  <div class="relative w-full h-[270px] overflow-hidden">
+    <!-- Background image with subtle zoom effect -->
+    <div class="absolute inset-0 bg-indigo-900">
+      <img
+        [src]="shopProfile?.logoUrl || shopBanner"
+        class="object-cover w-full h-full opacity-80 hover:scale-105 transition-transform duration-1000"
+        alt="Shop Banner"
+      />
+    </div>
 
-    <!-- Gradient overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent"
-    ></div>
+    <!-- Glassmorphism overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent backdrop-blur-sm"></div>
 
-    <!-- Location  -->
-    <div class="absolute p-2 bg-white rounded-full top-4 right-4 shadow-md">
-      <div class="flex flex-row items-center gap-1">
-        <lucide-angular
-          [img]="mapIcon"
-          class="h-4 text-indigo-700"
-        ></lucide-angular>
-        <h2 class="text-xs font-medium">{{shopProfile?.address}}</h2>
+    <!-- Floating location badge -->
+    <div class="absolute top-5 right-5 md:right-20">
+      <div class="flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur rounded-full shadow-md">
+        <lucide-angular [img]="mapPin" class="w-4 h-4 text-indigo-600"></lucide-angular>
+        <span class="text-xs font-medium text-gray-800">{{shopProfile?.address}}</span>
       </div>
     </div>
 
-    <!-- Shop info text -->
-    <div
-      class="absolute inset-0 flex flex-col items-start justify-end p-6 mb-10 text-white"
-    >
-      <div class="flex flex-row justify-between w-full">
-        <div>
-          <p class="mb-1 text-2xl font-bold tracking-tighter">{{shopProfile?.name}}</p>
+    <!-- Shop info with modern typography -->
+    <div class="absolute inset-0 flex flex-col justify-end p-8">
+      <div class="flex flex-col items-start space-y-3">
+        <!-- Shop name with subtle glow -->
+        <h1 class="text-3xl font-bold text-white drop-shadow-lg">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-indigo-200">
+            {{shopProfile?.name}}
+          </span>
+        </h1>
+        
+        <!-- Status indicator with pulse animation -->
+        <div class="flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur rounded-full">
+          <div class="relative flex items-center justify-center">
+            <div class="absolute w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-75"></div>
+            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+          </div>
+          <span class="text-sm font-medium text-white">Active now</span>
         </div>
         
-        <div class="flex flex-row items-center gap-2">
-          <div class="relative flex items-center justify-center w-6 h-6 overflow-hidden rounded-full">
-            <div
-              class="absolute w-4 h-4 rounded-full opacity-75 bg-emerald-500 animate-ping"
-            ></div>
-            <div class="relative w-2 h-2 rounded-full bg-emerald-500/70"></div>
-          </div>
-          <div class="flex flex-row gap-2 text-sm">
-            <p class="font-medium">active</p>
-            <p class="text-gray-300">21 hrs ago</p>
-          </div>
-        </div>
+        <!-- Description with fade effect -->
+        <p class="max-w-2xl text-white/90 text-sm leading-relaxed transition-all duration-500 hover:text-white">
+          {{ shopProfile?.description }}
+        </p>
       </div>
-      <p class="text-md tracking-tighter text-gray-200">
-        {{ shopProfile?.description }}
-      </p>
     </div>
   </div>
 
-  <!-- Content below the banner -->
-  <div
-    class="relative z-10 w-full -mt-12 bg-gradient-to-t from-indigo-200 to-white rounded-t-3xl shadow-sm"
-  >
-    <!-- Stats boxes -->
-    <div class="flex flex-row justify-between px-4 py-8 rounded-t-3xl">
+  <!-- Main content with glassmorphism effect -->
+  <div class=" z-10 w-full  -mt-6 bg-white/80 backdrop-blur-sm rounded-t-3xl shadow-xl border border-white/20">
+    <div class="max-w-6xl mx-auto">
+    <!-- Stats cards with hover effects -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 px-6 py-8 md:justify-between">
       <app-stats-box
         title="In Stock"
         [value]="13"
         status="Ordered"
+        class="hover:-translate-y-1 transition-transform duration-300"
       ></app-stats-box>
       <app-stats-box
         title="Fulfilled"
         [value]="56"
         status="Delivered"
+        class="hover:-translate-y-1 transition-transform duration-300"
       ></app-stats-box>
       <app-stats-box
         title="Pre-Order"
         [value]="4"
         status="Transit"
+        class="hover:-translate-y-1 transition-transform duration-300"
       ></app-stats-box>
     </div>
 
-    <!-- Dynamic product categories with carousels -->
-    <div class="px-4 py-6">
-      <!-- Show message if no products -->
-      <div *ngIf="categories.length === 0" class="text-center py-10">
-        <p class="text-gray-500">No products available in this shop yet.</p>
+    <!-- Product categories with modern layout -->
+    <div class="px-6 pb-10">
+      <!-- Empty state -->
+      <div *ngIf="categories.length === 0" class="flex flex-col items-center justify-center py-16">
+        <div class="w-20 h-20 mb-4 rounded-full bg-indigo-100 flex items-center justify-center">
+          <lucide-angular [img]="package" class="w-10 h-10 text-indigo-600"></lucide-angular>
+        </div>
+        <p class="text-gray-500 text-center max-w-md">
+          This shop hasn't added any products yet. Check back soon!
+        </p>
       </div>
 
-      <!-- Loop through each category -->
-      <div *ngFor="let category of categories" class="mb-8">
-        <h3 class="mb-4 text-xl font-bold text-gray-800">{{category.name}} ({{category.products.length}})</h3>
-        <div class="relative">
-          <!-- Navigation buttons - note the updated condition -->
+      <!-- Category sections -->
+      <div *ngFor="let category of categories" class="mb-12">
+        <!-- Category header with decorative element -->
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-1 h-8 bg-gradient-to-b from-indigo-500 to-indigo-300 rounded-full"></div>
+          <h3 class="text-xl font-bold text-gray-800">
+            {{category.name}} <span class="text-indigo-600">({{category.products.length}})</span>
+          </h3>
+        </div>
+
+        <!-- Product carousel with modern navigation -->
+        <div class="relative group">
+          <!-- Navigation buttons -->
           <button 
             *ngIf="category.products && category.products.length > 1"
-            class="absolute left-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 -translate-x-4 hover:bg-gray-100"
+            class="absolute left-0 z-10 flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 -translate-x-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-50"
             (click)="scrollLeft(categoryScrollContainer)"
           >
             <lucide-angular [img]="chevronLeft" class="w-5 h-5 text-indigo-700"></lucide-angular>
           </button>
           
-          <!-- Product carousel -->
+          <!-- Product grid/carousel hybrid -->
           <div 
             #categoryScrollContainer
-            class="flex gap-4 pb-4 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 overflow-x-auto pb-6 scroll-smooth snap-x snap-mandatory no-scrollbar"
           >
-            <!-- Loop through products in this category -->
             <app-product-item
               *ngFor="let product of category.products"
-              class="flex-shrink-0 w-64 snap-start"
+              class="flex-shrink-0 w-full snap-start transition-transform duration-300 hover:scale-[1.02]"
               [product]="product"
             ></app-product-item>
           </div>
           
-          <!-- Navigation buttons - note the updated condition -->
           <button 
             *ngIf="category.products && category.products.length > 1"
-            class="absolute right-0 z-10 flex items-center justify-center w-8 h-8 -translate-y-1/2 bg-white rounded-full shadow-md top-1/2 translate-x-4 hover:bg-gray-100"
+            class="absolute right-0 z-10 flex items-center justify-center w-10 h-10 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 translate-x-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-50"
             (click)="scrollRight(categoryScrollContainer)"
           >
             <lucide-angular [img]="chevronRight" class="w-5 h-5 text-indigo-700"></lucide-angular>
@@ -162,12 +166,16 @@
       </div>
     </div>
 
-    <!-- Add products button -->
-    <div 
-      routerLink="/products/product-create"
-        class="flex items-center gap-3 px-6 py-3 mx-auto mb-6 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-md shadow-sm w-fit hover:bg-indigo-900 transition-colors cursor-pointer"
+    <!-- Floating action button -->
+    <div class="sticky bottom-6 flex justify-center px-6 pb-6">
+      <button 
+        routerLink="/products/product-create"
+        class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
       >
-        <p class="font-semibold text-white">Add Products</p>
-      </div>
+        <lucide-angular [img]="plus" class="w-5 h-5 text-white"></lucide-angular>
+        <span class="font-semibold text-white">Add Products</span>
+      </button>
+    </div>
+  </div>
   </div>
 </div>

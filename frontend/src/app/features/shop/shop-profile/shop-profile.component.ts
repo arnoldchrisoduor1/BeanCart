@@ -6,7 +6,7 @@ import { Product } from '../../../models/product.model';
 import { Category } from '../../../models/category.model';
 import { StatsBoxComponent } from "../../../shared/components/stats-box/stats-box.component";
 import { ProductItemComponent } from "../../../shared/components/product-item/product-item.component";
-import { LucideAngularModule, MapPin, ChevronLeft, ChevronRight } from 'lucide-angular';
+import { LucideAngularModule, MapPin, ChevronLeft, ChevronRight, Package, Plus } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -31,9 +31,11 @@ export class ShopProfileComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   isLoading = true;
   
-  readonly mapIcon = MapPin;
+  readonly mapPin = MapPin;
   readonly chevronLeft = ChevronLeft;
   readonly chevronRight = ChevronRight;
+  readonly package = Package;
+  readonly plus = Plus;
 
   @ViewChildren('categoryScrollContainer') scrollContainers!: QueryList<ElementRef>;
   

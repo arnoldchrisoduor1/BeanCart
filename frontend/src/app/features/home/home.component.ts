@@ -79,7 +79,7 @@ interface CategoryItem {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FaqsComponent, ProductItemComponent, LucideAngularModule, CommonModule, CtaComponent],
+  imports: [FaqsComponent, ProductItemComponent, LucideAngularModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

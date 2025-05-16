@@ -1,5 +1,5 @@
-<div class="mt-10 mx-5">
-    <div class="flex justify-around py-5 bg-indigo-500 items-between w-[98%] justify-self-center rounded-md shadow-md shadow-indigo-700/70">
+<div class="relative px-5 pt-10 py-5 md:my-12 max-w-4xl mx-auto bg-gradient-to-r from-indigo-100/80 to-indigo-200/80 rounded-md">
+    <div class="flex justify-around md:justify-around py-5 bg-indigo-500 items-between w-[98%] justify-self-center rounded-md shadow-md shadow-indigo-700/70">
       <app-stats-box
       *ngIf="cartState.getCartValue()?.items as items"
         title="Sub Total"
@@ -45,11 +45,12 @@
         Your cart is empty.
       </div>
 
-      <div class="my-10 w-[70%] mx-auto"
+      <div class="my-10 w-[70%] md:w-[50%] mx-auto"
       routerLink="/checkout"
       >
         <app-button
         defaultText="Checkout"
+        loadingText="Checking out..."
         >
         </app-button>
       </div>

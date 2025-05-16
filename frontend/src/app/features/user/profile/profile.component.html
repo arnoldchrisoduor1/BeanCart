@@ -109,7 +109,7 @@
               </div>
             </div>
           } @else if (userProfile.role === 'Seller') {
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-3 gap-2">
               <app-stats-box
                 title="Pending"
                 [value]="13"
@@ -330,11 +330,11 @@
                     (deleteShop)="onDeleteShop($event)">
                   </app-shop-tile>
                   
-                  @if (currentShop?.id === shopItem.id) {
+                  <!-- @if (currentShop?.id === shopItem.id) {
                     <div class="absolute top-3 right-3 bg-indigo-600 text-white px-2 py-1 text-xs rounded-full shadow-sm">
                       Active
                     </div>
-                  }
+                  } -->
                 </div>
               }
             </div>

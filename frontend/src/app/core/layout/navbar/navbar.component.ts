@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   get menuItems() {
     const baseItems = [
       { path: '/', name: 'Home', icon: this.homeIcon },
-      { path: '/products/product-list', name: 'Products', icon: this.shoppingBag },
+      { path: '/products/product-list', name: 'Explore', icon: this.shoppingBag },
       { path: '/cart', name: 'Cart', icon: this.cartIcon }
     ];
 

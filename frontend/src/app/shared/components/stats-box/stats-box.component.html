@@ -1,12 +1,13 @@
 <div
-  class="relative w-full max-w-[220px] text-center rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-white border border-gray-100 shadow-sm group"
+  class="relative w-full max-w-[220px] text-center rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-white border border-gray-100 shadow-sm group mx-auto"
 >
-  <!-- Vibrant overhead border (now consistent for all statuses) -->
-  <div class="h-1.5 w-full"
-       [ngClass]="{
-         'bg-gradient-to-r from-indigo-500 to-indigo-400': status==='Transit',
-         'bg-gradient-to-r from-amber-500 to-amber-400': status==='Ordered',
-         'bg-gradient-to-r from-emerald-500 to-emerald-400': status==='Delivered'
+  <!-- Vibrant overhead border (now with default styling) -->
+  <div class="h-1.5 w-full bg-gray-200"
+       [ngStyle]="{
+         'background': status==='Transit' ? 'linear-gradient(to right, #6366f1, #818cf8)' : 
+                       status==='Ordered' ? 'linear-gradient(to right, #f59e0b, #fbbf24)' : 
+                       status==='Delivered' ? 'linear-gradient(to right, #10b981, #34d399)' : 
+                       'linear-gradient(to right, #d1d5db, #e5e7eb)'
        }">
   </div>
 
@@ -31,21 +32,21 @@
     <!-- Value (adjusts for mobile) -->
     <p class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{{value}}</p>
     
-    <!-- Status pill (responsive text scaling) -->
-    <div class="inline-flex items-center px-2.5 py-1 rounded-full text-[0.7rem] md:text-xs font-medium whitespace-nowrap"
+    <!-- Status pill (responsive text scaling with overflow handling) -->
+    <div class="inline-flex items-center px-2 py-0.5 rounded-full text-[0.65rem] md:text-xs font-medium max-w-full"
          [ngClass]="{
-           'bg-indigo-100 text-indigo-800': status==='Transit',
-           'bg-amber-100 text-amber-800': status==='Ordered',
-           'bg-emerald-100 text-emerald-800': status==='Delivered'
+           'bg-indigo-200 text-indigo-800': status==='Transit',
+           'bg-amber-200 text-amber-800': status==='Ordered',
+           'bg-emerald-200 text-emerald-800': status==='Delivered'
          }">
-      <span class="h-2 w-2 rounded-full mr-1.5 shrink-0"
+      <span class="h-1.5 w-1.5 md:h-2 md:w-2 rounded-full mr-1 md:mr-1.5 shrink-0"
             [ngClass]="{
               'bg-indigo-500': status==='Transit',
               'bg-amber-500': status==='Ordered',
               'bg-emerald-500': status==='Delivered'
             }">
       </span>
-      {{status}}
+      <span class="truncate">{{status}}</span>
     </div>
   </div>
 
