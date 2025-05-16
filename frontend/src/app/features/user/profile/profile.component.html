@@ -1,266 +1,306 @@
-<div class="relative mb-10 mt-5 overflow-hidden">
+<div class="relative min-h-screen overflow-hidden bg-gradient-to-br from-indigo-50 to-indigo-100">
+  <!-- Background elements -->
+   <div class="max-w-5xl mx-auto">
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-indigo-200/30 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-indigo-300/20 blur-3xl"></div>
+    <div class="absolute top-1/3 right-1/4 w-64 h-64 rounded-full bg-indigo-400/10 blur-3xl"></div>
+  </div>
+
   <div class="">
-    <app-update-profile-modal
-      [isVisible]="isModalVisible"
-      (closed)="closeModal()"
-    ></app-update-profile-modal>
+  <app-update-profile-modal
+    [isVisible]="isModalVisible"
+    (closed)="closeModal()"
+  ></app-update-profile-modal>
   </div>
-  
-  <!-- Semi-circle top background -->
-  <!-- <div
-    class="absolute -top-[450px] -right-[1px] w-[250%] h-[100%] rounded-full bg-indigo-500 -z-10"
-  ></div> -->
 
-  <!-- Semi-circle middle background -->
-  <div
-    class="absolute top-[48%] left-[80%] w-[230%] h-[50%] rounded-full bg-indigo-500 -z-10"
-  ></div>
-
-  <div class="container flex-grow p-4 pb-24 mx-auto">
-    <!-- Profile section with skeleton loading -->
-     <div class="p-2 bg-gradient-to-t from-indigo-200 to-indigo-500 rounded-lg shadow-lg">
-    @if (isLoadingProfile) {
-      <div class="flex flex-row items-center gap-5">
-        <div class="w-20 h-20 relative">
-          <div class="w-full h-full rounded-full bg-gray-200 animate-pulse"></div>
-          <div class="absolute -bottom-0 left-[17px] bg-gray-200 animate-pulse rounded-full px-1 border w-12 h-5"></div>
-        </div>
-        <div class="text-lg text-indigo-200">
-          <div class="flex flex-row gap-2">
-            <div class="w-24 h-6 bg-gray-200 animate-pulse rounded"></div>
-            <div class="w-24 h-6 bg-gray-200 animate-pulse rounded"></div>
-          </div>
-          <div class="w-40 h-4 mt-2 bg-gray-200 animate-pulse rounded"></div>
-        </div>
-      </div>
-    } @else if (isLoggedIn && userProfile) {
-      <div class="flex flex-row items-center gap-5">
-        <div class="w-20 h-20 relative">
-          @if (userProfile?.profileImageUrl) {
-            <img
-              [src]="userProfile.profileImageUrl"
-              alt="Profile"
-              class="w-full h-full object-cover border-4 border-indigo-200 rounded-full"
-            />
-          } @else {
-            <span
-              class="flex items-center justify-center w-20 h-20 bg-indigo-200 rounded-full"
-            >
-              <lucide-angular
-                [img]="userIcon"
-                size="16"
-                class="text-indigo-600"
-              ></lucide-angular>
-            </span>
-          }
-          @if (userProfile?.role === 'Seller') {
-            <div class="absolute bottom-1 left-[17px] bg-orange-200/50 rounded-full px-1 border">
-              <p class="text-orange-500 text-sm">Seller</p>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+    <!-- Profile header with glass morphism effect -->
+    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 mb-8">
+      <!-- Profile section with skeleton loading -->
+      <div class="p-6 md:p-8 bg-gradient-to-r from-indigo-500 to-indigo-600">
+        @if (isLoadingProfile) {
+          <div class="flex flex-row items-center gap-5 animate-pulse">
+            <div class="w-20 h-20 relative">
+              <div class="w-full h-full rounded-full bg-indigo-400/50"></div>
+              <div class="absolute -bottom-0 left-[17px] bg-indigo-300/70 rounded-full px-1 border w-12 h-5"></div>
             </div>
-          } @else if (userProfile?.role === 'Buyer') {
-            <div class="absolute top-0 -right-3 bg-orange-200/50 rounded-full px-1 border">
-              <p class="text-orange-500 text-sm">Buyer</p>
+            <div class="text-lg">
+              <div class="flex flex-row gap-2">
+                <div class="w-24 h-6 bg-indigo-400/50 rounded"></div>
+                <div class="w-24 h-6 bg-indigo-400/50 rounded"></div>
+              </div>
+              <div class="w-40 h-4 mt-2 bg-indigo-400/50 rounded"></div>
+            </div>
+          </div>
+        } @else if (isLoggedIn && userProfile) {
+          <div class="flex flex-row items-center gap-5">
+            <div class="w-20 h-20 relative">
+              @if (userProfile?.profileImageUrl) {
+                <img
+                  [src]="userProfile.profileImageUrl"
+                  alt="Profile"
+                  class="w-full h-full object-cover border-4 border-white/30 rounded-full shadow-md"
+                />
+              } @else {
+                <span
+                  class="flex items-center justify-center w-20 h-20 bg-white/90 rounded-full shadow-inner"
+                >
+                  <lucide-angular
+                    [img]="userIcon"
+                    size="24"
+                    class="text-indigo-600"
+                  ></lucide-angular>
+                </span>
+              }
+              @if (userProfile?.role === 'Seller') {
+                <div class="absolute bottom-1 left-[17px] bg-gradient-to-r from-amber-200 to-amber-300 rounded-full px-2 border border-white shadow-sm">
+                  <p class="text-amber-800 text-xs font-medium">Seller</p>
+                </div>
+              } @else if (userProfile?.role === 'Buyer') {
+                <div class="absolute top-0 -right-3 bg-gradient-to-r from-emerald-200 to-emerald-300 rounded-full px-2 border border-white shadow-sm">
+                  <p class="text-emerald-800 text-xs font-medium">Buyer</p>
+                </div>
+              }
+            </div>
+            <!-- Username and Address -->
+            <div class="text-white">
+              <div class="flex flex-row gap-2">
+                <p class="font-bold text-xl">{{ userProfile?.firstName || "Arnold" }}</p>
+                <p class="font-bold text-xl">{{ userProfile?.lastName || "Chris" }}</p>
+              </div>
+              <p class="text-indigo-100 text-sm mt-1">{{ userProfile?.email || "arnoldchris262@gmail.com" }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Statistics section with skeleton loading -->
+      <div class="p-6 md:p-8">
+        @if (isLoadingProfile) {
+          <div class="grid grid-cols-3 gap-4 animate-pulse">
+            <div class="h-24 bg-indigo-100/50 rounded-xl"></div>
+            <div class="h-24 bg-indigo-100/50 rounded-xl"></div>
+            <div class="h-24 bg-indigo-100/50 rounded-xl"></div>
+          </div>
+        } @else if (isLoggedIn && userProfile) {
+          @if (userProfile.role === 'Buyer') {
+            <div class="grid grid-cols-3 gap-4">
+              <div class="bg-gradient-to-br from-indigo-100 to-indigo-50 p-4 rounded-xl shadow-sm border border-indigo-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <p class="text-sm font-medium text-indigo-600">Orders</p>
+                <p class="text-2xl font-bold text-indigo-900 mt-1">34</p>
+                <div class="mt-2 h-1 bg-indigo-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-500 rounded-full w-3/4"></div>
+                </div>
+              </div>
+              <div class="bg-gradient-to-br from-indigo-100 to-indigo-50 p-4 rounded-xl shadow-sm border border-indigo-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <p class="text-sm font-medium text-indigo-600">Spent</p>
+                <p class="text-2xl font-bold text-indigo-900 mt-1">$200</p>
+                <div class="mt-2 h-1 bg-indigo-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-500 rounded-full w-1/2"></div>
+                </div>
+              </div>
+              <div class="bg-gradient-to-br from-indigo-100 to-indigo-50 p-4 rounded-xl shadow-sm border border-indigo-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <p class="text-sm font-medium text-indigo-600">Wishes</p>
+                <p class="text-2xl font-bold text-indigo-900 mt-1">15</p>
+                <div class="mt-2 h-1 bg-indigo-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-500 rounded-full w-2/3"></div>
+                </div>
+              </div>
+            </div>
+          } @else if (userProfile.role === 'Seller') {
+            <div class="grid grid-cols-3 gap-4">
+              <app-stats-box
+                title="Pending"
+                [value]="13"
+                status="Ordered"
+                gradientFrom="from-amber-100"
+                gradientTo="to-amber-50"
+                color="amber"
+              ></app-stats-box>
+              <app-stats-box
+                title="Fullfilled"
+                [value]="56"
+                status="Delivered"
+                gradientFrom="from-emerald-100"
+                gradientTo="to-emerald-50"
+                color="emerald"
+              ></app-stats-box>
+              <app-stats-box
+                title="Wished"
+                [value]="4"
+                status="Transit"
+                gradientFrom="from-blue-100"
+                gradientTo="to-blue-50"
+                color="blue"
+              ></app-stats-box>
             </div>
           }
-        </div>
-        <!-- Username and Address -->
-        <div class="text-lg text-indigo-200">
-          <div class="flex flex-row gap-2">
-            <p class="font-semibold">{{ userProfile?.firstName || "Arnold" }}</p>
-            <p class="font-semibold">{{ userProfile?.lastName || "Chris" }}</p>
-          </div>
-          <P class="text-sm">{{ userProfile?.email || "arnoldchris262@gmail.com" }}</P>
-        </div>
+        }
       </div>
-    }
 
-    <!-- Statistics section with skeleton loading -->
-    @if (isLoadingProfile) {
-      <div class="flex flex-row justify-between mt-10">
-        <div class="w-[30%] h-20 bg-gray-200 animate-pulse rounded-md"></div>
-        <div class="w-[30%] h-20 bg-gray-200 animate-pulse rounded-md"></div>
-        <div class="w-[30%] h-20 bg-gray-200 animate-pulse rounded-md"></div>
+      <!-- Action buttons -->
+      <div class="p-6 md:p-8 pt-0">
+        @if (isLoadingProfile) {
+          <div class="w-40 h-10 mx-auto bg-indigo-100/50 rounded-lg animate-pulse"></div>
+        } @else if (isLoggedIn && userProfile) {
+          @if (userProfile.role === 'Buyer') {
+            <div class="flex justify-center">
+              <button
+                (click)="openModal()"
+                class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:from-indigo-600 hover:to-indigo-700 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50"
+              >
+                Update Profile
+              </button>
+            </div>
+          } @else if (userProfile.role === 'Seller') {
+            <div class="flex flex-wrap justify-center gap-4">
+              <button 
+                routerLink="/shop/create-shop"
+                class="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:from-amber-600 hover:to-amber-700 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-50"
+              >
+                Create Shop
+              </button>
+              <button
+                (click)="openModal()"
+                class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:from-indigo-600 hover:to-indigo-700 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50"
+              >
+                Update Profile
+              </button>
+            </div>
+          }
+        }
       </div>
-    } @else if (isLoggedIn && userProfile) {
-      @if (userProfile.role === 'Buyer') {
-        <div class="flex flex-row justify-between mt-10">
-          <div
-            class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
-          >
-            <p class="text-sm font-semibold">Orders</p>
-            <p class="text-2xl font-bold">34</p>
-          </div>
-          <div
-            class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
-          >
-            <p class="text-sm font-semibold">Spent</p>
-            <p class="text-2xl font-bold">$ 200</p>
-          </div>
-          <div
-            class="text-center bg-indigo-600 text-indigo-200 py-2 px-4 rounded-md min-w-[100px] shadow-xl shadow-indigo-700/70 border border-indigo-400"
-          >
-            <p class="text-sm font-semibold">Wishes</p>
-            <p class="text-2xl font-bold">15</p>
-          </div>
-        </div>
-      } @else if (userProfile.role === 'Seller') {
-        <div class="flex flex-row justify-between mt-10">
-          <app-stats-box
-            title="Pending"
-            [value]="13"
-            status="Ordered"
-          ></app-stats-box>
-          <app-stats-box
-            title="Fullfilled"
-            [value]="56"
-            status="Delivered"
-          ></app-stats-box>
-          <app-stats-box
-            title="Wished"
-            [value]="4"
-            status="Transit"
-          ></app-stats-box>
-        </div>
-      }
-    }
-
-    <!-- Update profile section with skeleton loading -->
-    @if (isLoadingProfile) {
-      <div class="w-40 h-10 mx-auto mt-16 bg-gray-200 animate-pulse rounded-md"></div>
-    } @else if (isLoggedIn && userProfile) {
-      @if (userProfile.role === 'Buyer') {
-        <div
-          (click)="openModal()"
-          class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-indigo-600 border border-indigo-400 rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
-        >
-          <p>Update Profile</p>
-        </div>
-      } @else if (userProfile.role === 'Seller') {
-        <div class="flex flex-row justify-between items-center">
-          <div 
-            routerLink="/shop/create-shop"
-            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-gradient-to-r from-indigo-400 to-indigo-500  rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
-          >
-            <p>Create Shop</p>
-          </div>
-          <div
-            (click)="openModal()"
-            class="px-5 py-2 mx-auto mt-16 text-lg font-semibold text-indigo-200 bg-gradient-to-r from-indigo-400 to-indigo-500  rounded-md shadow-xl w-fit shadow-indigo-700/50 hover-animation"
-          >
-            <p>Update Profile</p>
-          </div>
-        </div>
-      }
-    }
-  </div>
+    </div>
 
     <!-- Payment Methods with skeleton loading -->
     @if (isLoadingProfile) {
-      <div class="mt-20">
-        <div class="w-48 h-8 bg-gray-200 animate-pulse rounded"></div>
-        <div class="flex flex-row justify-between mt-5">
-          <div class="w-[48%] h-32 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-[48%] h-32 bg-gray-200 animate-pulse rounded-md"></div>
+      <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6 mb-8 animate-pulse">
+        <div class="w-48 h-6 bg-indigo-100/50 rounded"></div>
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <div class="h-32 bg-indigo-100/50 rounded-xl"></div>
+          <div class="h-32 bg-indigo-100/50 rounded-xl"></div>
         </div>
       </div>
     } @else if (isLoggedIn && userProfile && userProfile.role === 'Buyer') {
-      <div class="mt-20">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tighter text-indigo-900">Payment Options</h2>
-        </div>
-        <div class="flex flex-row justify-between mt-5">
-          <div
-            class="px-3 py-2 bg-green-500 rounded-md shadow-lg shadow-green-400/50"
-          >
-            <div>
-              <p class="text-3xl font-extrabold text-center text-indigo-100">
-                M-PESA
-              </p>
+      <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6 mb-8">
+        <h2 class="text-xl font-bold text-indigo-900 mb-6">Payment Options</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-gradient-to-br from-green-500 to-green-600 p-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-2xl font-extrabold text-white">M-PESA</p>
+                <p class="text-green-100 text-sm mt-1">Mobile payments</p>
+              </div>
+              <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <lucide-angular
+                  [img]="smartphone"
+                  size="24"
+                  class="text-white"
+                ></lucide-angular>
+              </div>
             </div>
-            <div
-              class="flex items-center gap-3 px-4 py-1 mt-4 bg-white rounded-md w-fit"
+            <button
+              class="mt-6 px-4 py-2 bg-white text-green-600 font-medium rounded-lg text-sm flex items-center gap-2 group-hover:shadow-md transition-all"
             >
-              <p class="font-semibold text-green-400">Configure</p>
+              Configure
               <lucide-angular
                 [img]="moveRight"
                 size="16"
-                class="text-green-400"
+                class="text-green-600"
               ></lucide-angular>
-            </div>
+            </button>
           </div>
 
-          <div
-            class="px-3 py-2 bg-indigo-500 rounded-md shadow-lg shadow-indigo-400/50"
-          >
-            <div>
-              <p class="text-3xl font-extrabold text-center text-indigo-100">
-                STRIPE
-              </p>
+          <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-2xl font-extrabold text-white">STRIPE</p>
+                <p class="text-indigo-100 text-sm mt-1">Card payments</p>
+              </div>
+              <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <lucide-angular
+                  [img]="creditCard"
+                  size="24"
+                  class="text-white"
+                ></lucide-angular>
+              </div>
             </div>
-            <div
-              class="flex items-center gap-3 px-4 py-1 mt-4 bg-white rounded-md w-fit"
+            <button
+              class="mt-6 px-4 py-2 bg-white text-indigo-600 font-medium rounded-lg text-sm flex items-center gap-2 group-hover:shadow-md transition-all"
             >
-              <p class="font-semibold text-indigo-400">Configure</p>
+              Configure
               <lucide-angular
                 [img]="moveRight"
                 size="16"
-                class="text-indigo-400"
+                class="text-indigo-600"
               ></lucide-angular>
-            </div>
+            </button>
           </div>
         </div>
       </div>
     }
 
-    <!-- Orders/Shops section with skeleton loading -->
+    <!-- Orders/Shops section -->
     @if (isLoadingProfile || isLoadingShops) {
-      <div class="mt-20">
-        <div class="w-48 h-8 bg-gray-200 animate-pulse rounded"></div>
-        <div class="flex flex-col gap-2 mt-5">
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-32 h-8 mt-5 bg-gray-200 animate-pulse rounded-md"></div>
+      <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6 mb-8 animate-pulse">
+        <div class="w-48 h-6 bg-indigo-100/50 rounded"></div>
+        <div class="space-y-4 mt-6">
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="w-32 h-8 mt-6 bg-indigo-100/50 rounded-lg"></div>
         </div>
       </div>
     } @else if (isLoggedIn && userProfile) {
       @if (userProfile.role === 'Buyer') {
-        <div class="mt-20">
-          <h2 class="text-3xl font-bold tracking-tighter text-indigo-900">My Orders</h2>
-          <div class="flex flex-col gap-2">
+        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-2 md:p-6 mb-8">
+          <h2 class="text-xl font-bold text-indigo-900 mb-6">Recent Orders</h2>
+          <div class="space-y-3 flex flex-col gap-3">
             <app-orders
               product="Dell Mouse"
               [price]="17.99"
               status="Delivered"
+              statusColor="bg-emerald-100 text-emerald-800"
             ></app-orders>
             
             <app-orders
               product="Mobile Phone"
               [price]="350.49"
               status="Transit"
+              statusColor="bg-amber-100 text-amber-800"
             ></app-orders>
             
             <app-orders
               product="Star Light"
               [price]="89.69"
               status="Ordered"
+              statusColor="bg-blue-100 text-blue-800"
             ></app-orders>
 
-            <div
-              class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50 hover-animation"
+            <button
+              class="mt-6 px-4 py-2 bg-indigo-100 text-indigo-700 font-medium rounded-lg text-sm flex items-center gap-2 hover:bg-indigo-200 transition-all w-fit"
             >
-              <p class="font-semibold text-indigo-200">See More Orders</p>
+              View All Orders
               <lucide-angular
                 [img]="moveRight"
                 size="16"
-                class="text-indigo-200"
+                class="text-indigo-700"
               ></lucide-angular>
-            </div>
+            </button>
           </div>
         </div>
       } @else if (userProfile.role === 'Seller') {
-        <div class="shops-section mt-6">
-          <h2 class="header-title mb-4">My Shops</h2>
+        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6 mb-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-indigo-900">My Shops</h2>
+            @if (!isLoadingShops && userShops.length > 0) {
+              <a routerLink="/manage-shops" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
+                Manage Shops
+                <lucide-angular [img]='chevronRight' [size]="16"></lucide-angular>
+              </a>
+            }
+          </div>
           
           @if (isLoadingShops) {
             <div class="flex justify-center py-8">
@@ -269,10 +309,11 @@
           }
           
           @if (!isLoadingShops && userShops.length === 0) {
-            <div class="text-center py-6">
-              <p class="text-gray-500">You don't have any shops yet.</p>
-              <a routerLink="/shop/create-shop" class="inline-block mt-3 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                Create Your Shop
+            <div class="text-center py-8 bg-indigo-50/50 rounded-xl">
+              <lucide-angular [img]="store" size="48" class="text-indigo-300 mx-auto mb-4"></lucide-angular>
+              <p class="text-indigo-500 mb-4">You don't have any shops yet.</p>
+              <a routerLink="/shop/create-shop" class="inline-block px-6 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all">
+                Create Your First Shop
               </a>
             </div>
           }
@@ -280,7 +321,7 @@
           @if (!isLoadingShops && userShops.length > 0) {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               @for (shopItem of userShops; track shopItem.id) {
-                <div class="cursor-pointer relative" (click)="selectShop(shopItem)"
+                <div class="cursor-pointer relative group" (click)="selectShop(shopItem)"
                 routerLink="/shop/shop-profile"
                 >
                   <app-shop-tile
@@ -290,68 +331,65 @@
                   </app-shop-tile>
                   
                   @if (currentShop?.id === shopItem.id) {
-                    <div class="absolute top-3 right-20 bg-indigo-500 text-white px-2 py-1 text-xs rounded-full">
-                      Current
+                    <div class="absolute top-3 right-3 bg-indigo-600 text-white px-2 py-1 text-xs rounded-full shadow-sm">
+                      Active
                     </div>
                   }
                 </div>
               }
             </div>
           }
-          
-          @if (!isLoadingShops && userShops.length > 0) {
-            <div class="mt-4 flex justify-end">
-              <a routerLink="/manage-shops" class="inline-flex items-center text-indigo-600 hover:underline">
-                Manage Shops
-                <span class="ml-1"><lucide-angular [img]='moveRight' [size]="16"></lucide-angular></span>
-              </a>
-            </div>
-          }
         </div>
       }
     }
 
-    <!-- Wishlist section with skeleton loading -->
+    <!-- Wishlist section -->
     @if (isLoadingProfile) {
-      <div class="mt-20">
-        <div class="w-48 h-8 bg-gray-200 animate-pulse rounded"></div>
-        <div class="flex flex-col gap-2 mt-5">
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-full h-20 bg-gray-200 animate-pulse rounded-md"></div>
-          <div class="w-32 h-8 mt-5 bg-gray-200 animate-pulse rounded-md"></div>
+      <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6 animate-pulse">
+        <div class="w-48 h-6 bg-indigo-100/50 rounded"></div>
+        <div class="space-y-4 mt-6">
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="h-20 bg-indigo-100/50 rounded-lg"></div>
+          <div class="w-32 h-8 mt-6 bg-indigo-100/50 rounded-lg"></div>
         </div>
       </div>
     } @else if (isLoggedIn && userProfile && userProfile.role === 'Buyer') {
-      <div class="mt-20">
-        <h2 class="text-3xl font-bold tracking-tighter text-indigo-900">My Wishlist</h2>
+      <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/30 p-6">
+        <h2 class="text-xl font-bold text-indigo-900 mb-6">Wishlist</h2>
         
-        <app-wishlist
-          product="Speaker"
-          [price]="97.48"
-        ></app-wishlist>
-        
-        <app-wishlist
-          product="Monitor"
-          [price]="40.99"
-        ></app-wishlist>
-        
-        <app-wishlist
-          product="Laptop"
-          [price]="499.99"
-        ></app-wishlist>
-        
-        <div
-          class="flex items-center gap-3 px-4 py-1 mt-5 bg-indigo-500 border border-indigo-400 rounded-md shadow-md w-fit shadow-indigo-700/50 hover-animation"
-        >
-          <p class="font-semibold text-indigo-200">See More Wishes</p>
-          <lucide-angular
-            [img]="moveRight"
-            size="16"
-            class="text-indigo-200"
-          ></lucide-angular>
+        <div class="space-y-3">
+          <app-wishlist
+            product="Speaker"
+            [price]="97.48"
+            imageUrl="assets/speaker.jpg"
+          ></app-wishlist>
+          
+          <app-wishlist
+            product="Monitor"
+            [price]="40.99"
+            imageUrl="assets/monitor.jpg"
+          ></app-wishlist>
+          
+          <app-wishlist
+            product="Laptop"
+            [price]="499.99"
+            imageUrl="assets/laptop.jpg"
+          ></app-wishlist>
+
+          <button
+            class="mt-6 px-4 py-2 bg-indigo-100 text-indigo-700 font-medium rounded-lg text-sm flex items-center gap-2 hover:bg-indigo-200 transition-all w-fit"
+          >
+            View Full Wishlist
+            <lucide-angular
+              [img]="moveRight"
+              size="16"
+              class="text-indigo-700"
+            ></lucide-angular>
+          </button>
         </div>
       </div>
     }
+  </div>
   </div>
 </div>

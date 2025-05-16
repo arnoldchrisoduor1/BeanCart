@@ -1,29 +1,45 @@
 <div
-  class="grid items-center grid-cols-4 p-2 mt-5 border border-indigo-300 rounded-md shadow-md shadow-indigo-400/40 hover-animation"
+  class="grid items-center grid-cols-[auto_1fr_auto_auto] gap-2 p-4 bg-white/80 backdrop-blur-md rounded-xl border border-white/30 shadow-sm shadow-indigo-400 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
 >
-  <div>
-    <span
-      class="flex items-center justify-center w-10 h-10 bg-indigo-200 rounded-full"
-    >
+  <!-- Product Icon -->
+  <div class="flex items-center justify-center">
+    <span class="flex items-center justify-center w-12 h-12 bg-white/90 rounded-full shadow-inner border border-white/50">
       <lucide-angular
         [img]="package"
-        size="20"
+        size="22"
         class="text-indigo-600"
       ></lucide-angular>
     </span>
   </div>
-  <div>
-    <p>{{ product }}</p>
+
+  <!-- Product Name -->
+  <div class="pr-2 min-w-0">
+    <p class="font-medium text-indigo-900 truncate">{{ product }}</p>
+    <p class="text-xs text-indigo-500/80 mt-1">Order 2</p>
   </div>
+
+  <!-- Price -->
   <div class="flex items-center justify-center">
-    <p class="font-semibold">$ {{ price }}</p>
+    <p class="font-bold text-indigo-900 whitespace-nowrap">${{ price }}</p>
   </div>
-  <div class="px-2 py-1 text-center rounded-full"
-  [ngClass]="{
-    'bg-green-200/50 text-green-700': status === 'Delivered',
-    'bg-orange-200/50 text-orange-700': status === 'Ordered',
-    'bg-indigo-200/50 text-indigo-700': status === 'Transit'
-  }">
-    <p>{{ status }}</p>
+
+  <!-- Status Badge -->
+  <div class="flex justify-center">
+    <span class="px-3 py-1.5 text-sm font-medium rounded-full bg-white/90 backdrop-blur-sm border border-white/50 whitespace-nowrap"
+      [ngClass]="{
+        'text-green-600': status === 'Delivered',
+        'text-amber-600': status === 'Ordered',
+        'text-blue-600': status === 'Transit'
+      }"
+    >
+      <div class="flex items-center gap-1.5">
+        <lucide-angular
+          [img]="status === 'Delivered' ? checkcircle : (status === 'Ordered' ? clock : truck)"
+          size="16"
+          [class]="status === 'Delivered' ? 'text-green-500' : status === 'Ordered' ? 'text-amber-500' : 'text-blue-500'"
+        ></lucide-angular>
+        {{ status }}
+      </div>
+    </span>
   </div>
 </div>

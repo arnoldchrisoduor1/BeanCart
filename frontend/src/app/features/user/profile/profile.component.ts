@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthStateService } from '../../../core/auth/auth-state.service';
 import { Subscription } from 'rxjs';
 import { LucideAngularModule } from 'lucide-angular';
-import { User, MoveRight, ShoppingCart, Package } from 'lucide-angular';
+import { User, MoveRight, ShoppingCart, Package, Smartphone, CreditCard, ChevronRight, Store } from 'lucide-angular';
 import { WishlistComponent } from '../../../shared/components/wishlist/wishlist.component';
 import { OrdersComponent } from '../../../shared/components/orders/orders.component';
 import { UpdateProfileModalComponent } from '../../../shared/components/update-profile-modal/update-profile-modal.component';
@@ -46,6 +46,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   readonly moveRight = MoveRight;
   readonly shoppingCart = ShoppingCart;
   readonly package = Package;
+  readonly smartphone = Smartphone;
+  readonly creditCard = CreditCard;
+  readonly chevronRight = ChevronRight;
+  readonly store = Store;
 
   isModalVisible = false;
 

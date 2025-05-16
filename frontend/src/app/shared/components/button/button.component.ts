@@ -29,7 +29,7 @@ get buttonClasses() {
   }
   // Add other color options as needed
   
-  return `w-full p-2 shadow-md shadow-indigo-700/50 rounded transition-colors duration-200 text-white ${colorClasses} ${
+  return `w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 ${colorClasses} ${
     (this.disabled || this.isLoading) ? 'cursor-not-allowed' : ''
   }`;
 }

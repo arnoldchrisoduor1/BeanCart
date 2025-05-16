@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideAngularModule, CircleAlert  } from 'lucide-angular';
 import { User, X, UserRoundPen, Camera } from 'lucide-angular';
 import { InputComponent } from '../input/input.component';
 import { ButtonComponent } from "../button/button.component";
@@ -33,6 +33,7 @@ export class UpdateProfileModalComponent {
   readonly closeIcon = X;
   readonly userPen = UserRoundPen;
   readonly cameraIcon = Camera;
+  readonly alertCircle = CircleAlert;
 
   firstName: string = '';
   lastName: string = '';

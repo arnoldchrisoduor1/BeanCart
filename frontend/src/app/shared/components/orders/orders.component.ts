@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
-import { User, MoveRight, ShoppingCart, Package  } from 'lucide-angular';
+import { User, MoveRight, ShoppingCart, Package, Clock10, Truck, CircleCheckBig } from 'lucide-angular';
 
 
 @Component({
@@ -16,6 +16,7 @@ export class OrdersComponent {
   @Input() status: string = 'Delivered';
 
   readonly package = Package;
-
-
+  readonly clock = Clock10;
+  readonly truck = Truck;
+  readonly checkcircle = CircleCheckBig;
 }
